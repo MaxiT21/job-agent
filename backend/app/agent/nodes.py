@@ -13,18 +13,23 @@ from app.agent import prompts
 from app.agent.prompts import fence
 from app.agent.state import AgentState
 from app.config import settings
-from app.fetch import MAX_TEXT_CHARS, fetch_posting_text
+from app.fetch import MAX_TEXT_CHARS, FetchError, fetch_posting_text
 from app.llm import structured
 from app.profile import load_profile
 from app.render import render_cover_letter, render_cv, run_output_dir
 from app.schemas import (
     ApprovalAnswer,
+    ApprovalRequest,
     ClarifyAnswer,
+    ClarifyRequest,
     CoverLetter,
     FitReport,
     JobPosting,
     LowFitAnswer,
+    LowFitRequest,
     MatchResult,
+    PasteTextAnswer,
+    PasteTextRequest,
     TailoredCV,
     VerificationIssue,
     VerificationResult,
@@ -55,7 +60,17 @@ def fetch_posting(state: AgentState) -> dict:
     url = state.get("posting_url")
     if not url:
         raise ValueError("Provide posting_url or posting_text")
-    return {"posting_text": fetch_posting_text(url), "status": "running"}
+    try:
+        return {"posting_text": fetch_posting_text(url), "status": "running"}
+    except FetchError as e:
+        return {"fetch_error": str(e), "status": "running"}
+
+
+def ask_for_text(state: AgentState) -> dict:
+    """The URL could not be read: ask the candidate to paste the posting instead of failing."""
+    raw = interrupt(PasteTextRequest(reason=state["fetch_error"]).model_dump(mode="json"))
+    text = PasteTextAnswer.model_validate(raw).text
+    return {"posting_text": text[:MAX_TEXT_CHARS], "fetch_error": None}
 
 
 def extract_requirements(state: AgentState) -> dict:
@@ -66,7 +81,8 @@ def extract_requirements(state: AgentState) -> dict:
 
 def ask_clarification(state: AgentState) -> dict:
     """Agent decision: the posting is too vague, ask the user instead of guessing."""
-    raw = interrupt({"type": "clarify", "question": state["posting"].clarifying_question})
+    question = state["posting"].clarifying_question
+    raw = interrupt(ClarifyRequest(question=question).model_dump(mode="json"))
     return {"clarifications": [ClarifyAnswer.model_validate(raw).answer]}
 
 
@@ -90,7 +106,7 @@ def confirm_low_fit(state: AgentState) -> dict:
     fit = state["fit"]
     gaps = [m.requirement_id for m in fit.matches if m.status == "gap"]
     answer = interrupt(
-        {"type": "low_fit", "score": fit.score, "gaps": gaps, "summary": fit.summary}
+        LowFitRequest(score=fit.score, gaps=gaps, summary=fit.summary).model_dump(mode="json")
     )
     proceed = LowFitAnswer.model_validate(answer).proceed
     return {"status": "running" if proceed else "stopped"}
@@ -185,17 +201,13 @@ def verify(state: AgentState) -> dict:
 
 
 def human_approval(state: AgentState) -> dict:
-    answer = interrupt(
-        {
-            "type": "approve",
-            "fit": state["fit"].model_dump(),
-            "cv": state["cv"].model_dump(),
-            "cover_letter": state["cover_letter"].model_dump()
-            if state.get("cover_letter")
-            else None,
-            "verification": state["verification"].model_dump(),
-        }
+    request = ApprovalRequest(
+        fit=state["fit"],
+        cv=state["cv"],
+        cover_letter=state.get("cover_letter"),
+        verification=state["verification"],
     )
+    answer = interrupt(request.model_dump(mode="json"))
     decision = ApprovalAnswer.model_validate(answer)
     if decision.approved:
         return {"status": "approved"}
@@ -209,11 +221,15 @@ def human_approval(state: AgentState) -> dict:
 
 
 def render_and_log(state: AgentState, config: RunnableConfig) -> dict:
+    run_id = config["configurable"]["thread_id"]
     profile, posting = load_profile(), state["posting"]
-    out_dir = run_output_dir(posting, config["configurable"]["thread_id"])
+    out_dir = run_output_dir(posting, run_id)
     cv_path = render_cv(profile, state["cv"], posting, out_dir)
-    update = {"cv_path": str(cv_path), "status": "done"}
+    letter_path = None
     if letter := state.get("cover_letter"):
-        update["letter_path"] = str(render_cover_letter(profile, letter, posting, out_dir))
-    log_application(posting, state["fit"].score, cv_path)
+        letter_path = render_cover_letter(profile, letter, posting, out_dir)
+    log_application(run_id, posting, state["fit"].score, cv_path, letter_path)
+    update = {"cv_path": str(cv_path), "status": "done"}
+    if letter_path:
+        update["letter_path"] = str(letter_path)
     return update

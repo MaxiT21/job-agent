@@ -1,29 +1,35 @@
 # Job Application Agent
 
-AI agent that takes a job posting (URL or text) and produces a fit analysis, a tailored CV (.docx) and a cover letter. Portfolio project for AI developer roles.
+AI agent that takes a job posting (URL or text) and produces a fit analysis, a tailored CV and a cover letter (.docx). Portfolio project for AI developer roles.
 
 ## Core principle
-The agent must NEVER invent experience. It only selects, reorders and rewords items from `backend/data/profile.yaml` (fallback: `profile.sample.yaml`). Every generated line carries `evidence_ids` pointing to profile IDs, and a two-layer verifier checks them (deterministic ID/skill check in `scoring.py` + LLM fact-check).
+The agent must NEVER invent experience. It only selects, reorders and rewords items from `backend/data/profile.yaml` (fallback: `profile.sample.yaml`). Every generated line carries `evidence_ids` pointing to profile IDs, and a two-layer verifier checks them (deterministic checks in `scoring.py`: IDs, ownership, numbers, skills + LLM fact-check).
 
 ## Stack
 - Backend: Python 3.12, FastAPI, Pydantic v2, LangGraph, LiteLLM (multi-provider), python-docx
 - Frontend (planned): Next.js + TypeScript + Tailwind, deployed on Vercel
-- Storage (planned): Supabase for the application tracker and the LangGraph checkpointer
+- Storage: SQLite (checkpoints + tracker) locally; Supabase/Postgres planned for deployment
 
 ## Structure
-- `backend/app/schemas.py`: Pydantic contracts between all steps
-- `backend/app/agent/graph.py`: LangGraph wiring (fetch → extract → match → tailor → cover letter → verify → human approval → render)
-- `backend/app/agent/nodes.py`: graph nodes; `interrupt()` pauses for user input (vague posting, low fit, approval)
-- `backend/app/agent/prompts.py`: all prompts
-- `backend/app/scoring.py`: deterministic fit score + evidence checks (no LLM)
-- `backend/app/llm.py`: single `structured()` LiteLLM wrapper, logs cost/latency per step
-- `backend/app/main.py`: API (`POST /runs`, `POST /runs/{id}/resume`, `GET /runs/{id}/cv`)
+- `backend/app/schemas.py`: Pydantic contracts between all steps, incl. interrupt requests/answers
+- `backend/app/agent/graph.py`: LangGraph wiring (fetch → extract → match → tailor → cover letter → verify → human approval → render); `tracked()` stores per-run LLM usage; `get_graph()` = SQLite-checkpointed graph
+- `backend/app/agent/nodes.py`: graph nodes; `interrupt()` pauses for the user (unreadable URL, vague posting, low fit, approval)
+- `backend/app/agent/prompts.py`: all prompts; `fence()` wraps untrusted posting text
+- `backend/app/scoring.py`: deterministic fit score + layer-1 verifier (no LLM)
+- `backend/app/llm.py`: single `structured()` LiteLLM wrapper; `track_usage()` collects calls
+- `backend/app/fetch.py`: SSRF-safe posting fetch
+- `backend/app/render/`: `.docx` CV and cover letter, one folder per run
+- `backend/app/tracker.py`, `backend/app/db.py`: SQLite application tracker (same DB as checkpoints)
+- `backend/app/main.py` + `app/api/models.py`: HTTP API (see README "API")
+- `backend/tests/fakes.py`: `FakeLLM` + canned outputs valid against the sample profile
 - `evals/`: eval dataset + runner
+- `docs/plans/`: implementation plans
 
 ## Conventions
 - All LLM calls go through `llm.structured()` with a Pydantic schema. No raw string parsing.
 - Keep anything that can be deterministic out of the LLM (scores, validation) and cover it with tests.
-- Tests must not call an LLM: `cd backend && uv run pytest`.
+- Tests must not call an LLM: `cd backend && uv run pytest`. Drive graph/API tests with the `fake_llm` fixture.
+- Every interrupt has a `*Request` model (what the agent asks) and a `*Answer` model (registered in `ANSWER_MODELS`).
 - Lint/format before committing: `uv run ruff check . ../evals && uv run ruff format . ../evals`.
 - Dependencies live in `backend/pyproject.toml` + `uv.lock` (`uv add <pkg>`); never edit the lockfile by hand.
 - Keep docs current in the same commit as the change: README, CLAUDE.md, CHANGELOG (`Unreleased`), sub-READMEs.

@@ -3,7 +3,8 @@
 Fixed pipeline where steps are predictable, conditional edges where the agent
 has to decide (vague posting, low fit, failed verification, user edits).
 
-    fetch -> extract -> [vague?] -> ask_clarification -> extract
+    fetch -> [unreadable URL?] -> ask_for_text -> extract
+          -> extract -> [vague?] -> ask_clarification -> extract
                      -> match -> [low fit?] -> confirm_low_fit -> END (stopped)
                               -> tailor_cv -> cover_letter -> verify
                                  verify -> [failed & retries left] -> tailor_cv and/or cover_letter
@@ -17,16 +18,20 @@ state (`llm_calls`), which is how the API reports cost and latency per run.
 
 import inspect
 from collections.abc import Callable
+from functools import lru_cache
+from pathlib import Path
 
 from langchain_core.runnables import RunnableConfig
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, START, StateGraph
 
 from app import schemas
 from app.agent import nodes
 from app.agent.state import AgentState
 from app.config import settings
+from app.db import connect
 from app.llm import track_usage
 
 
@@ -41,6 +46,10 @@ def tracked(node: Callable[..., dict]) -> Callable[[AgentState, RunnableConfig],
 
     run.__name__ = node.__name__
     return run
+
+
+def after_fetch(state: AgentState) -> str:
+    return "ask_for_text" if state.get("fetch_error") else "extract_requirements"
 
 
 def after_extract(state: AgentState) -> str:
@@ -73,6 +82,7 @@ def after_approval(state: AgentState) -> str:
 def build_graph(checkpointer=None):
     g = StateGraph(AgentState)
     g.add_node("fetch_posting", tracked(nodes.fetch_posting))
+    g.add_node("ask_for_text", tracked(nodes.ask_for_text))
     g.add_node("extract_requirements", tracked(nodes.extract_requirements))
     g.add_node("ask_clarification", tracked(nodes.ask_clarification))
     g.add_node("match_profile", tracked(nodes.match_profile))
@@ -84,7 +94,8 @@ def build_graph(checkpointer=None):
     g.add_node("render_and_log", tracked(nodes.render_and_log))
 
     g.add_edge(START, "fetch_posting")
-    g.add_edge("fetch_posting", "extract_requirements")
+    g.add_conditional_edges("fetch_posting", after_fetch)
+    g.add_edge("ask_for_text", "extract_requirements")
     g.add_conditional_edges("extract_requirements", after_extract)
     g.add_edge("ask_clarification", "extract_requirements")
     g.add_conditional_edges("match_profile", after_match)
@@ -95,14 +106,21 @@ def build_graph(checkpointer=None):
     g.add_conditional_edges("human_approval", after_approval)
     g.add_edge("render_and_log", END)
 
-    # MemorySaver is fine for dev; swap for a Postgres checkpointer (Supabase) in prod.
     return g.compile(checkpointer=checkpointer or MemorySaver(serde=_serializer()))
+
+
+def build_persistent_graph(db_path: Path):
+    """Graph whose checkpoints live in SQLite, so runs survive restarts."""
+    return build_graph(SqliteSaver(connect(db_path), serde=_serializer()))
+
+
+@lru_cache
+def get_graph():
+    """The app-wide graph (FastAPI dependency; tests override it)."""
+    return build_persistent_graph(settings.database_path)
 
 
 def _serializer() -> JsonPlusSerializer:
     """Explicitly allow our Pydantic state types to be restored from checkpoints."""
     allowed = [("app.schemas", name) for name in schemas.__all_state_types__]
     return JsonPlusSerializer(allowed_msgpack_modules=allowed)
-
-
-graph = build_graph()

@@ -8,7 +8,8 @@ import pytest
 from langgraph.types import Command
 from pydantic import ValidationError
 
-from app.agent.graph import build_graph
+from app.agent.graph import build_graph, build_persistent_graph
+from app.fetch import FetchError
 from tests.fakes import good_letter, happy_script, match, posting, verify_fail, verify_pass
 
 POSTING = {"posting_text": "We need a Python + SQL intern. Kubernetes is a plus."}
@@ -180,3 +181,34 @@ def test_two_runs_same_posting_do_not_collide(fake_llm):
 
     assert len(set(paths)) == 4
     assert all(Path(p).exists() for p in paths)
+
+
+def test_unreadable_url_asks_for_pasted_text(graph, thread, fake_llm, monkeypatch):
+    def fail(url):
+        raise FetchError("The page has almost no readable text. Paste the posting text instead.")
+
+    monkeypatch.setattr("app.agent.nodes.fetch_posting_text", fail)
+    llm = fake_llm(happy_script())
+
+    graph.invoke({"posting_url": "https://jobs.example.com/1"}, thread)
+    pending = waiting_for(graph, thread)
+    assert pending["type"] == "paste_text"
+    assert "no readable text" in pending["reason"]
+
+    graph.invoke(Command(resume={"text": "Python and SQL backend intern."}), thread)
+    assert "Python and SQL backend intern." in llm.prompts("extract")[0]
+    assert waiting_for(graph, thread)["type"] == "approve"
+
+
+def test_state_survives_a_new_graph_instance(tmp_path, fake_llm):
+    fake_llm(happy_script())
+    cfg = {"configurable": {"thread_id": "persisted"}}
+    db = tmp_path / "state.db"
+
+    first = build_persistent_graph(db)
+    first.invoke(POSTING, cfg)
+
+    second = build_persistent_graph(db)
+    assert waiting_for(second, cfg)["type"] == "approve"
+    second.invoke(Command(resume={"approved": True}), cfg)
+    assert second.get_state(cfg).values["status"] == "done"

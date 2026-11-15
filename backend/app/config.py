@@ -32,6 +32,9 @@ class Settings(BaseSettings):
     profile_path: Path = BACKEND_DIR / "data" / "profile.yaml"
     sample_profile_path: Path = BACKEND_DIR / "data" / "profile.sample.yaml"
     output_dir: Path = BACKEND_DIR / "outputs"
+    # SQLite file holding run checkpoints and the application tracker.
+    database_path: Path = BACKEND_DIR / "outputs" / "job_agent.db"
+    log_level: str = "INFO"
 
     low_fit_threshold: float = 50.0  # below this the agent asks before continuing
     max_verify_retries: int = 2

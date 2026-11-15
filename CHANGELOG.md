@@ -18,7 +18,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - The cover letter is rendered to `.docx` too (greeting and sign-off in the posting's language are added by the renderer, not the LLM).
 - Each run writes to its own folder (`outputs/runs/<date>_<company>_<title>_<run-id>/cv.docx`, `cover_letter.docx`), so repeated postings never overwrite earlier files.
 
+- Runs persist in SQLite (LangGraph `SqliteSaver`), so they survive restarts; the application tracker lives in the same database with a status pipeline (`ready → applied → interview → offer / rejected / withdrawn`).
+- API: typed responses (`RunView`, discriminated `waiting_for`), `POST /runs/{id}/retry` for failed steps, `GET /runs/{id}/files/{cv|cover_letter}`, `GET /applications`, `PATCH /applications/{id}`; `/health` reports whether the real or sample profile is loaded.
+- If a posting URL can't be read, the run pauses with `paste_text` instead of failing.
+
 ### Changed
+- A failing step no longer returns HTTP 500: the run is kept with `status: "error"` and can be retried.
+- Resume answers are validated against the pending question (422 on the wrong shape, 409 if nothing is pending).
+- `GET /runs/{id}/cv` replaced by `GET /runs/{id}/files/cv`; the CSV tracker replaced by SQLite.
 - The posting is fenced in `<job_posting>` tags it cannot close, and every prompt treats it as untrusted data (prompt-injection guard).
 - The LLM fact-checker reports issue locations in a fixed format so they can be routed.
 - Dependencies are managed with uv (`backend/pyproject.toml` + `backend/uv.lock`); `requirements.txt` removed.

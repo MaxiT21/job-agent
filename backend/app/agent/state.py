@@ -14,6 +14,7 @@ class AgentState(TypedDict, total=False):
     # input
     posting_url: str | None
     posting_text: str
+    fetch_error: str | None  # set when the URL could not be read
     # pipeline outputs
     posting: JobPosting
     fit: FitReport

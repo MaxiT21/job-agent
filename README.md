@@ -14,7 +14,7 @@ checks every line against the evidence it cites.
 ## How it works
 
 ```
-fetch → extract requirements → [vague?] ask user
+fetch → [unreadable?] ask to paste → extract requirements → [vague?] ask user
                              → match profile → fit score → [low fit?] ask user
                                              → tailor CV → cover letter → verify
                                                verify → [failed] regenerate only the failing document
@@ -31,7 +31,7 @@ fetch → extract requirements → [vague?] ask user
 - **Provider-agnostic**: all LLM calls go through LiteLLM; cost and latency are recorded per step and per run.
 
 ## Stack
-LangGraph · FastAPI · Pydantic · LiteLLM · python-docx · Next.js · Supabase (planned) · Docker
+LangGraph · FastAPI · Pydantic · LiteLLM · python-docx · SQLite · Docker · Next.js (planned) · Supabase (planned)
 
 ## Run locally
 Requires [uv](https://docs.astral.sh/uv/) (it installs Python 3.12 for you).
@@ -47,6 +47,28 @@ uv run uvicorn app.main:app --reload   # http://localhost:8000/docs
 Use your own profile: copy `backend/data/profile.sample.yaml` to `backend/data/profile.yaml` (gitignored) and fill it in.
 
 Or with Docker: `docker compose up --build` (reads the same root `.env`; your profile is mounted, never baked into the image).
+
+## API
+Interactive docs at `http://localhost:8000/docs`. Runs persist in SQLite (`backend/outputs/job_agent.db`), so they survive restarts.
+
+| Method | Path | Purpose |
+|---|---|---|
+| `POST` | `/runs` | Start from `{"posting_url": ...}` or `{"posting_text": ...}` |
+| `GET` | `/runs/{id}` | Current state: `status`, `waiting_for`, fit, CV, letter, verification, per-run LLM usage |
+| `POST` | `/runs/{id}/resume` | Answer `waiting_for` with `{"value": {...}}` (shape depends on its `type`) |
+| `POST` | `/runs/{id}/retry` | Re-run the step that failed (`status: "error"`, e.g. provider outage) |
+| `GET` | `/runs/{id}/files/{cv\|cover_letter}` | Download the `.docx` |
+| `GET` | `/applications` | Tracker: one row per approved run |
+| `PATCH` | `/applications/{id}` | `{"status": "applied" \| "interview" \| "offer" \| "rejected" \| "withdrawn"}` |
+
+`waiting_for.type` → expected answer:
+
+| type | when | answer |
+|---|---|---|
+| `paste_text` | the URL could not be read | `{"text": "..."}` |
+| `clarify` | the posting is too vague | `{"answer": "..."}` |
+| `low_fit` | fit score below `LOW_FIT_THRESHOLD` | `{"proceed": true \| false}` |
+| `approve` | documents ready for review | `{"approved": true}` or `{"approved": false, "notes": "..."}` |
 
 ## Evals
 _Coming soon_: extraction precision/recall, hallucination rate, fit-score agreement with human judgement, cost and latency per provider. See [`evals/`](evals/).

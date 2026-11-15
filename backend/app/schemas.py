@@ -178,26 +178,70 @@ class VerificationResult(BaseModel):
     issues: list[VerificationIssue] = []
 
 
-# ---------- Human-in-the-loop answers (resume payloads) ----------
+# ---------- Human-in-the-loop: what the agent asks (interrupt payloads) ----------
+
+
+class PasteTextRequest(BaseModel):
+    """The URL could not be read; ask the candidate to paste the posting."""
+
+    type: Literal["paste_text"] = "paste_text"
+    reason: str
+
+
+class ClarifyRequest(BaseModel):
+    """The posting is too vague to tailor an application."""
+
+    type: Literal["clarify"] = "clarify"
+    question: str | None
+
+
+class LowFitRequest(BaseModel):
+    """The fit score is below the threshold: apply anyway?"""
+
+    type: Literal["low_fit"] = "low_fit"
+    score: float
+    gaps: list[str] = Field(description="IDs of requirements with no supporting evidence")
+    summary: str
+
+
+class ApprovalRequest(BaseModel):
+    """Final review before rendering the documents."""
+
+    type: Literal["approve"] = "approve"
+    fit: FitReport
+    cv: TailoredCV
+    cover_letter: CoverLetter | None
+    verification: VerificationResult
+
+
+# ---------- Human-in-the-loop: how the candidate answers (resume payloads) ----------
+
+
+class PasteTextAnswer(BaseModel):
+    text: str = Field(min_length=1)
 
 
 class ClarifyAnswer(BaseModel):
-    """Answer to a `clarify` interrupt (the posting was too vague)."""
-
     answer: str = Field(min_length=1)
 
 
 class LowFitAnswer(BaseModel):
-    """Answer to a `low_fit` interrupt: apply anyway or stop."""
-
     proceed: bool
 
 
 class ApprovalAnswer(BaseModel):
-    """Answer to an `approve` interrupt. Rejecting with notes regenerates the documents."""
+    """Rejecting with notes regenerates both documents with those notes."""
 
     approved: bool
     notes: str = ""
+
+
+ANSWER_MODELS: dict[str, type[BaseModel]] = {
+    "paste_text": PasteTextAnswer,
+    "clarify": ClarifyAnswer,
+    "low_fit": LowFitAnswer,
+    "approve": ApprovalAnswer,
+}
 
 
 # Types stored in the LangGraph checkpoint (allow-listed for deserialization).
