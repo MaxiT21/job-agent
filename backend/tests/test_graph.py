@@ -9,7 +9,7 @@ from langgraph.types import Command
 from pydantic import ValidationError
 
 from app.agent.graph import build_graph
-from tests.fakes import happy_script, match, posting, verify_fail
+from tests.fakes import good_letter, happy_script, match, posting, verify_fail
 
 POSTING = {"posting_text": "We need a Python + SQL intern. Kubernetes is a plus."}
 
@@ -102,3 +102,14 @@ def test_resume_answers_are_validated(graph, thread, fake_llm):
 
     with pytest.raises(ValidationError):
         graph.invoke(Command(resume="yes"), thread)
+
+
+def test_cover_letter_may_quote_numbers_from_the_posting(graph, thread, fake_llm):
+    letter = good_letter()
+    letter.paragraphs[0].text = "Your 40-person platform team builds with FastAPI, like I did."
+    llm = fake_llm(happy_script(cover_letter=[letter]))
+
+    graph.invoke({"posting_text": "Join our 40-person platform team. Python, SQL."}, thread)
+
+    assert llm.steps().count("verify") == 1  # layer 1 passed, LLM fact-check ran
+    assert waiting_for(graph, thread)["verification"]["passed"] is True

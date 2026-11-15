@@ -147,7 +147,7 @@ def verify(state: AgentState) -> dict:
     cv, letter = state["cv"], state.get("cover_letter")
 
     # Layer 1: deterministic, free, catches made-up IDs and skills.
-    issues = check_evidence_ids(profile, cv, letter)
+    issues = check_evidence_ids(profile, cv, letter, posting_text=state.get("posting_text", ""))
 
     # Layer 2: LLM fact-check of each line against the evidence it cites.
     if not issues:

@@ -8,6 +8,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 - Offline graph test harness (`tests/fakes.py`): a scripted LLM drives the full pipeline, including interrupts, retries and edits.
 
+- Verifier layer 1 now also rejects: bullets that borrow evidence from a different job/project (misattribution), bullets that don't cite their own item, numbers not present in the cited evidence, skill/language items used as CV entries, and duplicate entries.
+- Profile loading fails fast on duplicate IDs.
+
 ### Changed
 - Dependencies are managed with uv (`backend/pyproject.toml` + `backend/uv.lock`); `requirements.txt` removed.
 - CI runs `ruff check`, `ruff format --check` and `pytest` against the locked environment.

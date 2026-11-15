@@ -7,10 +7,11 @@ to guarantee nothing is invented.
 
 from __future__ import annotations
 
+from collections import Counter
 from enum import StrEnum
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 # ---------- Job posting ----------
 
@@ -74,6 +75,13 @@ class Profile(BaseModel):
     summary: str
     items: list[ProfileItem]
 
+    @model_validator(mode="after")
+    def _ids_are_unique(self) -> Profile:
+        counts = Counter(i for item in self.items for i in [item.id, *(b.id for b in item.bullets)])
+        if dupes := sorted(i for i, n in counts.items() if n > 1):
+            raise ValueError(f"Profile IDs must be unique; duplicated: {dupes}")
+        return self
+
     def evidence_ids(self) -> set[str]:
         """All IDs (items + bullets) that generated text is allowed to cite."""
         ids: set[str] = set()
@@ -84,6 +92,28 @@ class Profile(BaseModel):
 
     def item(self, item_id: str) -> ProfileItem | None:
         return next((i for i in self.items if i.id == item_id), None)
+
+    def owner(self, evidence_id: str) -> ProfileItem | None:
+        """The item an ID belongs to: the item itself, or the item holding that bullet."""
+        for item in self.items:
+            if item.id == evidence_id or any(b.id == evidence_id for b in item.bullets):
+                return item
+        return None
+
+    def evidence_text(self, evidence_id: str) -> str:
+        """Everything a citation of this ID may rely on (used for the number check).
+
+        Citing an item covers all its bullets; citing a bullet covers that bullet plus
+        its item's header (title, org, period, location).
+        """
+        item = self.owner(evidence_id)
+        if item is None:
+            return ""
+        header = " ".join(filter(None, [item.title, item.org, item.period, item.location]))
+        if evidence_id == item.id:
+            return " ".join([header, *item.tags, *(b.text for b in item.bullets)])
+        bullet = next(b for b in item.bullets if b.id == evidence_id)
+        return f"{header} {bullet.text}"
 
 
 # ---------- Matching ----------

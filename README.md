@@ -24,7 +24,9 @@ fetch → extract requirements → [vague?] ask user
 
 - **Workflow where it's predictable, agent decisions where it isn't**: LangGraph conditional edges for vague postings, low fit, failed verification and user edits.
 - **Deterministic where possible**: the fit score and the first verification layer are plain code (tested), not LLM output.
-- **Two-layer verification**: (1) every line must cite existing profile IDs, skills must exist in the profile; (2) an LLM fact-check of each line against the evidence it cites.
+- **Two-layer verification**:
+  1. *Deterministic* (`scoring.py`, free, unit-tested): every line cites existing profile IDs; each CV bullet cites its own job/project and never borrows another one's evidence; every number appears in the cited evidence; skills exist in the profile; entries are real and unique.
+  2. *LLM fact-check*: each line is checked against the evidence it cites (paraphrase OK, new facts not).
 - **Provider-agnostic**: all LLM calls go through LiteLLM; cost and latency are logged per step.
 
 ## Stack
