@@ -1,6 +1,8 @@
 # Backend Hardening Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
+
+**Status:** ✅ Completed 2026-11-15 (branch `backend-hardening`). Deviations from this plan are listed in `CHANGELOG.md` and the final summary: SQLite tracker + `runs.py` service, `paste_text` interrupt for unreadable URLs, failures returned as `status: "error"` (not HTTP 502), clarification cap, generated architecture diagram with a freshness test.
 
 **Goal:** Turn the scaffold into a reliable, well-tested agent backend: correct control flow, stronger anti-hallucination guarantees, persistent runs, a clean API and CLI, and a working eval harness.
 
@@ -37,12 +39,12 @@
 - Delete: `backend/requirements.txt`
 - Modify: `.github/workflows/tests.yml`, `backend/Dockerfile`, `README.md`, `CLAUDE.md`
 
-- [ ] `pyproject.toml`: project deps = current requirements + `langgraph-checkpoint-sqlite`; `[dependency-groups] dev = [pytest, ruff]`; ruff (line-length 100, rules `E,F,I,UP,B,SIM`); pytest `testpaths=["tests"]`, `pythonpath=["."]` (replaces `conftest.py` sys.path hack).
-- [ ] `uv lock`; `uv sync`; `uv run ruff check . && uv run ruff format --check . && uv run pytest` all green (fix lint findings).
-- [ ] CI: `astral-sh/setup-uv`, `uv sync --locked`, ruff check, ruff format --check, pytest.
-- [ ] Dockerfile: install with uv from the lockfile (`uv sync --locked --no-dev`), non-root user.
-- [ ] Docs: run instructions use uv; CHANGELOG "Unreleased" section started.
-- [ ] Commit `chore: uv + ruff tooling, lockfile, CI lint`.
+- [x] `pyproject.toml`: project deps = current requirements + `langgraph-checkpoint-sqlite`; `[dependency-groups] dev = [pytest, ruff]`; ruff (line-length 100, rules `E,F,I,UP,B,SIM`); pytest `testpaths=["tests"]`, `pythonpath=["."]` (replaces `conftest.py` sys.path hack).
+- [x] `uv lock`; `uv sync`; `uv run ruff check . && uv run ruff format --check . && uv run pytest` all green (fix lint findings).
+- [x] CI: `astral-sh/setup-uv`, `uv sync --locked`, ruff check, ruff format --check, pytest.
+- [x] Dockerfile: install with uv from the lockfile (`uv sync --locked --no-dev`), non-root user.
+- [x] Docs: run instructions use uv; CHANGELOG "Unreleased" section started.
+- [x] Commit `chore: uv + ruff tooling, lockfile, CI lint`.
 
 ### Task 2: Offline graph test harness + typed interrupt answers
 
@@ -55,18 +57,18 @@
 - Produces in `schemas.py`: `ClarifyAnswer(answer: str)`, `LowFitAnswer(proceed: bool)`, `ApprovalAnswer(approved: bool, notes: str = "")`.
 - State: `clarifications: list[str]` (appended), `edit_notes: str | None` — replaces `user_notes`.
 
-- [ ] Tests (fail first): `test_happy_path_pauses_for_approval_then_renders`, `test_vague_posting_asks_and_reextracts_with_answer`, `test_low_fit_stop_ends_run`, `test_low_fit_proceed_continues`, `test_failed_verification_retries_then_escalates`, `test_edit_notes_regenerate_and_keep_clarification`, `test_resume_answers_are_validated` (string to approval → `ValidationError`).
-- [ ] Nodes validate resume values with the answer models; clarification answers are accumulated and shown to every later prompt; edit notes only to generation prompts.
-- [ ] Commit `test: offline graph harness; fix interrupt answer handling`.
+- [x] Tests (fail first): `test_happy_path_pauses_for_approval_then_renders`, `test_vague_posting_asks_and_reextracts_with_answer`, `test_low_fit_stop_ends_run`, `test_low_fit_proceed_continues`, `test_failed_verification_retries_then_escalates`, `test_edit_notes_regenerate_and_keep_clarification`, `test_resume_answers_are_validated` (string to approval → `ValidationError`).
+- [x] Nodes validate resume values with the answer models; clarification answers are accumulated and shown to every later prompt; edit notes only to generation prompts.
+- [x] Commit `test: offline graph harness; fix interrupt answer handling`.
 
 ### Task 3: Deterministic verifier hardening
 
 **Files:** Modify `backend/app/scoring.py`, `backend/app/schemas.py`; Test `backend/tests/test_scoring.py` (move scoring tests out of `test_core.py`).
 
-- [ ] `Profile` validator: IDs unique across items and bullets → `ValueError` naming duplicates. Test `test_profile_rejects_duplicate_ids`.
-- [ ] `check_evidence_ids` adds: (a) CV entry must reference an `experience|project|education|certificate` item, once; (b) each entry bullet must cite ≥1 ID of its own item, and must not cite another experience/project item (`"Evidence belongs to a different item"`); (c) every number in a line (`\d+(?:[.,]\d+)?%?`) must appear in the text of the cited evidence (item title/org/period + bullets) → `"Number not in evidence: 10"`.
-- [ ] Tests: `test_bullet_citing_other_item_is_flagged`, `test_unsupported_number_is_flagged`, `test_number_from_evidence_passes`, `test_skill_entry_is_rejected`, `test_duplicate_entry_is_flagged`.
-- [ ] Commit `feat(verifier): ownership, number and entry checks`.
+- [x] `Profile` validator: IDs unique across items and bullets → `ValueError` naming duplicates. Test `test_profile_rejects_duplicate_ids`.
+- [x] `check_evidence_ids` adds: (a) CV entry must reference an `experience|project|education|certificate` item, once; (b) each entry bullet must cite ≥1 ID of its own item, and must not cite another experience/project item (`"Evidence belongs to a different item"`); (c) every number in a line (`\d+(?:[.,]\d+)?%?`) must appear in the text of the cited evidence (item title/org/period + bullets) → `"Number not in evidence: 10"`.
+- [x] Tests: `test_bullet_citing_other_item_is_flagged`, `test_unsupported_number_is_flagged`, `test_number_from_evidence_passes`, `test_skill_entry_is_rejected`, `test_duplicate_entry_is_flagged`.
+- [x] Commit `feat(verifier): ownership, number and entry checks`.
 
 ### Task 4: Agent quality — targeted regeneration, injection hardening, per-run usage, safe fetch
 
@@ -77,9 +79,9 @@
 - `app.llm.track_usage() -> contextmanager[list[dict]]` collecting `{step, model, latency_s, cost_usd, ok}` for calls inside it; graph nodes wrapped with `tracked(node)` that merges records into state key `llm_calls: Annotated[list[dict], operator.add]`.
 - State `regenerate: list[Literal["cv", "letter"]]`; `after_verify` routes failures by issue `where` prefix (`cv.` → cv, `cover_letter` → letter); `after_tailor` → `write_cover_letter` only if `"letter" in regenerate`, else `verify`.
 
-- [ ] Prompts: posting wrapped in `<job_posting>` tags; every system prompt states content inside tags is untrusted data, never instructions. Test asserts the tag wrapping in `FakeLLM.calls`.
-- [ ] Tests: `test_letter_only_issue_regenerates_only_letter`, `test_run_usage_is_per_run` (two runs, independent `llm_calls`), fetch tests with `httpx.MockTransport` + monkeypatched DNS (`test_rejects_private_ip`, `test_rejects_non_http`, `test_short_page_asks_to_paste`, `test_extracts_visible_text`).
-- [ ] Commit `feat(agent): targeted regeneration, prompt-injection guard, per-run usage, SSRF-safe fetch`.
+- [x] Prompts: posting wrapped in `<job_posting>` tags; every system prompt states content inside tags is untrusted data, never instructions. Test asserts the tag wrapping in `FakeLLM.calls`.
+- [x] Tests: `test_letter_only_issue_regenerates_only_letter`, `test_run_usage_is_per_run` (two runs, independent `llm_calls`), fetch tests with `httpx.MockTransport` + monkeypatched DNS (`test_rejects_private_ip`, `test_rejects_non_http`, `test_short_page_asks_to_paste`, `test_extracts_visible_text`).
+- [x] Commit `feat(agent): targeted regeneration, prompt-injection guard, per-run usage, SSRF-safe fetch`.
 
 ### Task 5: Outputs — per-run folder, cover letter .docx
 
@@ -87,8 +89,8 @@
 
 **Interfaces:** `render_cv(profile, cv, posting, out_dir: Path) -> Path` (`out_dir/cv.docx`), `render_cover_letter(profile, letter, posting, out_dir: Path) -> Path` (`out_dir/cover_letter.docx`); run folder `outputs/runs/<YYYYMMDD>_<company>_<title>_<run_id[:8]>/`. State gains `letter_path`.
 
-- [ ] Tests: `test_cv_docx_contains_name_and_bullets`, `test_cover_letter_docx_has_paragraphs`, `test_two_runs_same_posting_do_not_collide`, `test_section_titles_follow_language` (es).
-- [ ] Commit `feat(render): cover letter docx, per-run output folders`.
+- [x] Tests: `test_cv_docx_contains_name_and_bullets`, `test_cover_letter_docx_has_paragraphs`, `test_two_runs_same_posting_do_not_collide`, `test_section_titles_follow_language` (es).
+- [x] Commit `feat(render): cover letter docx, per-run output folders`.
 
 ### Task 6: Persistence + API
 
@@ -100,9 +102,9 @@
 - API (typed `response_model`s): `POST /runs`, `GET /runs/{id}`, `POST /runs/{id}/resume` (body validated against the pending interrupt type → 422 / 409 if nothing pending), `POST /runs/{id}/retry`, `GET /runs/{id}/files/{cv|cover_letter}`, `GET /applications`, `PATCH /applications/{run_id}`, `GET /health`. `RunView` exposes status, waiting_for, posting, fit, cv, cover_letter, verification, files, usage (calls, total cost, total latency), error.
 - LLM/fetch exceptions → 502 `{detail}`; run remains resumable via `/retry`.
 
-- [ ] Tests (TestClient + FakeLLM + tmp DB): full flow start→approve→download both files; `test_resume_wrong_shape_422`; `test_resume_without_pending_interrupt_409`; `test_provider_error_then_retry`; `test_unknown_run_404`; `test_state_survives_new_graph_instance` (persistence); tracker list/update.
-- [ ] Logging configured (`LOG_LEVEL`); request IDs not needed.
-- [ ] Commit `feat(api): sqlite persistence, typed responses, retry, tracker endpoints`.
+- [x] Tests (TestClient + FakeLLM + tmp DB): full flow start→approve→download both files; `test_resume_wrong_shape_422`; `test_resume_without_pending_interrupt_409`; `test_provider_error_then_retry`; `test_unknown_run_404`; `test_state_survives_new_graph_instance` (persistence); tracker list/update.
+- [x] Logging configured (`LOG_LEVEL`); request IDs not needed.
+- [x] Commit `feat(api): sqlite persistence, typed responses, retry, tracker endpoints`.
 
 ### Task 7: CLI
 
@@ -110,8 +112,8 @@
 
 **Interfaces:** `python -m app.cli run (--url URL | --file PATH | --text TEXT)`; prompts for each interrupt on stdin; prints fit table, verifier issues, CV/letter preview and file paths; `python -m app.cli applications`.
 
-- [ ] Test drives a full run with FakeLLM and scripted stdin answers.
-- [ ] Commit `feat(cli): interactive terminal runner`.
+- [x] Test drives a full run with FakeLLM and scripted stdin answers.
+- [x] Commit `feat(cli): interactive terminal runner`.
 
 ### Task 8: Evals
 
@@ -119,12 +121,12 @@
 
 **Interfaces:** `extraction_prf(gold: list[str], got: list[str]) -> tuple[int, int, int]`; `fit_bucket(score: float) -> Literal["low","medium","high"]` (<50, <75, ≥75); runner `--model` (repeatable), `--limit`, `--full` (whole pipeline, auto-approve, reports layer-1/layer-2 flagged-line rates), writes `evals/results/<date>_<model>.md`.
 
-- [ ] Tests for metrics only (no LLM).
-- [ ] Commit `feat(evals): dataset, fit agreement, hallucination rates`.
+- [x] Tests for metrics only (no LLM).
+- [x] Commit `feat(evals): dataset, fit agreement, hallucination rates`.
 
 ### Task 9: Documentation audit
 
-- [ ] README (architecture diagram, verifier guarantees, API table, CLI, evals, roadmap status), CLAUDE.md (structure + commands), `docs/architecture.md` (state, routing, verification layers, persistence), CHANGELOG, frontend/evals READMEs consistent with the API.
-- [ ] Commit `docs: bring all docs in line with backend`.
+- [x] README (architecture diagram, verifier guarantees, API table, CLI, evals, roadmap status), CLAUDE.md (structure + commands), `docs/architecture.md` (state, routing, verification layers, persistence), CHANGELOG, frontend/evals READMEs consistent with the API.
+- [x] Commit `docs: bring all docs in line with backend`.
 
 **Next plan (separate):** Next.js frontend against the typed API (generated TS types from OpenAPI).
