@@ -30,7 +30,8 @@ class FakeLLM:
     """Replaces `app.llm.structured`. Each step returns its scripted responses in order.
 
     The last response of a step is repeated if the step is called more times than scripted,
-    unless `strict=True`. Exceptions in the script are raised instead of returned.
+    unless `strict=True`. Exceptions in the script are raised instead of returned; callables
+    are called and their result used.
     """
 
     def __init__(self, responses: dict[str, list[Any]], strict: bool = False):
@@ -47,6 +48,8 @@ class FakeLLM:
         if not queue:
             raise ScriptExhausted(f"No scripted response for step {step!r}")
         item = queue.pop(0) if (len(queue) > 1 or self.strict) else queue[0]
+        if callable(item) and not isinstance(item, BaseModel):
+            item = item()  # e.g. block on an Event to observe a run mid-flight
         if isinstance(item, Exception):
             raise item
         assert isinstance(item, schema), f"{step}: scripted {type(item).__name__}, wanted {schema}"

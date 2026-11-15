@@ -59,14 +59,15 @@ uv run python -m app.cli applications                         # tracker
 ```
 
 ## API
-Interactive docs at `http://localhost:8000/docs`. Everything except `/health` and `/auth/*` requires logging in with `APP_PASSWORD` (`POST /auth/login`), which sets an HttpOnly session cookie. Runs persist in SQLite (`backend/outputs/job_agent.db`), so they survive restarts.
+Interactive docs at `http://localhost:8000/docs`. Starting, answering and retrying return immediately; poll `GET /runs/{id}` while `status` is `running` (`409` if you answer a run that is still working). Everything except `/health` and `/auth/*` requires logging in with `APP_PASSWORD` (`POST /auth/login`), which sets an HttpOnly session cookie. Runs persist in SQLite (`backend/outputs/job_agent.db`), so they survive restarts.
 
 | Method | Path | Purpose |
 |---|---|---|
-| `POST` | `/runs` | Start from `{"posting_url": ...}` or `{"posting_text": ...}` |
-| `GET` | `/runs/{id}` | Current state: `status`, `waiting_for`, fit, CV, letter, verification, per-run LLM usage |
-| `POST` | `/runs/{id}/resume` | Answer `waiting_for` with `{"value": {...}}` (shape depends on its `type`) |
-| `POST` | `/runs/{id}/retry` | Re-run the step that failed (`status: "error"`, e.g. provider outage) |
+| `GET` | `/runs` | Recent runs (status, company, title, fit score) |
+| `POST` | `/runs` | Start from `{"posting_url": ...}` or `{"posting_text": ...}` → `202`, runs in the background |
+| `GET` | `/runs/{id}` | Current state: `status` (`running` + `step` while working), `waiting_for`, fit, CV, letter, verification, per-run LLM usage |
+| `POST` | `/runs/{id}/resume` | Answer `waiting_for` with `{"value": {...}}` (shape depends on its `type`) → `202` |
+| `POST` | `/runs/{id}/retry` | Re-run a step that failed (`status: "error"`, e.g. provider outage) or was interrupted by a restart → `202` |
 | `GET` | `/runs/{id}/files/{cv\|cover_letter}` | Download the `.docx` |
 | `GET` | `/applications` | Tracker: one row per approved run |
 | `PATCH` | `/applications/{id}` | `{"status": "applied" \| "interview" \| "offer" \| "rejected" \| "withdrawn"}` |

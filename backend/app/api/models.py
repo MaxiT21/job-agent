@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, Field, HttpUrl, model_validator
@@ -61,9 +62,14 @@ class Files(BaseModel):
     cover_letter: bool
 
 
+RunStatus = Literal["running", "waiting", "stopped", "done", "error"]
+
+
 class RunView(BaseModel):
     run_id: str
-    status: Literal["running", "waiting", "stopped", "done", "error"]
+    created_at: datetime | None = None
+    status: RunStatus
+    step: str | None = Field(None, description="Graph node running next, while status=running")
     waiting_for: WaitingFor | None = None
     error: str | None = None
     posting: JobPosting | None = None
@@ -73,6 +79,15 @@ class RunView(BaseModel):
     verification: VerificationResult | None = None
     files: Files
     usage: Usage
+
+
+class RunSummary(BaseModel):
+    run_id: str
+    created_at: datetime | None
+    status: RunStatus
+    company: str | None
+    title: str | None
+    fit_score: float | None
 
 
 class StatusUpdate(BaseModel):

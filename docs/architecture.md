@@ -90,10 +90,15 @@ graph TD;
 - The posting is wrapped by `prompts.fence()` in `<job_posting>` tags that it cannot close, and every prompt says that content is data, not instructions.
 - `fetch.fetch_posting_text` allows http(s) only, checks every redirect hop resolves to public IPs (SSRF), and caps size (2 MB) and time (15 s).
 
+## Execution
+
+`app/runs.py` runs the graph with `graph.stream(..., stream_mode="tasks")`, inline (CLI, tests) or on the API's thread pool. The API returns `202` and clients poll; the node that is starting is exposed as `RunView.step`. One execution per run at a time (`Busy` → `409`). A run whose checkpoint has a next node but no pending question, no error and no live execution was cut off by a restart: it is reported as `error` and `retry` continues it.
+
 ## Persistence
 
 One SQLite file (`DATABASE_PATH`, default `backend/outputs/job_agent.db`):
 - LangGraph checkpoints (`SqliteSaver`): runs survive restarts. A failed step leaves the run at that node (`status: "error"`) and `retry` re-runs it.
+- `runs` table (`run_index.py`): run ids and start times, for listing.
 - `applications` table (`tracker.py`): one row per approved run with a status pipeline.
 
 For deployment, swap both for Postgres (Supabase): `build_persistent_graph()` and `tracker._conn()` are the only places that know about SQLite.

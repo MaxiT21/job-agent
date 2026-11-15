@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import threading
+import time
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -24,10 +27,25 @@ def client():
     app.dependency_overrides.clear()
 
 
+def settle(client, run_id: str, timeout: float = 5.0) -> dict:
+    deadline = time.monotonic() + timeout
+    while (view := client.get(f"/runs/{run_id}").json())["status"] == "running":
+        assert time.monotonic() < deadline, "run did not settle"
+        time.sleep(0.02)
+    return view
+
+
 def start(client, body=POSTING) -> dict:
     r = client.post("/runs", json=body)
-    assert r.status_code == 201, r.text
-    return r.json()
+    assert r.status_code == 202, r.text
+    return settle(client, r.json()["run_id"])
+
+
+def resume(client, run_id: str, value: dict):
+    r = client.post(f"/runs/{run_id}/resume", json={"value": value})
+    if r.status_code == 202:
+        return settle(client, run_id)
+    return r
 
 
 def test_full_flow_start_approve_download(client, fake_llm):
@@ -46,9 +64,7 @@ def test_full_flow_start_approve_download(client, fake_llm):
         "verify",
     ]
 
-    r = client.post(f"/runs/{run['run_id']}/resume", json={"value": {"approved": True}})
-    assert r.status_code == 200, r.text
-    done = r.json()
+    done = resume(client, run["run_id"], {"approved": True})
     assert done["status"] == "done"
     assert done["files"] == {"cv": True, "cover_letter": True}
 
@@ -81,7 +97,7 @@ def test_resume_wrong_shape_422(client, fake_llm):
 def test_resume_without_pending_interrupt_409(client, fake_llm):
     fake_llm(happy_script())
     run = start(client)
-    client.post(f"/runs/{run['run_id']}/resume", json={"value": {"approved": True}})
+    resume(client, run["run_id"], {"approved": True})
 
     r = client.post(f"/runs/{run['run_id']}/resume", json={"value": {"approved": True}})
     assert r.status_code == 409
@@ -98,9 +114,10 @@ def test_provider_error_then_retry(client, fake_llm):
     assert client.get(f"/runs/{run['run_id']}").json()["status"] == "error"
 
     r = client.post(f"/runs/{run['run_id']}/retry")
-    assert r.status_code == 200
-    assert r.json()["status"] == "waiting"
-    assert r.json()["error"] is None
+    assert r.status_code == 202
+    after = settle(client, run["run_id"])
+    assert after["status"] == "waiting"
+    assert after["error"] is None
 
 
 def test_retry_without_error_409(client, fake_llm):
@@ -124,7 +141,7 @@ def test_file_not_ready_404(client, fake_llm):
 def test_update_application_status(client, fake_llm):
     fake_llm(happy_script())
     run = start(client)
-    client.post(f"/runs/{run['run_id']}/resume", json={"value": {"approved": True}})
+    resume(client, run["run_id"], {"approved": True})
 
     r = client.patch(f"/applications/{run['run_id']}", json={"status": "applied"})
     assert r.status_code == 200
@@ -138,3 +155,31 @@ def test_health_reports_profile_source(client):
     body = client.get("/health").json()
     assert body["ok"] is True
     assert body["profile"] == "sample"
+
+
+def test_list_runs(client, fake_llm):
+    fake_llm(happy_script())
+    run = start(client)
+
+    listed = client.get("/runs").json()
+
+    assert [(r["run_id"], r["status"], r["company"]) for r in listed] == [
+        (run["run_id"], "waiting", "Acme")
+    ]
+
+
+def test_resume_while_running_409(client, fake_llm):
+    release = threading.Event()
+
+    def slow_match():
+        assert release.wait(5)
+        return match("met", "met", "gap")
+
+    fake_llm(happy_script(match=[slow_match]))
+    run_id = client.post("/runs", json=POSTING).json()["run_id"]
+
+    r = client.post(f"/runs/{run_id}/resume", json={"value": {"approved": True}})
+
+    assert r.status_code == 409
+    release.set()
+    assert settle(client, run_id)["status"] == "waiting"

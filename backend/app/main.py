@@ -1,12 +1,15 @@
 """FastAPI layer. The frontend talks only to these endpoints.
 
-Runs are LangGraph threads persisted in SQLite. A request advances the run until it
-finishes, pauses for the candidate (`waiting_for`), or fails (`error`, retryable).
+Runs are LangGraph threads persisted in SQLite. Starting, answering or retrying a run
+returns immediately; the run advances in a worker thread until it finishes, pauses for the
+candidate (`waiting_for`), or fails (`error`, retryable). Everything but /health and /auth
+needs the session cookie (see app/auth.py).
 
-  POST  /runs                      start from a URL or pasted text
-  GET   /runs/{id}                 current state
-  POST  /runs/{id}/resume          answer the pending question
-  POST  /runs/{id}/retry           re-run the step that failed
+  GET   /runs                      recent runs
+  POST  /runs                      start from a URL or pasted text (202, runs in background)
+  GET   /runs/{id}                 current state (poll while status=running)
+  POST  /runs/{id}/resume          answer the pending question (202)
+  POST  /runs/{id}/retry           re-run the step that failed or was interrupted (202)
   GET   /runs/{id}/files/{kind}    download cv | cover_letter (.docx)
   GET   /applications              tracker
   PATCH /applications/{id}         move an application through the pipeline
@@ -15,6 +18,7 @@ finishes, pauses for the candidate (`waiting_for`), or fails (`error`, retryable
 from __future__ import annotations
 
 import logging
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Annotated, Any, Literal
@@ -26,9 +30,9 @@ from pydantic import ValidationError
 
 from app import auth, tracker
 from app.agent.graph import get_graph
-from app.api.models import Health, Resume, RunView, StartRun, StatusUpdate
+from app.api.models import Health, Resume, RunSummary, RunView, StartRun, StatusUpdate
 from app.config import settings
-from app.runs import NotFailed, NotWaiting, RunNotFound, Runs
+from app.runs import Busy, NotFailed, NotWaiting, RunNotFound, Runs
 
 logging.basicConfig(
     level=settings.log_level, format="%(asctime)s %(levelname)s %(name)s: %(message)s"
@@ -44,8 +48,12 @@ app.add_middleware(
 DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 
 
+# Runs execute in the background; requests return 202 and the client polls GET /runs/{id}.
+EXECUTOR = ThreadPoolExecutor(max_workers=4, thread_name_prefix="run")
+
+
 def get_runs(graph: Annotated[Any, Depends(get_graph)]) -> Runs:
-    return Runs(graph)
+    return Runs(graph, executor=EXECUTOR)
 
 
 RunsDep = Annotated[Runs, Depends(get_runs)]
@@ -61,6 +69,8 @@ def _http_errors():
         raise HTTPException(409, "This run is not waiting for an answer") from e
     except NotFailed as e:
         raise HTTPException(409, "Only failed runs can be retried") from e
+    except Busy as e:
+        raise HTTPException(409, "The run is still working; wait until it pauses") from e
     except ValidationError as e:
         raise HTTPException(422, e.errors(include_url=False, include_context=False)) from e
 
@@ -71,7 +81,12 @@ def health():
     return Health(ok=True, model=settings.model, profile=profile)
 
 
-@private.post("/runs", response_model=RunView, status_code=201)
+@private.get("/runs", response_model=list[RunSummary])
+def list_runs(runs: RunsDep):
+    return runs.list()
+
+
+@private.post("/runs", response_model=RunView, status_code=202)
 def start_run(body: StartRun, runs: RunsDep):
     url = str(body.posting_url) if body.posting_url else None
     return runs.start(posting_url=url, posting_text=body.posting_text)
@@ -83,13 +98,13 @@ def get_run(run_id: str, runs: RunsDep):
         return runs.view(run_id)
 
 
-@private.post("/runs/{run_id}/resume", response_model=RunView)
+@private.post("/runs/{run_id}/resume", response_model=RunView, status_code=202)
 def resume_run(run_id: str, body: Resume, runs: RunsDep):
     with _http_errors():
         return runs.answer(run_id, body.value)
 
 
-@private.post("/runs/{run_id}/retry", response_model=RunView)
+@private.post("/runs/{run_id}/retry", response_model=RunView, status_code=202)
 def retry_run(run_id: str, runs: RunsDep):
     with _http_errors():
         return runs.retry(run_id)
