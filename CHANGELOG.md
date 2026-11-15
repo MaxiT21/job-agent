@@ -7,6 +7,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added (web app)
 - Web pages: login, new application (paste text or URL), recent runs with status.
+- Applications page: tracker table with a status dropdown.
 - Run page: live progress (polls while running), the agent's questions (paste text, clarify, low fit), fit score and evidence table (hover an evidence ID to see the profile text behind it), CV and cover-letter previews with evidence, fact-check history ("caught N issues and had them rewritten"), approve / request changes, retry on error, downloads, per-run AI usage.
 - `frontend/`: Next.js 16 app scaffold with the portfolio's palette and fonts, `/api/*` proxy to the backend, CSP `frame-ancestors` (demo embeddable by the portfolio, private app never), TypeScript API types generated from the backend's OpenAPI schema (`frontend/openapi.json`, checked by a backend test and CI), Vitest, and a frontend CI job.
 - Profile builder API: guided questions (`GET /profile/questions`), saved answers (`GET|PUT /profile/answers`), AI draft (`POST /profile/draft`: the model organises the answers, IDs are assigned in code, numbers and organisations not found in the answers are flagged, plus follow-up questions), and `GET|PUT /profile` (validated, written atomically, used by the agent immediately).
