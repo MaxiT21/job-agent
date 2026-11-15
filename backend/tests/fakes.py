@@ -7,6 +7,7 @@ from typing import Any
 
 from pydantic import BaseModel
 
+from app.llm import CallRecord, record_call
 from app.schemas import (
     CoverLetter,
     CVEntry,
@@ -41,6 +42,7 @@ class FakeLLM:
     def __call__(self, schema, *, system: str, user: str, step: str, model=None, retries=1):
         self.calls.append((step, user))
         self.systems[step].append(system)
+        record_call(CallRecord(step, model or "fake", 0.0, 0.0, True))
         queue = self.responses.get(step)
         if not queue:
             raise ScriptExhausted(f"No scripted response for step {step!r}")

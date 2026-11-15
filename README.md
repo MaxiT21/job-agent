@@ -17,7 +17,7 @@ checks every line against the evidence it cites.
 fetch → extract requirements → [vague?] ask user
                              → match profile → fit score → [low fit?] ask user
                                              → tailor CV → cover letter → verify
-                                               verify → [failed] retry with feedback
+                                               verify → [failed] regenerate only the failing document
                                                       → human approval → [edits] regenerate
                                                                        → render .docx + log
 ```
@@ -27,7 +27,8 @@ fetch → extract requirements → [vague?] ask user
 - **Two-layer verification**:
   1. *Deterministic* (`scoring.py`, free, unit-tested): every line cites existing profile IDs; each CV bullet cites its own job/project and never borrows another one's evidence; every number appears in the cited evidence; skills exist in the profile; entries are real and unique.
   2. *LLM fact-check*: each line is checked against the evidence it cites (paraphrase OK, new facts not).
-- **Provider-agnostic**: all LLM calls go through LiteLLM; cost and latency are logged per step.
+- **Untrusted input stays data**: the posting is fenced in tags it cannot close and prompts treat it as data; URL fetching blocks private/local addresses (SSRF) and oversized pages.
+- **Provider-agnostic**: all LLM calls go through LiteLLM; cost and latency are recorded per step and per run.
 
 ## Stack
 LangGraph · FastAPI · Pydantic · LiteLLM · python-docx · Next.js · Supabase (planned) · Docker

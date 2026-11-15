@@ -1,13 +1,18 @@
 """Thin LiteLLM wrapper: one function, any provider, always structured output.
 
-Every call is logged with model, latency and cost so evals can compare providers.
+Every call is recorded (step, model, latency, cost, ok):
+- in the process-wide `usage` log (used by evals to compare providers);
+- in the innermost `track_usage()` block, if any (used by the graph to keep per-run usage).
 """
 
 from __future__ import annotations
 
 import logging
 import time
-from dataclasses import dataclass, field
+from collections.abc import Iterator
+from contextlib import contextmanager
+from contextvars import ContextVar
+from dataclasses import asdict, dataclass, field
 
 import litellm
 from pydantic import BaseModel, ValidationError
@@ -36,6 +41,24 @@ class UsageLog:
 
 
 usage = UsageLog()
+_collector: ContextVar[list[dict] | None] = ContextVar("llm_usage_collector", default=None)
+
+
+@contextmanager
+def track_usage() -> Iterator[list[dict]]:
+    """Collect the calls made inside the block as plain dicts (checkpoint-friendly)."""
+    calls: list[dict] = []
+    token = _collector.set(calls)
+    try:
+        yield calls
+    finally:
+        _collector.reset(token)
+
+
+def record_call(record: CallRecord) -> None:
+    usage.calls.append(record)
+    if (calls := _collector.get()) is not None:
+        calls.append(asdict(record))
 
 
 def structured[T: BaseModel](
@@ -56,7 +79,7 @@ def structured[T: BaseModel](
         resp = litellm.completion(
             model=model, messages=messages, response_format=schema, temperature=0
         )
-        latency = time.perf_counter() - start
+        latency = round(time.perf_counter() - start, 3)
         try:
             cost = litellm.completion_cost(completion_response=resp)
         except Exception:  # unknown pricing for some models
@@ -65,13 +88,15 @@ def structured[T: BaseModel](
         content = resp.choices[0].message.content
         try:
             result = schema.model_validate_json(content)
-            usage.calls.append(CallRecord(step, model, latency, cost, True))
-            return result
         except ValidationError as e:
-            usage.calls.append(CallRecord(step, model, latency, cost, False))
+            record_call(CallRecord(step, model, latency, cost, False))
             log.warning("Invalid %s output (attempt %s): %s", schema.__name__, attempt + 1, e)
             messages += [
                 {"role": "assistant", "content": content},
                 {"role": "user", "content": f"That JSON was invalid: {e}. Return valid JSON only."},
             ]
+            continue
+        record_call(CallRecord(step, model, latency, cost, True))
+        log.info("llm step=%s model=%s latency=%.2fs cost=%s", step, model, latency, cost)
+        return result
     raise RuntimeError(f"{step}: model did not return a valid {schema.__name__}")
