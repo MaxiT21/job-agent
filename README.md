@@ -48,6 +48,15 @@ Use your own profile: copy `backend/data/profile.sample.yaml` to `backend/data/p
 
 Or with Docker: `docker compose up --build` (reads the same root `.env`; your profile is mounted, never baked into the image).
 
+## CLI
+The whole agent in the terminal, no frontend needed (same database as the API):
+```bash
+cd backend
+uv run python -m app.cli run --url https://example.com/job   # or --file posting.txt / --text "..."
+uv run python -m app.cli resume <run-id>                      # continue a paused or failed run
+uv run python -m app.cli applications                         # tracker
+```
+
 ## API
 Interactive docs at `http://localhost:8000/docs`. Runs persist in SQLite (`backend/outputs/job_agent.db`), so they survive restarts.
 

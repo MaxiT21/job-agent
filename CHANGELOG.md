@@ -22,6 +22,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - API: typed responses (`RunView`, discriminated `waiting_for`), `POST /runs/{id}/retry` for failed steps, `GET /runs/{id}/files/{cv|cover_letter}`, `GET /applications`, `PATCH /applications/{id}`; `/health` reports whether the real or sample profile is loaded.
 - If a posting URL can't be read, the run pauses with `paste_text` instead of failing.
 
+- Interactive CLI (`python -m app.cli run|resume|applications`) sharing the run service and database with the API.
+
 ### Changed
 - A failing step no longer returns HTTP 500: the run is kept with `status: "error"` and can be retried.
 - Resume answers are validated against the pending question (422 on the wrong shape, 409 if nothing is pending).
