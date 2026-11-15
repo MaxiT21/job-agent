@@ -4,7 +4,7 @@ Status: draft for approval · 2026-11-15
 
 ## Intent
 
-Máximo wants to use the job agent visually instead of from the terminal, and to show it on his portfolio (https://maximotorassa.vercel.app, repo `MaxiT21/portfolio`) as a project that recruiters can click through. It is a single-user tool: running the AI for strangers would cost money, so the public version replays recorded runs and makes no AI calls.
+Máximo wants to use the job agent visually instead of from the terminal, and to show it on the portfolio (https://maximotorassa.vercel.app, repo `MaxiT21/portfolio`) as a project that recruiters can click through. It is a single-user tool: running the AI for strangers would cost money, so the public version replays recorded runs and makes no AI calls.
 
 ## Goals
 
