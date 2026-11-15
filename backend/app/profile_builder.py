@@ -101,6 +101,9 @@ GUIDED_SECTIONS: list[GuidedSection] = [
     ),
 ]
 
+# Answers to the draft's follow-up questions are saved under this key (see the web app).
+FOLLOW_UPS = "follow_ups"
+
 # ---------- saved answers ----------
 
 _SCHEMA = """CREATE TABLE IF NOT EXISTS profile_answers (
@@ -252,7 +255,9 @@ def flag_unsupported(profile: Profile, answers: dict[str, str]) -> list[DraftFla
 
 
 def draft_profile(answers: dict[str, str]) -> ProfileDraft:
-    titles = {s.id: s.title for s in GUIDED_SECTIONS}
+    titles = {s.id: s.title for s in GUIDED_SECTIONS} | {
+        FOLLOW_UPS: "Answers to follow-up questions"
+    }
     user = "\n\n".join(
         f"## {titles.get(k, k)}\n{v.strip()}" for k, v in answers.items() if v.strip()
     )
