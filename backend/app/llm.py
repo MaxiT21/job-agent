@@ -2,12 +2,12 @@
 
 Every call is logged with model, latency and cost so evals can compare providers.
 """
+
 from __future__ import annotations
 
 import logging
 import time
 from dataclasses import dataclass, field
-from typing import TypeVar
 
 import litellm
 from pydantic import BaseModel, ValidationError
@@ -15,7 +15,6 @@ from pydantic import BaseModel, ValidationError
 from app.config import settings
 
 log = logging.getLogger(__name__)
-T = TypeVar("T", bound=BaseModel)
 
 
 @dataclass
@@ -39,7 +38,7 @@ class UsageLog:
 usage = UsageLog()
 
 
-def structured(
+def structured[T: BaseModel](
     schema: type[T],
     *,
     system: str,

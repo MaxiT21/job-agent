@@ -23,9 +23,12 @@ The agent must NEVER invent experience. It only selects, reorders and rewords it
 ## Conventions
 - All LLM calls go through `llm.structured()` with a Pydantic schema. No raw string parsing.
 - Keep anything that can be deterministic out of the LLM (scores, validation) and cover it with tests.
-- Tests must not call an LLM: `cd backend && pytest`.
+- Tests must not call an LLM: `cd backend && uv run pytest`.
+- Lint/format before committing: `uv run ruff check . ../evals && uv run ruff format . ../evals`.
+- Dependencies live in `backend/pyproject.toml` + `uv.lock` (`uv add <pkg>`); never edit the lockfile by hand.
+- Keep docs current in the same commit as the change: README, CLAUDE.md, CHANGELOG (`Unreleased`), sub-READMEs.
 - Never commit `backend/data/profile.yaml`, `.env` or `backend/outputs/` (real personal data).
 - No auto-submitting applications and no LinkedIn scraping.
 
 ## Run
-cd backend && pip install -r requirements.txt && uvicorn app.main:app --reload
+`.env` at the repo root (copy `.env.example`). Then `cd backend && uv sync && uv run uvicorn app.main:app --reload`.

@@ -2,6 +2,7 @@
 
 Kept out of the LLM on purpose: numbers you can reproduce and test.
 """
+
 from app.schemas import (
     CoverLetter,
     JobPosting,
@@ -48,17 +49,24 @@ def check_evidence_ids(
     for ei, entry in enumerate(cv.entries):
         if entry.item_id not in valid:
             issues.append(
-                VerificationIssue(where=f"cv.entries[{ei}]", text=entry.item_id, reason="Unknown item")
+                VerificationIssue(
+                    where=f"cv.entries[{ei}]", text=entry.item_id, reason="Unknown item"
+                )
             )
         for bi, line in enumerate(entry.bullets):
             check(f"cv.entries[{ei}].bullets[{bi}]", line.text, line.evidence_ids)
 
     profile_skills = {
-        s.lower() for item in profile.items for s in [*item.tags, item.title] if item.kind == "skill"
+        s.lower()
+        for item in profile.items
+        for s in [*item.tags, item.title]
+        if item.kind == "skill"
     } | {t.lower() for item in profile.items for t in item.tags}
     for s in cv.skills:
         if s.lower() not in profile_skills:
-            issues.append(VerificationIssue(where="cv.skills", text=s, reason="Skill not in profile"))
+            issues.append(
+                VerificationIssue(where="cv.skills", text=s, reason="Skill not in profile")
+            )
 
     if letter:
         for pi, line in enumerate(letter.paragraphs):

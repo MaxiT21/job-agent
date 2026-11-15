@@ -4,17 +4,18 @@ Design rule: every sentence the agent writes (CV bullet, cover-letter paragraph)
 carries the IDs of the profile items that back it. The verifier uses those IDs
 to guarantee nothing is invented.
 """
+
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 from typing import Literal
 
 from pydantic import BaseModel, Field
 
-
 # ---------- Job posting ----------
 
-class Language(str, Enum):
+
+class Language(StrEnum):
     en = "en"
     es = "es"
     ca = "ca"
@@ -45,6 +46,7 @@ class JobPosting(BaseModel):
 
 
 # ---------- Candidate profile (single source of truth) ----------
+
 
 class Bullet(BaseModel):
     id: str
@@ -86,6 +88,7 @@ class Profile(BaseModel):
 
 # ---------- Matching ----------
 
+
 class RequirementMatch(BaseModel):
     requirement_id: str
     status: Literal["met", "partial", "gap"]
@@ -95,6 +98,7 @@ class RequirementMatch(BaseModel):
 
 class MatchResult(BaseModel):
     """What the LLM returns. The score is computed in code, not by the LLM."""
+
     matches: list[RequirementMatch]
     summary: str
 
@@ -107,9 +111,12 @@ class FitReport(BaseModel):
 
 # ---------- Generated outputs ----------
 
+
 class GroundedLine(BaseModel):
     text: str
-    evidence_ids: list[str] = Field(description="Profile IDs this sentence is based on. Never empty.")
+    evidence_ids: list[str] = Field(
+        description="Profile IDs this sentence is based on. Never empty."
+    )
 
 
 class CVEntry(BaseModel):
@@ -129,6 +136,7 @@ class CoverLetter(BaseModel):
 
 # ---------- Verification ----------
 
+
 class VerificationIssue(BaseModel):
     where: str = Field(description="e.g. 'cv.entries[0].bullets[1]' or 'cover_letter[2]'")
     text: str
@@ -142,7 +150,15 @@ class VerificationResult(BaseModel):
 
 # Types stored in the LangGraph checkpoint (allow-listed for deserialization).
 __all_state_types__ = [
-    "Language", "Requirement", "JobPosting", "RequirementMatch", "FitReport",
-    "GroundedLine", "CVEntry", "TailoredCV", "CoverLetter",
-    "VerificationIssue", "VerificationResult",
+    "Language",
+    "Requirement",
+    "JobPosting",
+    "RequirementMatch",
+    "FitReport",
+    "GroundedLine",
+    "CVEntry",
+    "TailoredCV",
+    "CoverLetter",
+    "VerificationIssue",
+    "VerificationResult",
 ]

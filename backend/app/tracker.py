@@ -3,6 +3,7 @@
 MVP: append to a local CSV. Week 3: swap for a Supabase `applications` table
 (same function signature, so nothing else changes).
 """
+
 import csv
 from datetime import date
 from pathlib import Path
@@ -21,12 +22,14 @@ def log_application(posting: JobPosting, fit_score: float, cv_path: Path) -> Non
         w = csv.DictWriter(f, fieldnames=FIELDS)
         if new:
             w.writeheader()
-        w.writerow({
-            "date": date.today().isoformat(),
-            "company": posting.company,
-            "title": posting.title,
-            "location": posting.location or "",
-            "fit_score": fit_score,
-            "cv_path": str(cv_path),
-            "status": "Ready to send",
-        })
+        w.writerow(
+            {
+                "date": date.today().isoformat(),
+                "company": posting.company,
+                "title": posting.title,
+                "location": posting.location or "",
+                "fit_score": fit_score,
+                "cv_path": str(cv_path),
+                "status": "Ready to send",
+            }
+        )

@@ -2,6 +2,7 @@
 
 Single-column, no tables/graphics: ATS parsers read it reliably.
 """
+
 from __future__ import annotations
 
 import re
@@ -16,12 +17,30 @@ from app.config import settings
 from app.schemas import JobPosting, Profile, TailoredCV
 
 SECTION_TITLES = {
-    "en": {"summary": "Summary", "experience": "Experience", "project": "Projects",
-           "education": "Education", "certificate": "Certificates", "skills": "Skills"},
-    "es": {"summary": "Perfil", "experience": "Experiencia", "project": "Proyectos",
-           "education": "Formación", "certificate": "Certificados", "skills": "Habilidades"},
-    "ca": {"summary": "Perfil", "experience": "Experiència", "project": "Projectes",
-           "education": "Formació", "certificate": "Certificats", "skills": "Habilitats"},
+    "en": {
+        "summary": "Summary",
+        "experience": "Experience",
+        "project": "Projects",
+        "education": "Education",
+        "certificate": "Certificates",
+        "skills": "Skills",
+    },
+    "es": {
+        "summary": "Perfil",
+        "experience": "Experiencia",
+        "project": "Proyectos",
+        "education": "Formación",
+        "certificate": "Certificados",
+        "skills": "Habilidades",
+    },
+    "ca": {
+        "summary": "Perfil",
+        "experience": "Experiència",
+        "project": "Projectes",
+        "education": "Formació",
+        "certificate": "Certificats",
+        "skills": "Habilitats",
+    },
 }
 ACCENT = RGBColor(0x1F, 0x3A, 0x5F)
 
@@ -58,8 +77,14 @@ def render_cv(profile: Profile, cv: TailoredCV, posting: JobPosting) -> Path:
     r.bold = True
     r.font.size = Pt(18)
     contact = doc.add_paragraph(
-        " · ".join([profile.location, profile.email, *(profile.phone and [profile.phone] or []),
-                    *profile.links.values()])
+        " · ".join(
+            [
+                profile.location,
+                profile.email,
+                *(profile.phone and [profile.phone] or []),
+                *profile.links.values(),
+            ]
+        )
     )
     contact.alignment = WD_ALIGN_PARAGRAPH.CENTER
 

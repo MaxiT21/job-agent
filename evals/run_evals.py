@@ -1,4 +1,5 @@
 """Eval runner skeleton (week 4). Extraction eval implemented; others TODO."""
+
 from __future__ import annotations
 
 import argparse
@@ -23,7 +24,9 @@ def similar(a: str, b: str) -> bool:
 def eval_extraction(model: str, cases: list[dict]) -> dict:
     tp = fp = fn = 0
     for case in cases:
-        pred = structured(JobPosting, system=prompts.EXTRACT, user=case["text"], step="extract", model=model)
+        pred = structured(
+            JobPosting, system=prompts.EXTRACT, user=case["text"], step="extract", model=model
+        )
         gold = [g["text"] for g in case["gold_requirements"]]
         got = [r.text for r in pred.requirements]
         matched_gold = {g for g in gold if any(similar(g, p) for p in got)}
@@ -47,7 +50,9 @@ def main() -> None:
         usage.calls.clear()
         r = eval_extraction(model, cases)
         avg_lat = sum(c.latency_s for c in usage.calls) / max(len(usage.calls), 1)
-        print(f"| {model} | {r['precision']} | {r['recall']} | {usage.total_cost:.4f} | {avg_lat:.1f} |")
+        print(
+            f"| {model} | {r['precision']} | {r['recall']} | {usage.total_cost:.4f} | {avg_lat:.1f} |"
+        )
     # TODO: hallucination rate, fit agreement
 
 

@@ -5,6 +5,7 @@ Flow:
   POST /runs/{id}/resume     -> answers the interrupt, returns the next interrupt or the result
   GET  /runs/{id}/cv         -> downloads the generated .docx
 """
+
 from __future__ import annotations
 
 import uuid

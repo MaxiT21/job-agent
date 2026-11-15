@@ -3,6 +3,7 @@
 Nodes that call `interrupt()` pause the graph and wait for the user; the API
 resumes them with `Command(resume=...)`.
 """
+
 from __future__ import annotations
 
 import httpx
@@ -33,13 +34,16 @@ def _profile_json() -> str:
 
 # ---------- 1. Input ----------
 
+
 def fetch_posting(state: AgentState) -> dict:
     if state.get("posting_text"):
         return {"status": "running"}
     url = state.get("posting_url")
     if not url:
         raise ValueError("Provide posting_url or posting_text")
-    html = httpx.get(url, timeout=20, follow_redirects=True, headers={"User-Agent": "job-agent/0.1"}).text
+    html = httpx.get(
+        url, timeout=20, follow_redirects=True, headers={"User-Agent": "job-agent/0.1"}
+    ).text
     soup = BeautifulSoup(html, "html.parser")
     for tag in soup(["script", "style", "nav", "footer", "header"]):
         tag.decompose()
@@ -63,6 +67,7 @@ def ask_clarification(state: AgentState) -> dict:
 
 # ---------- 2. Matching ----------
 
+
 def match_profile(state: AgentState) -> dict:
     posting = state["posting"]
     result = structured(
@@ -79,18 +84,20 @@ def confirm_low_fit(state: AgentState) -> dict:
     """Agent decision: low fit -> ask whether it's worth applying."""
     fit = state["fit"]
     gaps = [m.requirement_id for m in fit.matches if m.status == "gap"]
-    answer = interrupt({"type": "low_fit", "score": fit.score, "gaps": gaps, "summary": fit.summary})
+    answer = interrupt(
+        {"type": "low_fit", "score": fit.score, "gaps": gaps, "summary": fit.summary}
+    )
     return {"status": "running" if answer.get("continue") else "stopped"}
 
 
 # ---------- 3. Generation ----------
 
+
 def _feedback_block(state: AgentState) -> str:
     parts = []
-    if v := state.get("verification"):
-        if not v.passed:
-            issues = "\n".join(f"- {i.where}: {i.reason} ({i.text})" for i in v.issues)
-            parts.append(f"Fix these verifier issues:\n{issues}")
+    if (v := state.get("verification")) and not v.passed:
+        issues = "\n".join(f"- {i.where}: {i.reason} ({i.text})" for i in v.issues)
+        parts.append(f"Fix these verifier issues:\n{issues}")
     if notes := state.get("user_notes"):
         parts.append(f"Candidate notes: {notes}")
     return "\n\n".join(parts)
@@ -126,6 +133,7 @@ def write_cover_letter(state: AgentState) -> dict:
 
 # ---------- 4. Verification ----------
 
+
 def verify(state: AgentState) -> dict:
     profile = load_profile()
     cv, letter = state["cv"], state.get("cover_letter")
@@ -153,13 +161,16 @@ def verify(state: AgentState) -> dict:
 
 # ---------- 5. Approval + output ----------
 
+
 def human_approval(state: AgentState) -> dict:
     answer = interrupt(
         {
             "type": "approve",
             "fit": state["fit"].model_dump(),
             "cv": state["cv"].model_dump(),
-            "cover_letter": state["cover_letter"].model_dump() if state.get("cover_letter") else None,
+            "cover_letter": state["cover_letter"].model_dump()
+            if state.get("cover_letter")
+            else None,
             "verification": state["verification"].model_dump(),
         }
     )

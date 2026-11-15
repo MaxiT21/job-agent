@@ -15,3 +15,7 @@ node_modules/
 .next/
 
 .DS_Store
+
+# tooling
+.ruff_cache/
+.superpowers/

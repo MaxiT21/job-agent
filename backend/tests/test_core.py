@@ -1,4 +1,5 @@
 """Tests that run without any LLM call."""
+
 from app.profile import load_profile
 from app.schemas import (
     CVEntry,

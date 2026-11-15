@@ -31,16 +31,19 @@ fetch → extract requirements → [vague?] ask user
 LangGraph · FastAPI · Pydantic · LiteLLM · python-docx · Next.js · Supabase (planned) · Docker
 
 ## Run locally
+Requires [uv](https://docs.astral.sh/uv/) (it installs Python 3.12 for you).
+
 ```bash
+cp .env.example .env           # repo root: set MODEL and the provider key
 cd backend
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp ../.env.example .env        # add your API key + model
-pytest                         # no LLM calls needed
-uvicorn app.main:app --reload  # http://localhost:8000/docs
+uv sync                        # creates .venv from the lockfile
+uv run pytest                  # no LLM calls needed
+uv run uvicorn app.main:app --reload   # http://localhost:8000/docs
 ```
 
-Use your own profile: copy `data/profile.sample.yaml` to `data/profile.yaml` (gitignored) and fill it in.
+Use your own profile: copy `backend/data/profile.sample.yaml` to `backend/data/profile.yaml` (gitignored) and fill it in.
+
+Or with Docker: `docker compose up --build` (reads the same root `.env`; your profile is mounted, never baked into the image).
 
 ## Evals
 _Coming soon_: extraction precision/recall, hallucination rate, fit-score agreement with human judgement, cost and latency per provider. See [`evals/`](evals/).
