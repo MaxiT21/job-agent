@@ -212,3 +212,16 @@ def test_state_survives_a_new_graph_instance(tmp_path, fake_llm):
     assert waiting_for(second, cfg)["type"] == "approve"
     second.invoke(Command(resume={"approved": True}), cfg)
     assert second.get_state(cfg).values["status"] == "done"
+
+
+def test_still_vague_after_two_answers_moves_on_to_low_fit(graph, thread, fake_llm):
+    llm = fake_llm(happy_script(extract=[posting(vague=True)], match=[match()]))
+
+    graph.invoke(POSTING, thread)
+    graph.invoke(Command(resume={"answer": "No idea"}), thread)
+    graph.invoke(Command(resume={"answer": "Still no idea"}), thread)
+
+    assert llm.steps().count("extract") == 3
+    pending = waiting_for(graph, thread)
+    assert pending["type"] == "low_fit"
+    assert pending["score"] == 0.0

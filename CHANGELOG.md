@@ -24,7 +24,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Interactive CLI (`python -m app.cli run|resume|applications`) sharing the run service and database with the API.
 
+- Eval harness: 8 labelled fictional postings (en/es/ca), extraction P/R, vague detection, fit agreement, and `--full` verification metrics; results saved to `evals/results/`.
+
 ### Changed
+- A posting that is still vague after 2 clarifying answers (`MAX_CLARIFICATIONS`) moves on to the low-fit check instead of asking forever.
 - A failing step no longer returns HTTP 500: the run is kept with `status: "error"` and can be retried.
 - Resume answers are validated against the pending question (422 on the wrong shape, 409 if nothing is pending).
 - `GET /runs/{id}/cv` replaced by `GET /runs/{id}/files/cv`; the CSV tracker replaced by SQLite.

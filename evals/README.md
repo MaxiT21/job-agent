@@ -1,25 +1,33 @@
 # Evals
 
+Measure how well each model does the job, offline from the app, on a fixed dataset.
+
 ## Dataset (`dataset/postings.jsonl`)
-20–30 real postings, one JSON per line, labelled by hand:
+Fictional postings (en / es / ca), one JSON per line, labelled by hand **against the sample profile** (`backend/data/profile.sample.yaml`):
 
 ```json
-{"id": "p01", "source_url": "...", "text": "...",
+{"id": "p01", "lang": "en", "text": "...",
  "gold_requirements": [{"text": "Python", "importance": "must"}],
- "gold_fit": "high|medium|low"}
+ "gold_fit": "high|medium|low|null", "gold_vague": false}
 ```
-Postings are public; keep anything private in `dataset/private/` (gitignored).
+`gold_fit` buckets follow the app's score: low < 50 ≤ medium < 75 ≤ high.
+Real postings or your real profile go in `dataset/private/` (gitignored).
 
 ## Metrics
 | Metric | How | Target |
 |---|---|---|
-| Extraction precision / recall | extracted vs gold requirements (fuzzy match) | > 0.85 |
-| Hallucination rate | lines flagged by an independent fact-check model + manual spot-check | 0% |
+| Extraction precision / recall | extracted vs gold requirements (fuzzy match, `metrics.py`) | > 0.85 |
+| Vague detection | `is_vague` vs `gold_vague` | all |
 | Fit agreement | agent score bucket vs `gold_fit` | > 80% |
-| Cost / latency per run | from `app.llm.usage` | report per model |
+| First-pass verified (`--full`) | runs whose first draft passed both verifier layers | report |
+| Residual flagged lines (`--full`) | lines still flagged after retries / all generated lines | 0% |
+| Cost / latency | from the recorded LLM calls | report per model |
 
 ## Run
 ```bash
-python evals/run_evals.py --model gpt-4o-mini --model gemini/<model>
+cd backend
+uv run python ../evals/run_evals.py --model gemini/gemini-flash-latest
+uv run python ../evals/run_evals.py --model gemini/gemini-flash-latest --model gpt-4o-mini --full
 ```
-Output: a markdown table to paste into the main README.
+Needs the provider keys in `.env`. Output: a markdown table, also saved to `results/<date>_<models>.md`, ready to paste into the main README.
+The metric functions and the runner itself are tested offline (`backend/tests/test_eval_metrics.py`).

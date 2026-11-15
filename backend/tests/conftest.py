@@ -16,6 +16,8 @@ def isolated_settings(tmp_path, monkeypatch):
     monkeypatch.setattr(settings, "output_dir", tmp_path / "outputs")
     monkeypatch.setattr(settings, "profile_path", tmp_path / "no-real-profile.yaml")
     monkeypatch.setattr(settings, "database_path", tmp_path / "test.db")
+    for name in ("model", "verifier_model"):  # restored after tests that switch models
+        monkeypatch.setattr(settings, name, getattr(settings, name))
     load_profile.cache_clear()
     yield settings
     load_profile.cache_clear()

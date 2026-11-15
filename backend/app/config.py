@@ -38,6 +38,7 @@ class Settings(BaseSettings):
 
     low_fit_threshold: float = 50.0  # below this the agent asks before continuing
     max_verify_retries: int = 2
+    max_clarifications: int = 2  # questions about a vague posting before moving on
 
     cors_origins: list[str] = ["http://localhost:3000"]
 

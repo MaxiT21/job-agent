@@ -80,7 +80,7 @@ Interactive docs at `http://localhost:8000/docs`. Runs persist in SQLite (`backe
 | `approve` | documents ready for review | `{"approved": true}` or `{"approved": false, "notes": "..."}` |
 
 ## Evals
-_Coming soon_: extraction precision/recall, hallucination rate, fit-score agreement with human judgement, cost and latency per provider. See [`evals/`](evals/).
+Extraction precision/recall, vague-posting detection, fit-score agreement with hand labels and, with `--full`, how often drafts pass verification and how many flagged lines survive retries, plus cost and latency per model. See [`evals/`](evals/). Results: _pending first run with a real API key._
 
 ## Design decisions
 - No auto-submitting and no LinkedIn scraping (ToS). The agent prepares, the human sends.

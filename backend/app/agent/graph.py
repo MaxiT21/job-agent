@@ -53,7 +53,10 @@ def after_fetch(state: AgentState) -> str:
 
 
 def after_extract(state: AgentState) -> str:
-    return "ask_clarification" if state["posting"].is_vague else "match_profile"
+    asked = len(state.get("clarifications", []))
+    if state["posting"].is_vague and asked < settings.max_clarifications:
+        return "ask_clarification"
+    return "match_profile"  # still vague after N answers: the low-fit check lets the user decide
 
 
 def after_match(state: AgentState) -> str:
