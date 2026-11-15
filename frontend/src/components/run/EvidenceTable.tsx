@@ -30,7 +30,7 @@ export function EvidenceTable({
 }) {
   const reqs = Object.fromEntries((posting?.requirements ?? []).map((r) => [r.id, r]));
   return (
-    <div className="overflow-x-auto">
+    <div>
       <table aria-label="Requirements" className="w-full text-left text-sm">
         <thead className="text-xs uppercase tracking-wider text-muted">
           <tr>

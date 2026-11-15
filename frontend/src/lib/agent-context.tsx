@@ -1,19 +1,15 @@
 "use client";
 
-import { createContext, type ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, type ReactNode, useContext, useState } from "react";
 
-import { getAgent } from "./agent";
+import { createAgent } from "./agent";
 import type { AgentClient } from "./client";
 
 const AgentContext = createContext<AgentClient | null>(null);
 
-/** Provides the build's AgentClient (or `client` in tests). Children render once it is ready. */
+/** Provides the build's AgentClient (or `client` in tests). Renders children immediately. */
 export function AgentProvider({ client, children }: { client?: AgentClient; children: ReactNode }) {
-  const [agent, setAgent] = useState<AgentClient | null>(client ?? null);
-  useEffect(() => {
-    if (!client) getAgent().then(setAgent);
-  }, [client]);
-  if (!agent) return null;
+  const [agent] = useState<AgentClient>(() => client ?? createAgent());
   return <AgentContext.Provider value={agent}>{children}</AgentContext.Provider>;
 }
 

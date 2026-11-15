@@ -23,7 +23,7 @@ export function EvidenceChip({ id, text }: { id: string; text?: string }) {
         <span
           id={tipId}
           role="tooltip"
-          className="absolute bottom-full left-0 z-10 mb-1 w-72 rounded-md bg-ink p-2.5 text-xs leading-relaxed text-paper shadow-lg"
+          className="absolute left-0 top-full z-10 mt-1 w-72 max-w-[80vw] rounded-md bg-ink p-2.5 text-xs leading-relaxed text-paper shadow-lg"
         >
           {text ?? "Not in the current profile"}
         </span>
