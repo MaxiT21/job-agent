@@ -48,3 +48,13 @@ def test_calls_outside_tracking_are_not_collected(fake_completion):
         llm.structured(ClarifyAnswer, system="s", user="u", step="y", model="m")
 
     assert [c["step"] for c in calls] == ["y"]
+
+
+def test_nested_tracking_records_in_every_enclosing_block(fake_completion):
+    fake_completion.append('{"answer": "a"}')
+
+    with llm.track_usage() as outer, llm.track_usage() as inner:
+        llm.structured(ClarifyAnswer, system="s", user="u", step="x", model="m")
+
+    assert [c["step"] for c in inner] == ["x"]
+    assert [c["step"] for c in outer] == ["x"]

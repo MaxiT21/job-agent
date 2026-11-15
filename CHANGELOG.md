@@ -43,6 +43,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `.env` is read from the repo root (shared with docker compose); `backend/.env` overrides it.
 
 ### Fixed
+- LLM calls are recorded in every enclosing `track_usage()` block, so the eval runner's cost and call totals include calls made inside the graph.
 - Interrupt answers are validated (`ClarifyAnswer`, `LowFitAnswer`, `ApprovalAnswer`); a plain-string answer no longer crashes the run, and "apply anyway" on a low-fit posting now actually continues (`{"proceed": true}`).
 - Clarifications about the posting are kept for the whole run instead of being overwritten by later edit requests.
 - Provider API keys in `.env` are now exported to the process environment; previously LiteLLM never saw them.

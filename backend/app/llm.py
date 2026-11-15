@@ -2,7 +2,7 @@
 
 Every call is recorded (step, model, latency, cost, ok):
 - in the process-wide `usage` log (used by evals to compare providers);
-- in the innermost `track_usage()` block, if any (used by the graph to keep per-run usage).
+- in every enclosing `track_usage()` block (the graph uses one per node for per-run usage).
 """
 
 from __future__ import annotations
@@ -41,23 +41,26 @@ class UsageLog:
 
 
 usage = UsageLog()
-_collector: ContextVar[list[dict] | None] = ContextVar("llm_usage_collector", default=None)
+_collectors: ContextVar[tuple[list[dict], ...]] = ContextVar("llm_usage_collectors", default=())
 
 
 @contextmanager
 def track_usage() -> Iterator[list[dict]]:
-    """Collect the calls made inside the block as plain dicts (checkpoint-friendly)."""
+    """Collect the calls made inside the block as plain dicts (checkpoint-friendly).
+
+    Blocks nest: a call is recorded in every enclosing block (e.g. per node and per eval).
+    """
     calls: list[dict] = []
-    token = _collector.set(calls)
+    token = _collectors.set((*_collectors.get(), calls))
     try:
         yield calls
     finally:
-        _collector.reset(token)
+        _collectors.reset(token)
 
 
 def record_call(record: CallRecord) -> None:
     usage.calls.append(record)
-    if (calls := _collector.get()) is not None:
+    for calls in _collectors.get():
         calls.append(asdict(record))
 
 
