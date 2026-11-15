@@ -16,8 +16,8 @@ Every push to `main` redeploys it. To refresh the recordings: `cd backend && uv 
 
 ## 2. The entry in `src/content/projects.ts` (added 2026-11-15)
 
-The screenshot lives at `public/projects/job-agent.png` in the portfolio. The `repo` link only works once
-this repository is public; the live entry omits it while the repo is private.
+The screenshot lives at `public/projects/job-agent.png` in the portfolio. The repository is public
+(since 2026-11-15), so the entry links the source code too.
 
 ```ts
   {
