@@ -110,7 +110,7 @@ Browser ──> Next.js (frontend/) ──/api/* rewrite──> FastAPI ──> 
               └─ demo build (NEXT_PUBLIC_DEMO=1): DemoClient replays public/demo/*.json, no backend
 ```
 
-- **Auth**: one password (`APP_PASSWORD`) → HMAC-signed HttpOnly cookie; the Next.js proxy keeps it first-party, so no CORS and no backend URL in the browser.
+- **Auth**: one password (`APP_PASSWORD`) → HMAC-signed HttpOnly cookie; the Next.js proxy keeps it first-party, so no CORS and no backend URL in the browser. Failed logins are throttled by client address; behind the proxy every request comes from the Next.js server, so the throttle is effectively global (fine for one user; `X-Forwarded-For` is deliberately not trusted because it can be spoofed). Set `COOKIE_SECURE=true` when serving over HTTPS.
 - **One UI, two data sources**: screens talk to an `AgentClient`. `HttpClient` calls the API; `DemoClient` steps through recordings (simulated progress, recorded answers, unrecorded paths such as "request changes" explain that they need the live agent).
 - **Contract**: TypeScript types are generated from the API's OpenAPI schema (`frontend/openapi.json`); a backend test and a CI step fail when either side is stale.
 - **Embedding**: the demo sends `frame-ancestors 'self' https://maximotorassa.vercel.app`; the private app sends `frame-ancestors 'none'`.
