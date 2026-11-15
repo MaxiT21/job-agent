@@ -1,6 +1,6 @@
 # Job Application Agent
 
-Paste a job posting → get a fit analysis, a tailored CV (.docx) and a cover letter.
+Paste a job posting → get a fit analysis, a tailored CV and a cover letter (both `.docx`).
 Every sentence is traceable to the candidate's real experience, and nothing is sent without human approval.
 
 > 🚧 Work in progress. Demo link, eval results and video coming in week 4.
@@ -19,7 +19,7 @@ fetch → extract requirements → [vague?] ask user
                                              → tailor CV → cover letter → verify
                                                verify → [failed] regenerate only the failing document
                                                       → human approval → [edits] regenerate
-                                                                       → render .docx + log
+                                                                       → render CV + letter .docx + log
 ```
 
 - **Workflow where it's predictable, agent decisions where it isn't**: LangGraph conditional edges for vague postings, low fit, failed verification and user edits.

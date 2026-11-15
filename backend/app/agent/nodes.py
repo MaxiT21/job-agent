@@ -6,16 +6,17 @@ resumes them with `Command(resume=...)`, validated against the matching *Answer 
 
 from __future__ import annotations
 
+from langchain_core.runnables import RunnableConfig
 from langgraph.types import interrupt
 
 from app.agent import prompts
 from app.agent.prompts import fence
 from app.agent.state import AgentState
 from app.config import settings
-from app.cv.render import render_cv
 from app.fetch import MAX_TEXT_CHARS, fetch_posting_text
 from app.llm import structured
 from app.profile import load_profile
+from app.render import render_cover_letter, render_cv, run_output_dir
 from app.schemas import (
     ApprovalAnswer,
     ClarifyAnswer,
@@ -207,7 +208,12 @@ def human_approval(state: AgentState) -> dict:
     }
 
 
-def render_and_log(state: AgentState) -> dict:
-    path = render_cv(load_profile(), state["cv"], state["posting"])
-    log_application(state["posting"], state["fit"].score, path)
-    return {"cv_path": str(path), "status": "done"}
+def render_and_log(state: AgentState, config: RunnableConfig) -> dict:
+    profile, posting = load_profile(), state["posting"]
+    out_dir = run_output_dir(posting, config["configurable"]["thread_id"])
+    cv_path = render_cv(profile, state["cv"], posting, out_dir)
+    update = {"cv_path": str(cv_path), "status": "done"}
+    if letter := state.get("cover_letter"):
+        update["letter_path"] = str(render_cover_letter(profile, letter, posting, out_dir))
+    log_application(posting, state["fit"].score, cv_path)
+    return update

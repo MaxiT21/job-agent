@@ -15,9 +15,10 @@ Every node is wrapped with `tracked()` so the LLM calls it makes are stored in t
 state (`llm_calls`), which is how the API reports cost and latency per run.
 """
 
+import inspect
 from collections.abc import Callable
-from functools import wraps
 
+from langchain_core.runnables import RunnableConfig
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
 from langgraph.graph import END, START, StateGraph
@@ -29,13 +30,16 @@ from app.config import settings
 from app.llm import track_usage
 
 
-def tracked(node: Callable[[AgentState], dict]) -> Callable[[AgentState], dict]:
-    @wraps(node)
-    def run(state: AgentState) -> dict:
+def tracked(node: Callable[..., dict]) -> Callable[[AgentState, RunnableConfig], dict]:
+    """Run a node inside `track_usage()` and store its LLM calls in the run's state."""
+    wants_config = len(inspect.signature(node).parameters) > 1
+
+    def run(state: AgentState, config: RunnableConfig) -> dict:
         with track_usage() as calls:
-            update = node(state)
+            update = node(state, config) if wants_config else node(state)
         return {**update, "llm_calls": calls} if calls else update
 
+    run.__name__ = node.__name__
     return run
 
 

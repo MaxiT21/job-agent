@@ -28,5 +28,6 @@ class AgentState(TypedDict, total=False):
     status: Literal["running", "stopped", "approved", "done"]
     # final
     cv_path: str
+    letter_path: str
     # observability: one dict per LLM call (see app.llm.CallRecord), appended by each node
     llm_calls: Annotated[list[dict], operator.add]

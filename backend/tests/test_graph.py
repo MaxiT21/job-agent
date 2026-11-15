@@ -165,3 +165,18 @@ def test_run_usage_is_per_run(fake_llm):
     steps_b = [c["step"] for c in graph.get_state(b).values["llm_calls"]]
     assert steps_a == ["extract", "match", "tailor_cv", "cover_letter", "verify"]
     assert steps_b == steps_a + ["tailor_cv", "cover_letter", "verify"]
+
+
+def test_two_runs_same_posting_do_not_collide(fake_llm):
+    graph = build_graph()
+    fake_llm(happy_script())
+    paths = []
+    for run in ("run-1", "run-2"):
+        cfg = {"configurable": {"thread_id": run}}
+        graph.invoke(POSTING, cfg)
+        graph.invoke(Command(resume={"approved": True}), cfg)
+        values = graph.get_state(cfg).values
+        paths += [values["cv_path"], values["letter_path"]]
+
+    assert len(set(paths)) == 4
+    assert all(Path(p).exists() for p in paths)

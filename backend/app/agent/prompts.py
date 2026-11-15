@@ -59,6 +59,7 @@ COVER_LETTER = (
 - Open with why this role/company, then 2-3 concrete pieces of evidence that match must-have requirements.
 - Address at most one gap honestly and briefly (learning plan), never pretend it's met.
 - Every paragraph lists the profile IDs it relies on in evidence_ids.
+- Body paragraphs only: no greeting, no sign-off, no signature (they are added automatically).
 - Only use numbers that appear in the cited evidence or in the posting.
 - Plain, direct tone. No clichés ("I am writing to express my interest...").
 - Write in the posting's language ({language}).

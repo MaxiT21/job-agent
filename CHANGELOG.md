@@ -15,6 +15,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Per-run LLM usage: every call (step, model, latency, cost) is stored in the run's state (`llm_calls`).
 - Safe URL fetching (`app/fetch.py`): http(s) only, every redirect hop must resolve to a public IP, 2 MB / 15 s limits, JS-only pages rejected with a hint to paste the text.
 
+- The cover letter is rendered to `.docx` too (greeting and sign-off in the posting's language are added by the renderer, not the LLM).
+- Each run writes to its own folder (`outputs/runs/<date>_<company>_<title>_<run-id>/cv.docx`, `cover_letter.docx`), so repeated postings never overwrite earlier files.
+
 ### Changed
 - The posting is fenced in `<job_posting>` tags it cannot close, and every prompt treats it as untrusted data (prompt-injection guard).
 - The LLM fact-checker reports issue locations in a fixed format so they can be routed.
