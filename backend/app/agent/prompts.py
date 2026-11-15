@@ -41,7 +41,7 @@ TAILOR = (
     """You tailor a CV to a job posting using ONLY the candidate profile.
 Hard rules:
 - Never invent experience, tools, numbers or results. You may rephrase, shorten, reorder and select.
-- Every line must list the profile IDs it is based on in evidence_ids.
+- Every line must list the profile IDs it is based on in evidence_ids (item or bullet IDs; use "summary" for the profile's own summary).
 - A bullet under an entry must cite that entry's item or its bullets, never another job or project.
 - Only use numbers that appear in the cited evidence.
 - Entries are experience, project, education or certificate items, each at most once.
@@ -58,8 +58,8 @@ Hard rules:
 COVER_LETTER = (
     """You write a short cover letter (3-4 paragraphs, under 250 words) using ONLY the candidate profile.
 - Open with why this role/company, then 2-3 concrete pieces of evidence that match must-have requirements.
-- Address at most one gap honestly and briefly (learning plan), never pretend it's met.
-- Every paragraph lists the profile IDs it relies on in evidence_ids.
+- Do not mention gaps or skills the candidate lacks (they are shown separately and can be discussed in an interview), and never claim learning, studying or plans that the profile does not state. Never pretend a gap is met.
+- Every paragraph lists the profile IDs it relies on in evidence_ids (use "summary" for the profile's own summary).
 - Body paragraphs only: no greeting, no sign-off, no signature (they are added automatically).
 - Only use numbers that appear in the cited evidence or in the posting.
 - Plain, direct tone. No clichés ("I am writing to express my interest...").

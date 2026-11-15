@@ -66,6 +66,10 @@ class ProfileItem(BaseModel):
     tags: list[str] = []
 
 
+# The profile's own `summary` field is citable evidence under this reserved ID.
+SUMMARY_ID = "summary"
+
+
 class Profile(BaseModel):
     name: str
     email: str
@@ -80,11 +84,15 @@ class Profile(BaseModel):
         counts = Counter(i for item in self.items for i in [item.id, *(b.id for b in item.bullets)])
         if dupes := sorted(i for i, n in counts.items() if n > 1):
             raise ValueError(f"Profile IDs must be unique; duplicated: {dupes}")
+        if SUMMARY_ID in counts:
+            raise ValueError(
+                f"'{SUMMARY_ID}' is reserved for the profile summary; rename that item"
+            )
         return self
 
     def evidence_ids(self) -> set[str]:
-        """All IDs (items + bullets) that generated text is allowed to cite."""
-        ids: set[str] = set()
+        """All IDs (summary + items + bullets) that generated text is allowed to cite."""
+        ids: set[str] = {SUMMARY_ID}
         for item in self.items:
             ids.add(item.id)
             ids.update(b.id for b in item.bullets)
@@ -106,6 +114,8 @@ class Profile(BaseModel):
         Citing an item covers all its bullets; citing a bullet covers that bullet plus
         its item's header (title, org, period, location).
         """
+        if evidence_id == SUMMARY_ID:
+            return self.summary
         item = self.owner(evidence_id)
         if item is None:
             return ""

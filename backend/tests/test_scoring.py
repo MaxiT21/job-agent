@@ -192,3 +192,22 @@ def test_letter_may_quote_numbers_from_the_posting():
 
     assert check_evidence_ids(profile, cv, letter, posting_text="A team of 40 engineers") == []
     assert _reasons(check_evidence_ids(profile, cv, letter)) == "Number not in evidence: 40"
+
+
+def test_profile_summary_is_citable_evidence():
+    profile = _numbers_profile().model_copy(
+        update={"summary": "QA engineer with 3 years of testing."}
+    )
+    cv = TailoredCV(
+        summary=_line("QA engineer with 3 years of testing experience.", "summary"),
+        entries=[],
+        skills=[],
+    )
+    assert check_evidence_ids(profile, cv, None) == []
+
+
+def test_profile_summary_cannot_back_a_job_bullet():
+    cv = _cv(CVEntry(item_id="exp-consulting", bullets=[_line("Did QA.", "summary")]))
+    issues = check_evidence_ids(load_profile(), cv, None)
+    assert [i.where for i in issues] == ["cv.entries[0].bullets[0]"]
+    assert "own item" in issues[0].reason

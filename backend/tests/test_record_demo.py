@@ -53,7 +53,9 @@ def test_records_every_pause_until_done(tmp_path, fake_llm):
 
 
 def test_low_fit_and_clarify_are_answered_with_the_scenario_answers(tmp_path, fake_llm):
-    fake_llm(happy_script(extract=[posting(vague=True), posting()], match=[match("gap", "gap", "gap")]))
+    fake_llm(
+        happy_script(extract=[posting(vague=True), posting()], match=[match("gap", "gap", "gap")])
+    )
     answers = AutoAnswers(clarify="A junior Python role", proceed=True)
 
     rec = record(scenario(id="vague", answers=answers), tmp_path)

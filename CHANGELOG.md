@@ -58,6 +58,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `.env` is read from the repo root (shared with docker compose); `backend/.env` overrides it.
 
 ### Fixed
+- First drafts failed verification most of the time because the prompts contradicted the verifier: the cover letter was told to address a gap with a "learning plan" (the verifier rightly rejected the invented plans), gap sentences ("I haven't used X") can't be backed by evidence, and the profile's own summary had no citable ID. The letter no longer mentions gaps (they're in the fit table) and `summary` is a citable, reserved evidence ID. Found by reading the verification history of recorded runs.
 - LLM calls no longer force `temperature=0` (Gemini 3 can loop forever below 1.0; a profile draft hung for minutes). Temperature is now optional (`LLM_TEMPERATURE`), every call has a timeout (`LLM_TIMEOUT_S`, 120 s) and retries transient provider errors (`LLM_NUM_RETRIES`, 2).
 - The CV/letter contact line skips empty fields instead of printing stray separators.
 - LLM calls are recorded in every enclosing `track_usage()` block, so the eval runner's cost and call totals include calls made inside the graph.
