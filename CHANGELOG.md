@@ -6,6 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added (web app)
+- `frontend/`: Next.js 16 app scaffold with the portfolio's palette and fonts, `/api/*` proxy to the backend, CSP `frame-ancestors` (demo embeddable by the portfolio, private app never), TypeScript API types generated from the backend's OpenAPI schema (`frontend/openapi.json`, checked by a backend test and CI), Vitest, and a frontend CI job.
 - Profile builder API: guided questions (`GET /profile/questions`), saved answers (`GET|PUT /profile/answers`), AI draft (`POST /profile/draft`: the model organises the answers, IDs are assigned in code, numbers and organisations not found in the answers are flagged, plus follow-up questions), and `GET|PUT /profile` (validated, written atomically, used by the agent immediately).
 - Every verifier pass is kept (`verification_history` in state and `RunView`), so the UI can show what was caught and fixed.
 - Background runs: `POST /runs`, `/resume`, `/retry` return `202` and the run continues in a worker thread; `RunView.step` reports the node in progress; answering a run that is still working returns `409`; runs left mid-pipeline by a server restart show as `error` and can be retried.

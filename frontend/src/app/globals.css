@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Same palette and type as the portfolio (maximotorassa.vercel.app). */
+@theme inline {
+  --color-paper: #f4f1ec;
+  --color-card: #fbf9f6;
+  --color-ink: #1a1a18;
+  --color-terracotta: #9c4530;
+  --color-muted: #6b6b64;
+  --color-line: #e2ddd4;
+  --color-met: #4f6b3a;
+  --color-partial: #9a6b1f;
+  --color-gap: #9c4530;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), monospace;
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-terracotta);
+  color: var(--color-paper);
+}

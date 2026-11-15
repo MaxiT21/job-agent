@@ -7,7 +7,7 @@ The agent must NEVER invent experience. It only selects, reorders and rewords it
 
 ## Stack
 - Backend: Python 3.12, FastAPI, Pydantic v2, LangGraph, LiteLLM (multi-provider), python-docx
-- Frontend (planned): Next.js + TypeScript + Tailwind, deployed on Vercel
+- Frontend: Next.js 16 + React 19 + TypeScript + Tailwind 4 (`frontend/`); private app (proxied to the backend) and public demo build (`NEXT_PUBLIC_DEMO=1`, recorded runs)
 - Storage: SQLite (checkpoints + tracker) locally; Supabase/Postgres planned for deployment
 
 ## Structure
@@ -26,6 +26,7 @@ The agent must NEVER invent experience. It only selects, reorders and rewords it
 - `backend/app/main.py` + `app/api/models.py`: HTTP API (see README "API")
 - `backend/app/cli.py`: interactive terminal runner
 - `backend/tests/fakes.py`: `FakeLLM` + canned outputs valid against the sample profile
+- `frontend/src/lib/client.ts`: `AgentClient` interface (HttpClient live / DemoClient recordings); `api-types.ts` is generated from `frontend/openapi.json`
 - `evals/`: eval dataset + runner
 - `docs/architecture.md`: pipeline, state, verification layers, persistence
 - `docs/plans/`: implementation plans
@@ -42,6 +43,12 @@ The agent must NEVER invent experience. It only selects, reorders and rewords it
 - Conditional edges must declare their targets (path map) so the graph stays inspectable.
 - Never commit `backend/data/profile.yaml`, `.env` or `backend/outputs/` (real personal data).
 - No auto-submitting applications and no LinkedIn scraping.
+
+## Frontend conventions
+- Read `frontend/AGENTS.md`: Next.js 16 differs from older versions; check `frontend/node_modules/next/dist/docs/` before using an API.
+- After changing an API model: `cd backend && uv run python -m scripts.export_openapi`, then `cd frontend && npm run gen:types` (both are checked by tests/CI).
+- Frontend checks: `npm run lint && npm run typecheck && npm test`.
+- No secrets in the frontend: it only knows `BACKEND_URL` (server-side) and `NEXT_PUBLIC_DEMO`.
 
 ## Run
 `.env` at the repo root (copy `.env.example`). Then `cd backend && uv sync && uv run uvicorn app.main:app --reload`.

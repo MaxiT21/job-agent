@@ -1,24 +1,35 @@
-# Frontend (Next.js) — planned
+# Frontend (Next.js)
 
-Create it with:
+The web app for the job agent. One codebase, two builds:
+
+| Build | Command | What it is |
+|---|---|---|
+| **Private app** | `npm run dev` / `npm run build` | Talks to the FastAPI backend through `/api/*` (proxied by Next.js, so the session cookie is first-party and the backend URL never reaches the browser). Behind `APP_PASSWORD`. |
+| **Public demo** | `npm run build:demo` | No backend, no keys, no AI calls: replays runs recorded on the fictional sample profile. Can be embedded by the portfolio. |
+
+## Develop
 ```bash
-npx create-next-app@latest . --typescript --tailwind --app
+# terminal 1 (repo root .env needs GEMINI_API_KEY, APP_PASSWORD)
+cd backend && uv run uvicorn app.main:app --reload
+# terminal 2
+cd frontend && npm install && npm run dev      # http://localhost:3000
 ```
-Generate API types from the backend's OpenAPI schema (`http://localhost:8000/openapi.json`) instead of writing them by hand.
+`BACKEND_URL` (server-side only) overrides the backend address, default `http://localhost:8000`.
 
-## Pages
-1. **New application** (`/`): textarea for the posting (or URL) → `POST /runs`
-2. **Run view** (`/runs/[id]`): renders `status` and whatever the agent is waiting for (`waiting_for.type`):
-   - `paste_text` → explain why the URL failed + textarea → `POST /runs/{id}/resume` with `{ "value": { "text": "..." } }`
-   - `clarify` → show the question + answer box → resume with `{ "value": { "answer": "..." } }`
-   - `low_fit` → score, gaps, "Apply anyway?" → resume with `{ "value": { "proceed": true|false } }`
-   - `approve` → fit table (requirement → status → evidence), CV preview, cover letter,
-     verifier issues → resume with `{ "value": { "approved": true } }` or `{ "value": { "approved": false, "notes": "..." } }`
-   - `status: "error"` → show `error` + retry button (`POST /runs/{id}/retry`)
-   - `status: "done"` → download buttons (`GET /runs/{id}/files/cv`, `/files/cover_letter`)
-   - always: per-run cost/latency from `usage`
-3. **Tracker** (`/applications`): table from `GET /applications`, status dropdown → `PATCH /applications/{id}`
+## Checks
+```bash
+npm run lint && npm run typecheck && npm test   # unit tests, no backend needed
+npm run build:demo && npm run e2e               # demo smoke test (Playwright)
+```
 
-## Tip
-The fit table with evidence links is the screenshot for your README and demo video:
-it makes the "no hallucination" design visible at a glance.
+## API types
+`src/lib/api-types.ts` is generated from `openapi.json`, which the backend exports:
+```bash
+cd backend && uv run python -m scripts.export_openapi   # a backend test fails if it is stale
+cd frontend && npm run gen:types                         # CI fails if this is stale
+```
+Use the aliases in `src/lib/types.ts`; never edit `api-types.ts` by hand.
+
+## Structure
+- `src/lib/client.ts` — `AgentClient`: everything the screens need. `HttpClient` (live) and `DemoClient` (recordings) implement it; `getAgent()` picks one per build.
+- `src/app/` — pages; `src/components/` — UI.
