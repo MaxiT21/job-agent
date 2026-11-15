@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
+import { Suspense } from "react";
 
 import { DemoBanner } from "@/components/DemoBanner";
 import { Nav } from "@/components/Nav";
@@ -28,7 +29,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-screen font-sans">
         <AgentProvider>
           {isDemo && <DemoBanner />}
-          <Nav />
+          {/* Nav reads the current path, which is only known at request time. */}
+          <Suspense fallback={<div className="h-[61px] border-b border-line" />}>
+            <Nav />
+          </Suspense>
           <main className="mx-auto w-full max-w-5xl px-4 pb-24 pt-8 sm:px-6">{children}</main>
         </AgentProvider>
       </body>
