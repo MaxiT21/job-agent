@@ -58,3 +58,38 @@ def test_nested_tracking_records_in_every_enclosing_block(fake_completion):
 
     assert [c["step"] for c in inner] == ["x"]
     assert [c["step"] for c in outer] == ["x"]
+
+
+def test_calls_are_bounded_by_timeout_and_retry_transient_errors(monkeypatch):
+    seen = {}
+
+    def completion(**kwargs):
+        seen.update(kwargs)
+        return _response('{"answer": "ok"}')
+
+    monkeypatch.setattr(llm.litellm, "completion", completion)
+    monkeypatch.setattr(llm.litellm, "completion_cost", lambda **kw: 0.0)
+    monkeypatch.setattr(llm.settings, "llm_timeout_s", 90)
+
+    llm.structured(ClarifyAnswer, system="s", user="u", step="x", model="m")
+
+    assert seen["timeout"] == 90
+    assert seen["num_retries"] >= 1
+
+
+@pytest.mark.parametrize(("configured", "sent"), [(None, "absent"), (0.2, 0.2)])
+def test_temperature_is_only_sent_when_configured(monkeypatch, configured, sent):
+    # Gemini 3 can loop at temperature < 1, so by default we let the provider choose.
+    seen = {}
+
+    def completion(**kwargs):
+        seen.update(kwargs)
+        return _response('{"answer": "ok"}')
+
+    monkeypatch.setattr(llm.litellm, "completion", completion)
+    monkeypatch.setattr(llm.litellm, "completion_cost", lambda **kw: 0.0)
+    monkeypatch.setattr(llm.settings, "llm_temperature", configured)
+
+    llm.structured(ClarifyAnswer, system="s", user="u", step="x", model="m")
+
+    assert seen.get("temperature", "absent") == sent

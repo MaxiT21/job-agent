@@ -38,6 +38,10 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
 
     low_fit_threshold: float = 50.0  # below this the agent asks before continuing
+    # Sampling temperature; unset = provider default (Gemini 3 can loop below 1.0).
+    llm_temperature: float | None = None
+    llm_timeout_s: float = 120  # per LLM call; a hung provider must not hang the run
+    llm_num_retries: int = 2  # LiteLLM retries for transient errors (rate limits, 5xx)
     max_verify_retries: int = 2
     max_clarifications: int = 2  # questions about a vague posting before moving on
 

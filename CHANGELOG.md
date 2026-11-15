@@ -50,6 +50,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `.env` is read from the repo root (shared with docker compose); `backend/.env` overrides it.
 
 ### Fixed
+- LLM calls no longer force `temperature=0` (Gemini 3 can loop forever below 1.0; a profile draft hung for minutes). Temperature is now optional (`LLM_TEMPERATURE`), every call has a timeout (`LLM_TIMEOUT_S`, 120 s) and retries transient provider errors (`LLM_NUM_RETRIES`, 2).
 - The CV/letter contact line skips empty fields instead of printing stray separators.
 - LLM calls are recorded in every enclosing `track_usage()` block, so the eval runner's cost and call totals include calls made inside the graph.
 - Interrupt answers are validated (`ClarifyAnswer`, `LowFitAnswer`, `ApprovalAnswer`); a plain-string answer no longer crashes the run, and "apply anyway" on a low-fit posting now actually continues (`{"proceed": true}`).

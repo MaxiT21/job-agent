@@ -79,9 +79,10 @@ def structured[T: BaseModel](
 
     for attempt in range(retries + 1):
         start = time.perf_counter()
-        resp = litellm.completion(
-            model=model, messages=messages, response_format=schema, temperature=0
-        )
+        options = {"timeout": settings.llm_timeout_s, "num_retries": settings.llm_num_retries}
+        if settings.llm_temperature is not None:
+            options["temperature"] = settings.llm_temperature
+        resp = litellm.completion(model=model, messages=messages, response_format=schema, **options)
         latency = round(time.perf_counter() - start, 3)
         try:
             cost = litellm.completion_cost(completion_response=resp)
