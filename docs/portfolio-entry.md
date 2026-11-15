@@ -10,14 +10,14 @@ live inside the project's detail view.
 1. On Vercel: **Add New → Project → Import `MaxiT21/job-agent`**.
 2. **Root Directory:** `frontend`. Framework preset: Next.js.
 3. **Environment variable:** `NEXT_PUBLIC_DEMO` = `1` (nothing else: the demo has no backend and no keys).
-4. Deploy. Pick a project name such as `job-agent-demo` → `https://job-agent-demo.vercel.app`.
+4. Deploy. Deployed 2026-11-15 as project `job-agent-demo` → **https://job-agent-demo-ten.vercel.app**.
 
 Every push to `main` redeploys it. To refresh the recordings: `cd backend && uv run python -m scripts.record_demo`, commit `frontend/public/demo/`.
 
-## 2. Add the entry to `src/content/projects.ts`
+## 2. The entry in `src/content/projects.ts` (added 2026-11-15)
 
-Replace the URL if you chose a different Vercel name. Drop a screenshot of the run page at
-`public/projects/job-agent.png` in the portfolio and keep the `image` line, or remove it.
+The screenshot lives at `public/projects/job-agent.png` in the portfolio. The `repo` link only works once
+this repository is public; the live entry omits it while the repo is private.
 
 ```ts
   {
@@ -65,7 +65,7 @@ Replace the URL if you chose a different Vercel name. Drop a screenshot of the r
       { value: "7 / 7", label: { en: "fit scores matching hand labels", es: "encajes iguales a las etiquetas" } },
     ],
     image: "/projects/job-agent.png",
-    url: "https://job-agent-demo.vercel.app",
+    url: "https://job-agent-demo-ten.vercel.app",
     repo: "https://github.com/MaxiT21/job-agent",
     embed: true,
   },

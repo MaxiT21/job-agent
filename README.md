@@ -3,7 +3,7 @@
 Paste a job posting → get a fit analysis, a tailored CV and a cover letter (both `.docx`).
 Every sentence is traceable to the candidate's real experience, and nothing is sent without human approval.
 
-**Live demo:** _link after the Vercel deploy_ — replays real runs of the agent on a fictional candidate (no sign-up, no AI calls on your side).
+**Live demo: [job-agent-demo-ten.vercel.app](https://job-agent-demo-ten.vercel.app)** — replays real runs of the agent on a fictional candidate (no sign-up, no AI calls). Also on [my portfolio](https://maximotorassa.vercel.app).
 
 ![Run page: fit score, evidence table with the profile text behind each ID, CV and letter with their evidence, and the fact-check that caught and fixed a claim](docs/screenshots/run-review.png)
 
@@ -131,7 +131,8 @@ No test calls an LLM or needs the backend running. CI runs all of the above on e
 - [x] CV + cover letter, two-layer verifier with targeted retries, human approval, tracker
 - [x] Persistent runs (SQLite), typed API, CLI, eval harness, first Gemini eval results
 - [x] Web app (password-protected) with profile builder; public demo of recorded runs
-- [ ] Demo on Vercel + portfolio entry, screenshots/video
+- [x] Demo on Vercel + portfolio entry
+- [ ] Short demo video / GIF
 - [x] Prompt fixes found via verification history: first drafts pass 6/7 (was 1/7)
 - [ ] Hosted private app (Postgres/Supabase for checkpoints + tracker)
 - [ ] Job discovery (Greenhouse/Lever/Ashby/InfoJobs APIs, weekly digest)

@@ -6,6 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added (web app)
+- Public demo deployed at https://job-agent-demo-ten.vercel.app (Vercel project `job-agent-demo`, root `frontend/`, `NEXT_PUBLIC_DEMO=1`) and embedded in the portfolio.
 - Public demo: `backend/scripts/record_demo.py` records real runs on the sample profile (5 scenarios) into `frontend/public/demo/`; the demo build (`NEXT_PUBLIC_DEMO=1`) replays them with no backend, no keys and no AI calls; Playwright smoke test; a test ensures recordings only contain the sample candidate.
 - `docker compose up` runs the backend and the web app (API not exposed on the host).
 - `docs/portfolio-entry.md`: Vercel steps and a ready-to-paste `projects.ts` entry for the portfolio.
