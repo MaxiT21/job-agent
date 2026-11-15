@@ -1,0 +1,15 @@
+services:
+  backend:
+    build: ./backend
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/data:/app/data        # mount your real profile.yaml without baking it into the image
+      - ./backend/outputs:/app/outputs
+
+  # frontend:
+  #   build: ./frontend
+  #   ports: ["3000:3000"]
+  #   environment:
+  #     NEXT_PUBLIC_API_URL: http://localhost:8000

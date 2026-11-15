@@ -1,0 +1,83 @@
+# FICTIONAL sample profile, safe to commit.
+# Copy to data/profile.yaml (gitignored) and fill in your real data.
+# Rules: every item and bullet has a unique id; the agent can only cite these ids.
+
+name: Alex Example
+email: alex.example@example.com
+location: Barcelona, Spain
+links:
+  github: github.com/alex-example
+  web: alex-example.dev
+summary: >
+  Computer engineering student focused on backend and AI applications,
+  with internship experience in QA and consulting.
+
+items:
+  - id: exp-consulting
+    kind: experience
+    title: Technical Consultant Intern
+    org: Example Consulting
+    period: Feb 2026 - Jul 2026
+    location: Barcelona
+    tags: [qa, testing, jira, sql, agile]
+    bullets:
+      - id: exp-consulting-b1
+        text: Designed and executed functional test cases for a banking web application in an Agile team.
+        tags: [qa, testing, agile]
+      - id: exp-consulting-b2
+        text: Tracked and triaged defects in Jira and validated data with SQL queries.
+        tags: [jira, sql]
+
+  - id: proj-network-monitor
+    kind: project
+    title: Home Network Monitor
+    period: 2026
+    tags: [python, fastapi, rest, html]
+    bullets:
+      - id: proj-network-monitor-b1
+        text: Built a FastAPI backend that scans the local network and serves device status to an HTML dashboard.
+        tags: [python, fastapi]
+      - id: proj-network-monitor-b2
+        text: Runs as a background service with automatic restart.
+        tags: [devops]
+
+  - id: proj-flight-alerts
+    kind: project
+    title: Flight Price Alerts
+    period: 2026
+    tags: [python, beautifulsoup, github actions, automation]
+    bullets:
+      - id: proj-flight-alerts-b1
+        text: Python scraper that finds flights under a price threshold and emails an HTML summary.
+        tags: [python, scraping]
+      - id: proj-flight-alerts-b2
+        text: Scheduled weekly with GitHub Actions.
+        tags: [github actions, ci]
+
+  - id: edu-bsc
+    kind: education
+    title: BSc Computer Engineering
+    org: Example University
+    period: 2023 - 2027
+    tags: []
+    bullets: []
+
+  - id: cert-agents
+    kind: certificate
+    title: AI Agents Course
+    org: Hugging Face
+    period: 2026
+    tags: [agents, llm, tool calling]
+    bullets: []
+
+  - id: skills-core
+    kind: skill
+    title: Core skills
+    tags: [python, fastapi, sql, git, docker, rest, jira, testing, react, next.js, supabase]
+    bullets: []
+
+  - id: lang-english
+    kind: language
+    title: English (C1)
+    tags: [english]
+    bullets: []

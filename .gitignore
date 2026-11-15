@@ -1,0 +1,17 @@
+# secrets & personal data
+.env
+backend/data/profile.yaml
+backend/outputs/
+evals/dataset/private/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# node
+node_modules/
+.next/
+
+.DS_Store
