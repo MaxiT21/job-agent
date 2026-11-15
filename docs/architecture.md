@@ -103,10 +103,26 @@ One SQLite file (`DATABASE_PATH`, default `backend/outputs/job_agent.db`):
 
 For deployment, swap both for Postgres (Supabase): `build_persistent_graph()` and `tracker._conn()` are the only places that know about SQLite.
 
+## Web app
+
+```
+Browser ──> Next.js (frontend/) ──/api/* rewrite──> FastAPI ──> LangGraph ──> LiteLLM ──> Gemini
+              └─ demo build (NEXT_PUBLIC_DEMO=1): DemoClient replays public/demo/*.json, no backend
+```
+
+- **Auth**: one password (`APP_PASSWORD`) → HMAC-signed HttpOnly cookie; the Next.js proxy keeps it first-party, so no CORS and no backend URL in the browser.
+- **One UI, two data sources**: screens talk to an `AgentClient`. `HttpClient` calls the API; `DemoClient` steps through recordings (simulated progress, recorded answers, unrecorded paths such as "request changes" explain that they need the live agent).
+- **Contract**: TypeScript types are generated from the API's OpenAPI schema (`frontend/openapi.json`); a backend test and a CI step fail when either side is stale.
+- **Embedding**: the demo sends `frame-ancestors 'self' https://maximotorassa.vercel.app`; the private app sends `frame-ancestors 'none'`.
+
+## Profile builder
+
+Guided sections (`profile_builder.GUIDED_SECTIONS`) → answers saved in SQLite → one LLM call returns a draft without IDs (`DraftProfileLLM`) → IDs assigned in code (`exp-data-intern`, `exp-data-intern-b1`) → numbers and organisations absent from the answers are flagged → the candidate edits and saves → `data/profile.yaml` (atomic write; the agent uses it immediately).
+
 ## Layers
 
 ```
 app/cli.py ─┐
             ├─> app/runs.py (start / view / answer / retry) ─> agent/graph.py ─> agent/nodes.py ─> llm.py, scoring.py, render/, tracker.py
-app/main.py ┘        └─ api/models.py (RunView: the frontend contract)
+app/main.py ┘        └─ api/models.py (RunView: the frontend contract → frontend/openapi.json)
 ```

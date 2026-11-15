@@ -3,7 +3,9 @@
 Paste a job posting → get a fit analysis, a tailored CV and a cover letter (both `.docx`).
 Every sentence is traceable to the candidate's real experience, and nothing is sent without human approval.
 
-> 🚧 Work in progress: backend, CLI and evals work end to end; web UI, deployment and published eval results are next.
+**Live demo:** _link after the Vercel deploy_ — replays real runs of the agent on a fictional candidate (no sign-up, no AI calls on your side).
+
+![Run page: fit score, evidence table and fact-check](docs/screenshots/run-review.png)
 
 ## Why
 Tailoring a CV per application takes ~30 min and it's tempting to stretch the truth.
@@ -32,25 +34,36 @@ fetch → [unreadable?] ask to paste → extract requirements → [vague?] ask u
 - **Durable runs**: checkpoints in SQLite, so a run paused for your answer (or failed on a provider outage) can be resumed or retried later.
 
 ## Stack
-LangGraph · FastAPI · Pydantic · LiteLLM · python-docx · SQLite · Docker · Next.js (planned) · Supabase (planned)
+LangGraph · FastAPI · Pydantic · LiteLLM (Gemini) · python-docx · SQLite · Next.js 16 · React 19 · TypeScript · Tailwind · Vitest · Playwright · Docker
 
 ## Run locally
-Requires [uv](https://docs.astral.sh/uv/) (it installs Python 3.12 for you).
+Requires [uv](https://docs.astral.sh/uv/) (installs Python 3.12 for you) and Node 22+.
 
 ```bash
-cp .env.example .env           # repo root: set MODEL and the provider key
-cd backend
-uv sync                        # creates .venv from the lockfile
-uv run pytest                  # no LLM calls needed
-uv run uvicorn app.main:app --reload   # http://localhost:8000/docs
+cp .env.example .env     # repo root: GEMINI_API_KEY, APP_PASSWORD (and SESSION_SECRET)
+
+# terminal 1 — API
+cd backend && uv sync && uv run uvicorn app.main:app --reload    # http://localhost:8000/docs
+
+# terminal 2 — web app
+cd frontend && npm install && npm run dev                         # http://localhost:3000
 ```
+Log in with `APP_PASSWORD`. Then build your profile on the **Profile** page (guided questions → AI draft → review → save) and start an application on **New application**. Your profile, answers and runs stay on your machine (`backend/data/`, `backend/outputs/`, both gitignored).
 
-Use your own profile: build it in the web app's profile page (guided questions → AI draft → review → save), or copy `backend/data/profile.sample.yaml` to `backend/data/profile.yaml` (gitignored) and edit it by hand.
+Or with Docker: `docker compose up --build` → http://localhost:3000 (reads the same root `.env`; your profile is mounted, never baked into an image; the API is only reachable by the web app).
 
-Or with Docker: `docker compose up --build` (reads the same root `.env`; your profile is mounted, never baked into the image).
+## Web app
+| Page | What you do there |
+|---|---|
+| **New application** | Paste a posting or a URL; see recent runs |
+| **Run** | Watch progress, answer the agent's questions, review fit + evidence (hover an ID to see your own words), CV and letter previews, fact-check history; approve or request changes; download the `.docx` files |
+| **Applications** | Tracker with a status per application |
+| **Profile** | Guided questions; the AI organises your answers, flags anything it couldn't find in them and asks follow-up questions; you edit and save |
+
+The **public demo** is the same app built with `NEXT_PUBLIC_DEMO=1`: no backend, it replays runs recorded with the real agent (`backend/scripts/record_demo.py`). See [`frontend/README.md`](frontend/README.md) and [`docs/portfolio-entry.md`](docs/portfolio-entry.md).
 
 ## CLI
-The whole agent in the terminal, no frontend needed (same database as the API):
+The whole agent in the terminal (same database as the API):
 ```bash
 cd backend
 uv run python -m app.cli run --url https://example.com/job   # or --file posting.txt / --text "..."
@@ -86,7 +99,13 @@ Interactive docs at `http://localhost:8000/docs`. Starting, answering and retryi
 | `approve` | documents ready for review | `{"approved": true}` or `{"approved": false, "notes": "..."}` |
 
 ## Evals
-Extraction precision/recall, vague-posting detection, fit-score agreement with hand labels and, with `--full`, how often drafts pass verification and how many flagged lines survive retries, plus cost and latency per model. See [`evals/`](evals/). Results: _pending first run with a real API key._
+8 hand-labelled fictional postings (English, Spanish, Catalan) against the sample profile, run with `gemini/gemini-flash-latest` on 2026-11-15. See [`evals/`](evals/).
+
+| Extraction precision / recall | Vague posting detected | Fit score matches hand label | Unsupported lines in final documents | First draft passes verification |
+|---|---|---|---|---|
+| 0.89 / 0.95 | 8 / 8 | 7 / 7 | **0 / 69** | 1 / 7 (avg 2.3 verification passes) |
+
+The verifier catches what the generator gets wrong, so nothing unsupported ships; the cost is extra passes. Making first drafts pass more often is the next optimisation.
 
 ## Design decisions
 - No auto-submitting and no LinkedIn scraping (ToS). The agent prepares, the human sends.
@@ -94,20 +113,21 @@ Extraction precision/recall, vague-posting detection, fit-score agreement with h
 
 ## Development
 ```bash
-cd backend
-uv run pytest                                   # 85+ tests, no network, no LLM
-uv run ruff check . ../evals && uv run ruff format . ../evals
-uv run python -m app.agent.graph                # print the graph as Mermaid (docs/architecture.md)
+cd backend && uv run pytest && uv run ruff check . ../evals && uv run ruff format . ../evals
+cd frontend && npm run lint && npm run typecheck && npm test
+cd frontend && npm run build:demo && npm run e2e      # demo smoke test (Playwright)
+cd backend && uv run python -m app.agent.graph        # graph as Mermaid (docs/architecture.md)
 ```
-CI runs lint and tests on every push and PR. Changes are logged in [`CHANGELOG.md`](CHANGELOG.md).
+No test calls an LLM or needs the backend running. CI runs all of the above on every push and PR. Changes are logged in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Roadmap
 - [x] Profile, extraction, matching, deterministic fit score
 - [x] CV + cover letter, two-layer verifier with targeted retries, human approval, tracker
-- [x] Persistent runs (SQLite), typed API, CLI, eval harness
-- [ ] First eval results with a real model (Gemini) published here
-- [ ] Next.js UI (run view with evidence table, tracker)
-- [ ] Deploy (Vercel + Railway/Render), Postgres/Supabase for checkpoints + tracker, demo video
+- [x] Persistent runs (SQLite), typed API, CLI, eval harness, first Gemini eval results
+- [x] Web app (password-protected) with profile builder; public demo of recorded runs
+- [ ] Demo on Vercel + portfolio entry, screenshots/video
+- [ ] Prompt tuning so first drafts pass verification more often (faster, cheaper runs)
+- [ ] Hosted private app (Postgres/Supabase for checkpoints + tracker)
 - [ ] Job discovery (Greenhouse/Lever/Ashby/InfoJobs APIs, weekly digest)
 
 ## License

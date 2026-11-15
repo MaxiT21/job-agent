@@ -101,6 +101,11 @@ export function ProfileBuilder({ saveDelayMs = 800 }: { saveDelayMs?: number }) 
         <Button onClick={build} disabled={!hasAnswers || busy !== null || agent.demo}>
           {busy === "draft" ? "Building…" : draft ? "Rebuild my profile" : "Build my profile"}
         </Button>
+        {agent.demo && (
+          <span className="text-xs text-muted">
+            In the demo the questions are shown read-only; building a profile needs the live agent.
+          </span>
+        )}
         {busy === "draft" && <Spinner label="The AI is organising your answers (10–30 s)…" />}
         {saved && busy !== "draft" && (
           <span className="text-xs text-muted">{saved === "saving" ? "Saving…" : "Answers saved"}</span>

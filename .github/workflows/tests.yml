@@ -44,3 +44,7 @@ jobs:
         run: npm run check:types-fresh
       - name: Demo build
         run: npm run build:demo
+      - name: Demo smoke test
+        run: |
+          npx playwright install --with-deps chromium
+          npm run e2e

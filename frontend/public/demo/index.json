@@ -1,0 +1,111 @@
+{
+ "scenarios": [
+  {
+   "id": "strong-match",
+   "title": "Strong match",
+   "description": "A backend internship that fits the profile: evidence for every requirement."
+  },
+  {
+   "id": "low-fit",
+   "title": "Low fit",
+   "description": "A senior SRE role: the agent flags the gaps and asks before tailoring anything."
+  },
+  {
+   "id": "vague",
+   "title": "Vague posting",
+   "description": "A posting with no real requirements: the agent asks instead of guessing."
+  },
+  {
+   "id": "spanish",
+   "title": "Spanish posting",
+   "description": "A QA internship in Spanish: the CV and letter come out in Spanish."
+  },
+  {
+   "id": "ai-intern",
+   "title": "AI engineer intern",
+   "description": "Partial fit: honest about the gaps, strict about the evidence."
+  }
+ ],
+ "questions": [
+  {
+   "id": "basics",
+   "title": "About you",
+   "prompt": "Your name, contact details and what you are looking for.",
+   "hints": [
+    "Full name, email, phone (optional), city",
+    "Links: GitHub, LinkedIn, portfolio",
+    "Current situation (studying X, working as Y) and the roles you want"
+   ],
+   "optional": false
+  },
+  {
+   "id": "experience",
+   "title": "Work experience",
+   "prompt": "Jobs and internships, most recent first. Write freely, one per paragraph.",
+   "hints": [
+    "Company, role, dates (month and year) and city",
+    "What you did and which tools you used",
+    "Results with numbers if you have them (users, time saved, size of the team)"
+   ],
+   "optional": false
+  },
+  {
+   "id": "projects",
+   "title": "Projects",
+   "prompt": "Personal, university or open-source projects.",
+   "hints": [
+    "What it does and why you built it",
+    "Your role and the technologies",
+    "Anything measurable (users, stars, performance) and a link"
+   ],
+   "optional": false
+  },
+  {
+   "id": "education",
+   "title": "Education",
+   "prompt": "Degrees and other formal education.",
+   "hints": [
+    "Degree, institution, dates",
+    "Relevant courses, thesis or a good grade"
+   ],
+   "optional": false
+  },
+  {
+   "id": "skills",
+   "title": "Skills",
+   "prompt": "Languages, frameworks and tools you can actually work with.",
+   "hints": [
+    "Only what you could discuss in an interview",
+    "Say where you used each one if it isn't obvious from above"
+   ],
+   "optional": false
+  },
+  {
+   "id": "languages",
+   "title": "Languages",
+   "prompt": "Languages you speak and your level.",
+   "hints": [
+    "e.g. Spanish (native), English (C1), Catalan (B2)"
+   ],
+   "optional": false
+  },
+  {
+   "id": "achievements",
+   "title": "Certificates and achievements",
+   "prompt": "Courses, certificates, awards, hackathons, volunteering.",
+   "hints": [
+    "Name, issuer and year"
+   ],
+   "optional": true
+  },
+  {
+   "id": "cv_text",
+   "title": "Your current CV (optional)",
+   "prompt": "Paste the text of your current CV; it is used together with your answers.",
+   "hints": [
+    "Copy-paste from the PDF or Word file; formatting does not matter"
+   ],
+   "optional": true
+  }
+ ]
+}

@@ -1,15 +1,19 @@
 services:
   backend:
     build: ./backend
-    env_file: .env
-    ports:
-      - "8000:8000"
+    env_file: .env          # GEMINI_API_KEY, APP_PASSWORD, SESSION_SECRET, ...
     volumes:
-      - ./backend/data:/app/data        # mount your real profile.yaml without baking it into the image
-      - ./backend/outputs:/app/outputs
+      - ./backend/data:/app/data        # your real profile.yaml, never baked into the image
+      - ./backend/outputs:/app/outputs  # SQLite database + generated documents
+    expose:
+      - "8000"              # only reachable by the frontend, not published on the host
 
-  # frontend:
-  #   build: ./frontend
-  #   ports: ["3000:3000"]
-  #   environment:
-  #     NEXT_PUBLIC_API_URL: http://localhost:8000
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        BACKEND_URL: http://backend:8000
+    ports:
+      - "3000:3000"         # open http://localhost:3000
+    depends_on:
+      - backend

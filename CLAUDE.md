@@ -1,6 +1,6 @@
 # Job Application Agent
 
-AI agent that takes a job posting (URL or text) and produces a fit analysis, a tailored CV and a cover letter (.docx). Portfolio project for AI developer roles.
+AI agent that takes a job posting (URL or text) and produces a fit analysis, a tailored CV and a cover letter (.docx). Single-user web app (password) + public demo of recorded runs for the portfolio. Portfolio project for AI developer roles.
 
 ## Core principle
 The agent must NEVER invent experience. It only selects, reorders and rewords items from `backend/data/profile.yaml` (fallback: `profile.sample.yaml`). Every generated line carries `evidence_ids` pointing to profile IDs, and a two-layer verifier checks them (deterministic checks in `scoring.py`: IDs, ownership, numbers, skills + LLM fact-check).
@@ -26,6 +26,7 @@ The agent must NEVER invent experience. It only selects, reorders and rewords it
 - `backend/app/main.py` + `app/api/models.py`: HTTP API (see README "API")
 - `backend/app/cli.py`: interactive terminal runner
 - `backend/tests/fakes.py`: `FakeLLM` + canned outputs valid against the sample profile
+- `backend/scripts/record_demo.py`: records real runs on the sample profile into `frontend/public/demo/` (refuses a real profile)
 - `frontend/src/lib/client.ts`: `AgentClient` interface (HttpClient live / DemoClient recordings); `api-types.ts` is generated from `frontend/openapi.json`
 - `evals/`: eval dataset + runner
 - `docs/architecture.md`: pipeline, state, verification layers, persistence
@@ -49,6 +50,7 @@ The agent must NEVER invent experience. It only selects, reorders and rewords it
 - After changing an API model: `cd backend && uv run python -m scripts.export_openapi`, then `cd frontend && npm run gen:types` (both are checked by tests/CI).
 - Frontend checks: `npm run lint && npm run typecheck && npm test`.
 - No secrets in the frontend: it only knows `BACKEND_URL` (server-side) and `NEXT_PUBLIC_DEMO`.
+- Demo recordings must only contain the sample profile (`src/lib/demo-fixtures.test.ts` checks). Re-record after changing prompts or the RunView contract.
 
 ## Run
-`.env` at the repo root (copy `.env.example`). Then `cd backend && uv sync && uv run uvicorn app.main:app --reload`.
+`.env` at the repo root (copy `.env.example`; needs `GEMINI_API_KEY` and `APP_PASSWORD`). Then `cd backend && uv sync && uv run uvicorn app.main:app --reload` and `cd frontend && npm run dev` (or `docker compose up --build`).

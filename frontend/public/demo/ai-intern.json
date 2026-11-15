@@ -1,0 +1,956 @@
+{
+ "id": "ai-intern",
+ "title": "AI engineer intern",
+ "description": "Partial fit: honest about the gaps, strict about the evidence.",
+ "posting_text": "AI Engineer Intern - Lumen AI\nYou'll prototype LLM-powered features with our applied AI team.\nMust have:\n- Python\n- Experience calling LLM APIs\n- Understanding of AI agents and tool calling\nNice to have:\n- RAG / vector databases",
+ "profile": {
+  "name": "Alex Example",
+  "email": "alex.example@example.com",
+  "phone": null,
+  "location": "Barcelona, Spain",
+  "links": {
+   "github": "github.com/alex-example",
+   "web": "alex-example.dev"
+  },
+  "summary": "Computer engineering student focused on backend and AI applications, with internship experience in QA and consulting.\n",
+  "items": [
+   {
+    "id": "exp-consulting",
+    "kind": "experience",
+    "title": "Technical Consultant Intern",
+    "org": "Example Consulting",
+    "period": "Feb 2026 - Jul 2026",
+    "location": "Barcelona",
+    "bullets": [
+     {
+      "id": "exp-consulting-b1",
+      "text": "Designed and executed functional test cases for a banking web application in an Agile team.",
+      "tags": [
+       "qa",
+       "testing",
+       "agile"
+      ]
+     },
+     {
+      "id": "exp-consulting-b2",
+      "text": "Tracked and triaged defects in Jira and validated data with SQL queries.",
+      "tags": [
+       "jira",
+       "sql"
+      ]
+     }
+    ],
+    "tags": [
+     "qa",
+     "testing",
+     "jira",
+     "sql",
+     "agile"
+    ]
+   },
+   {
+    "id": "proj-network-monitor",
+    "kind": "project",
+    "title": "Home Network Monitor",
+    "org": null,
+    "period": "2026",
+    "location": null,
+    "bullets": [
+     {
+      "id": "proj-network-monitor-b1",
+      "text": "Built a FastAPI backend that scans the local network and serves device status to an HTML dashboard.",
+      "tags": [
+       "python",
+       "fastapi"
+      ]
+     },
+     {
+      "id": "proj-network-monitor-b2",
+      "text": "Runs as a background service with automatic restart.",
+      "tags": [
+       "devops"
+      ]
+     }
+    ],
+    "tags": [
+     "python",
+     "fastapi",
+     "rest",
+     "html"
+    ]
+   },
+   {
+    "id": "proj-flight-alerts",
+    "kind": "project",
+    "title": "Flight Price Alerts",
+    "org": null,
+    "period": "2026",
+    "location": null,
+    "bullets": [
+     {
+      "id": "proj-flight-alerts-b1",
+      "text": "Python scraper that finds flights under a price threshold and emails an HTML summary.",
+      "tags": [
+       "python",
+       "scraping"
+      ]
+     },
+     {
+      "id": "proj-flight-alerts-b2",
+      "text": "Scheduled weekly with GitHub Actions.",
+      "tags": [
+       "github actions",
+       "ci"
+      ]
+     }
+    ],
+    "tags": [
+     "python",
+     "beautifulsoup",
+     "github actions",
+     "automation"
+    ]
+   },
+   {
+    "id": "edu-bsc",
+    "kind": "education",
+    "title": "BSc Computer Engineering",
+    "org": "Example University",
+    "period": "2023 - 2027",
+    "location": null,
+    "bullets": [],
+    "tags": []
+   },
+   {
+    "id": "cert-agents",
+    "kind": "certificate",
+    "title": "AI Agents Course",
+    "org": "Hugging Face",
+    "period": "2026",
+    "location": null,
+    "bullets": [],
+    "tags": [
+     "agents",
+     "llm",
+     "tool calling"
+    ]
+   },
+   {
+    "id": "skills-core",
+    "kind": "skill",
+    "title": "Core skills",
+    "org": null,
+    "period": null,
+    "location": null,
+    "bullets": [],
+    "tags": [
+     "python",
+     "fastapi",
+     "sql",
+     "git",
+     "docker",
+     "rest",
+     "jira",
+     "testing",
+     "react",
+     "next.js",
+     "supabase"
+    ]
+   },
+   {
+    "id": "lang-english",
+    "kind": "language",
+    "title": "English (C1)",
+    "org": null,
+    "period": null,
+    "location": null,
+    "bullets": [],
+    "tags": [
+     "english"
+    ]
+   }
+  ]
+ },
+ "steps": [
+  {
+   "view": {
+    "run_id": "ai-intern",
+    "created_at": null,
+    "status": "waiting",
+    "step": null,
+    "waiting_for": {
+     "type": "approve",
+     "fit": {
+      "matches": [
+       {
+        "requirement_id": "r1",
+        "status": "met",
+        "evidence_ids": [
+         "proj-network-monitor-b1",
+         "proj-flight-alerts-b1",
+         "skills-core"
+        ],
+        "note": "Demonstrated Python proficiency across multiple backend and automation projects."
+       },
+       {
+        "requirement_id": "r2",
+        "status": "partial",
+        "evidence_ids": [
+         "cert-agents"
+        ],
+        "note": "Completed an AI Agents course covering LLMs, but does not detail project experience calling LLM APIs directly."
+       },
+       {
+        "requirement_id": "r3",
+        "status": "met",
+        "evidence_ids": [
+         "cert-agents"
+        ],
+        "note": "Completed Hugging Face AI Agents course."
+       },
+       {
+        "requirement_id": "r4",
+        "status": "met",
+        "evidence_ids": [
+         "cert-agents"
+        ],
+        "note": "Hugging Face AI Agents course covered tool calling concepts."
+       },
+       {
+        "requirement_id": "r5",
+        "status": "gap",
+        "evidence_ids": [],
+        "note": "No mention of RAG concepts or implementations in profile."
+       },
+       {
+        "requirement_id": "r6",
+        "status": "gap",
+        "evidence_ids": [],
+        "note": "No mention of vector databases."
+       }
+      ],
+      "summary": "Candidate possesses solid Python fundamentals and theoretical understanding of AI agents and tool calling from coursework, but lacks practical LLM API integration projects as well as RAG and vector database familiarity.",
+      "score": 70.0
+     },
+     "cv": {
+      "summary": {
+       "text": "Computer engineering student with hands-on experience developing Python backends and automations, complemented by coursework in AI agents and tool calling.",
+       "evidence_ids": [
+        "edu-bsc",
+        "cert-agents",
+        "proj-network-monitor-b1",
+        "proj-flight-alerts-b1"
+       ]
+      },
+      "entries": [
+       {
+        "item_id": "cert-agents",
+        "bullets": []
+       },
+       {
+        "item_id": "proj-network-monitor",
+        "bullets": [
+         {
+          "text": "Built a FastAPI backend that scans the local network and serves device status to an HTML dashboard.",
+          "evidence_ids": [
+           "proj-network-monitor-b1"
+          ]
+         },
+         {
+          "text": "Configured the application to run as a persistent background service with automatic restart.",
+          "evidence_ids": [
+           "proj-network-monitor-b2"
+          ]
+         }
+        ]
+       },
+       {
+        "item_id": "proj-flight-alerts",
+        "bullets": [
+         {
+          "text": "Created a Python scraper that monitors flight prices below a set threshold and sends HTML email notifications.",
+          "evidence_ids": [
+           "proj-flight-alerts-b1"
+          ]
+         },
+         {
+          "text": "Automated weekly execution using GitHub Actions workflows.",
+          "evidence_ids": [
+           "proj-flight-alerts-b2"
+          ]
+         }
+        ]
+       },
+       {
+        "item_id": "exp-consulting",
+        "bullets": [
+         {
+          "text": "Designed and executed functional test cases for a banking web application within an Agile team.",
+          "evidence_ids": [
+           "exp-consulting-b1"
+          ]
+         },
+         {
+          "text": "Tracked and triaged defects in Jira and performed data validation using SQL queries.",
+          "evidence_ids": [
+           "exp-consulting-b2"
+          ]
+         }
+        ]
+       },
+       {
+        "item_id": "edu-bsc",
+        "bullets": []
+       }
+      ],
+      "skills": [
+       "python",
+       "fastapi",
+       "rest",
+       "git",
+       "docker",
+       "sql",
+       "testing",
+       "jira",
+       "github actions",
+       "agents",
+       "tool calling",
+       "llm"
+      ]
+     },
+     "cover_letter": {
+      "paragraphs": [
+       {
+        "text": "Lumen AI's focus on prototyping LLM-powered features matches my engineering focus on backend development and applied AI. In Python, I have built a FastAPI backend to monitor local network devices and created an automated flight price scraper scheduled with GitHub Actions.",
+        "evidence_ids": [
+         "proj-network-monitor-b1",
+         "proj-flight-alerts-b1",
+         "proj-flight-alerts-b2"
+        ]
+       },
+       {
+        "text": "I completed Hugging Face's AI Agents Course, which provided a structured understanding of LLMs, agent architectures, and tool calling mechanisms. This foundation prepares me to assist your team with evaluating and structuring agent interactions.",
+        "evidence_ids": [
+         "cert-agents"
+        ]
+       },
+       {
+        "text": "While my experience with LLMs and tool calling is grounded in coursework rather than commercial API integration, my computer engineering studies and core Python skills provide the technical base needed to adapt quickly to your applied AI workflows.",
+        "evidence_ids": [
+         "cert-agents",
+         "edu-bsc",
+         "skills-core"
+        ]
+       }
+      ]
+     },
+     "verification": {
+      "passed": true,
+      "issues": []
+     }
+    },
+    "error": null,
+    "posting": {
+     "title": "AI Engineer Intern",
+     "company": "Lumen AI",
+     "location": null,
+     "seniority": "intern",
+     "language": "en",
+     "requirements": [
+      {
+       "id": "r1",
+       "text": "Proficiency in Python.",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r2",
+       "text": "Experience calling LLM APIs.",
+       "category": "experience",
+       "importance": "must"
+      },
+      {
+       "id": "r3",
+       "text": "Understanding of AI agents.",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r4",
+       "text": "Understanding of tool calling.",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r5",
+       "text": "Familiarity with RAG.",
+       "category": "skill",
+       "importance": "nice"
+      },
+      {
+       "id": "r6",
+       "text": "Familiarity with vector databases.",
+       "category": "skill",
+       "importance": "nice"
+      }
+     ],
+     "responsibilities": [
+      "Prototype LLM-powered features with the applied AI team."
+     ],
+     "is_vague": false,
+     "clarifying_question": null
+    },
+    "fit": {
+     "matches": [
+      {
+       "requirement_id": "r1",
+       "status": "met",
+       "evidence_ids": [
+        "proj-network-monitor-b1",
+        "proj-flight-alerts-b1",
+        "skills-core"
+       ],
+       "note": "Demonstrated Python proficiency across multiple backend and automation projects."
+      },
+      {
+       "requirement_id": "r2",
+       "status": "partial",
+       "evidence_ids": [
+        "cert-agents"
+       ],
+       "note": "Completed an AI Agents course covering LLMs, but does not detail project experience calling LLM APIs directly."
+      },
+      {
+       "requirement_id": "r3",
+       "status": "met",
+       "evidence_ids": [
+        "cert-agents"
+       ],
+       "note": "Completed Hugging Face AI Agents course."
+      },
+      {
+       "requirement_id": "r4",
+       "status": "met",
+       "evidence_ids": [
+        "cert-agents"
+       ],
+       "note": "Hugging Face AI Agents course covered tool calling concepts."
+      },
+      {
+       "requirement_id": "r5",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No mention of RAG concepts or implementations in profile."
+      },
+      {
+       "requirement_id": "r6",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No mention of vector databases."
+      }
+     ],
+     "summary": "Candidate possesses solid Python fundamentals and theoretical understanding of AI agents and tool calling from coursework, but lacks practical LLM API integration projects as well as RAG and vector database familiarity.",
+     "score": 70.0
+    },
+    "cv": {
+     "summary": {
+      "text": "Computer engineering student with hands-on experience developing Python backends and automations, complemented by coursework in AI agents and tool calling.",
+      "evidence_ids": [
+       "edu-bsc",
+       "cert-agents",
+       "proj-network-monitor-b1",
+       "proj-flight-alerts-b1"
+      ]
+     },
+     "entries": [
+      {
+       "item_id": "cert-agents",
+       "bullets": []
+      },
+      {
+       "item_id": "proj-network-monitor",
+       "bullets": [
+        {
+         "text": "Built a FastAPI backend that scans the local network and serves device status to an HTML dashboard.",
+         "evidence_ids": [
+          "proj-network-monitor-b1"
+         ]
+        },
+        {
+         "text": "Configured the application to run as a persistent background service with automatic restart.",
+         "evidence_ids": [
+          "proj-network-monitor-b2"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "proj-flight-alerts",
+       "bullets": [
+        {
+         "text": "Created a Python scraper that monitors flight prices below a set threshold and sends HTML email notifications.",
+         "evidence_ids": [
+          "proj-flight-alerts-b1"
+         ]
+        },
+        {
+         "text": "Automated weekly execution using GitHub Actions workflows.",
+         "evidence_ids": [
+          "proj-flight-alerts-b2"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "exp-consulting",
+       "bullets": [
+        {
+         "text": "Designed and executed functional test cases for a banking web application within an Agile team.",
+         "evidence_ids": [
+          "exp-consulting-b1"
+         ]
+        },
+        {
+         "text": "Tracked and triaged defects in Jira and performed data validation using SQL queries.",
+         "evidence_ids": [
+          "exp-consulting-b2"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "edu-bsc",
+       "bullets": []
+      }
+     ],
+     "skills": [
+      "python",
+      "fastapi",
+      "rest",
+      "git",
+      "docker",
+      "sql",
+      "testing",
+      "jira",
+      "github actions",
+      "agents",
+      "tool calling",
+      "llm"
+     ]
+    },
+    "cover_letter": {
+     "paragraphs": [
+      {
+       "text": "Lumen AI's focus on prototyping LLM-powered features matches my engineering focus on backend development and applied AI. In Python, I have built a FastAPI backend to monitor local network devices and created an automated flight price scraper scheduled with GitHub Actions.",
+       "evidence_ids": [
+        "proj-network-monitor-b1",
+        "proj-flight-alerts-b1",
+        "proj-flight-alerts-b2"
+       ]
+      },
+      {
+       "text": "I completed Hugging Face's AI Agents Course, which provided a structured understanding of LLMs, agent architectures, and tool calling mechanisms. This foundation prepares me to assist your team with evaluating and structuring agent interactions.",
+       "evidence_ids": [
+        "cert-agents"
+       ]
+      },
+      {
+       "text": "While my experience with LLMs and tool calling is grounded in coursework rather than commercial API integration, my computer engineering studies and core Python skills provide the technical base needed to adapt quickly to your applied AI workflows.",
+       "evidence_ids": [
+        "cert-agents",
+        "edu-bsc",
+        "skills-core"
+       ]
+      }
+     ]
+    },
+    "verification": {
+     "passed": true,
+     "issues": []
+    },
+    "verification_history": [
+     {
+      "passed": false,
+      "issues": [
+       {
+        "where": "cover_letter[2]",
+        "text": "While my experience with LLMs stems primarily from coursework rather than production API deployments, I am actively expanding my practical skills through hands-on API integration exercises to ramp up quickly.",
+        "reason": "The cited evidence (cert-agents) only references the Hugging Face AI Agents Course and does not support the claim that the candidate is actively expanding practical skills through hands-on API integration exercises."
+       }
+      ]
+     },
+     {
+      "passed": true,
+      "issues": []
+     }
+    ],
+    "files": {
+     "cv": false,
+     "cover_letter": false
+    },
+    "usage": {
+     "calls": [
+      {
+       "step": "extract",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 6.047,
+       "cost_usd": 0.0027765000000000003,
+       "ok": true
+      },
+      {
+       "step": "match",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 12.986,
+       "cost_usd": 0.00711525,
+       "ok": true
+      },
+      {
+       "step": "tailor_cv",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 20.458,
+       "cost_usd": 0.01161825,
+       "ok": true
+      },
+      {
+       "step": "cover_letter",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 10.899,
+       "cost_usd": 0.00600375,
+       "ok": true
+      },
+      {
+       "step": "verify",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 36.037,
+       "cost_usd": 0.019393499999999998,
+       "ok": true
+      },
+      {
+       "step": "cover_letter",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 14.994,
+       "cost_usd": 0.0078375,
+       "ok": true
+      },
+      {
+       "step": "verify",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 7.208,
+       "cost_usd": 0.00472875,
+       "ok": true
+      }
+     ],
+     "total_cost_usd": 0.059473,
+     "total_latency_s": 108.629
+    }
+   },
+   "answer": {
+    "approved": true
+   }
+  },
+  {
+   "view": {
+    "run_id": "ai-intern",
+    "created_at": null,
+    "status": "done",
+    "step": null,
+    "waiting_for": null,
+    "error": null,
+    "posting": {
+     "title": "AI Engineer Intern",
+     "company": "Lumen AI",
+     "location": null,
+     "seniority": "intern",
+     "language": "en",
+     "requirements": [
+      {
+       "id": "r1",
+       "text": "Proficiency in Python.",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r2",
+       "text": "Experience calling LLM APIs.",
+       "category": "experience",
+       "importance": "must"
+      },
+      {
+       "id": "r3",
+       "text": "Understanding of AI agents.",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r4",
+       "text": "Understanding of tool calling.",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r5",
+       "text": "Familiarity with RAG.",
+       "category": "skill",
+       "importance": "nice"
+      },
+      {
+       "id": "r6",
+       "text": "Familiarity with vector databases.",
+       "category": "skill",
+       "importance": "nice"
+      }
+     ],
+     "responsibilities": [
+      "Prototype LLM-powered features with the applied AI team."
+     ],
+     "is_vague": false,
+     "clarifying_question": null
+    },
+    "fit": {
+     "matches": [
+      {
+       "requirement_id": "r1",
+       "status": "met",
+       "evidence_ids": [
+        "proj-network-monitor-b1",
+        "proj-flight-alerts-b1",
+        "skills-core"
+       ],
+       "note": "Demonstrated Python proficiency across multiple backend and automation projects."
+      },
+      {
+       "requirement_id": "r2",
+       "status": "partial",
+       "evidence_ids": [
+        "cert-agents"
+       ],
+       "note": "Completed an AI Agents course covering LLMs, but does not detail project experience calling LLM APIs directly."
+      },
+      {
+       "requirement_id": "r3",
+       "status": "met",
+       "evidence_ids": [
+        "cert-agents"
+       ],
+       "note": "Completed Hugging Face AI Agents course."
+      },
+      {
+       "requirement_id": "r4",
+       "status": "met",
+       "evidence_ids": [
+        "cert-agents"
+       ],
+       "note": "Hugging Face AI Agents course covered tool calling concepts."
+      },
+      {
+       "requirement_id": "r5",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No mention of RAG concepts or implementations in profile."
+      },
+      {
+       "requirement_id": "r6",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No mention of vector databases."
+      }
+     ],
+     "summary": "Candidate possesses solid Python fundamentals and theoretical understanding of AI agents and tool calling from coursework, but lacks practical LLM API integration projects as well as RAG and vector database familiarity.",
+     "score": 70.0
+    },
+    "cv": {
+     "summary": {
+      "text": "Computer engineering student with hands-on experience developing Python backends and automations, complemented by coursework in AI agents and tool calling.",
+      "evidence_ids": [
+       "edu-bsc",
+       "cert-agents",
+       "proj-network-monitor-b1",
+       "proj-flight-alerts-b1"
+      ]
+     },
+     "entries": [
+      {
+       "item_id": "cert-agents",
+       "bullets": []
+      },
+      {
+       "item_id": "proj-network-monitor",
+       "bullets": [
+        {
+         "text": "Built a FastAPI backend that scans the local network and serves device status to an HTML dashboard.",
+         "evidence_ids": [
+          "proj-network-monitor-b1"
+         ]
+        },
+        {
+         "text": "Configured the application to run as a persistent background service with automatic restart.",
+         "evidence_ids": [
+          "proj-network-monitor-b2"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "proj-flight-alerts",
+       "bullets": [
+        {
+         "text": "Created a Python scraper that monitors flight prices below a set threshold and sends HTML email notifications.",
+         "evidence_ids": [
+          "proj-flight-alerts-b1"
+         ]
+        },
+        {
+         "text": "Automated weekly execution using GitHub Actions workflows.",
+         "evidence_ids": [
+          "proj-flight-alerts-b2"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "exp-consulting",
+       "bullets": [
+        {
+         "text": "Designed and executed functional test cases for a banking web application within an Agile team.",
+         "evidence_ids": [
+          "exp-consulting-b1"
+         ]
+        },
+        {
+         "text": "Tracked and triaged defects in Jira and performed data validation using SQL queries.",
+         "evidence_ids": [
+          "exp-consulting-b2"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "edu-bsc",
+       "bullets": []
+      }
+     ],
+     "skills": [
+      "python",
+      "fastapi",
+      "rest",
+      "git",
+      "docker",
+      "sql",
+      "testing",
+      "jira",
+      "github actions",
+      "agents",
+      "tool calling",
+      "llm"
+     ]
+    },
+    "cover_letter": {
+     "paragraphs": [
+      {
+       "text": "Lumen AI's focus on prototyping LLM-powered features matches my engineering focus on backend development and applied AI. In Python, I have built a FastAPI backend to monitor local network devices and created an automated flight price scraper scheduled with GitHub Actions.",
+       "evidence_ids": [
+        "proj-network-monitor-b1",
+        "proj-flight-alerts-b1",
+        "proj-flight-alerts-b2"
+       ]
+      },
+      {
+       "text": "I completed Hugging Face's AI Agents Course, which provided a structured understanding of LLMs, agent architectures, and tool calling mechanisms. This foundation prepares me to assist your team with evaluating and structuring agent interactions.",
+       "evidence_ids": [
+        "cert-agents"
+       ]
+      },
+      {
+       "text": "While my experience with LLMs and tool calling is grounded in coursework rather than commercial API integration, my computer engineering studies and core Python skills provide the technical base needed to adapt quickly to your applied AI workflows.",
+       "evidence_ids": [
+        "cert-agents",
+        "edu-bsc",
+        "skills-core"
+       ]
+      }
+     ]
+    },
+    "verification": {
+     "passed": true,
+     "issues": []
+    },
+    "verification_history": [
+     {
+      "passed": false,
+      "issues": [
+       {
+        "where": "cover_letter[2]",
+        "text": "While my experience with LLMs stems primarily from coursework rather than production API deployments, I am actively expanding my practical skills through hands-on API integration exercises to ramp up quickly.",
+        "reason": "The cited evidence (cert-agents) only references the Hugging Face AI Agents Course and does not support the claim that the candidate is actively expanding practical skills through hands-on API integration exercises."
+       }
+      ]
+     },
+     {
+      "passed": true,
+      "issues": []
+     }
+    ],
+    "files": {
+     "cv": true,
+     "cover_letter": true
+    },
+    "usage": {
+     "calls": [
+      {
+       "step": "extract",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 6.047,
+       "cost_usd": 0.0027765000000000003,
+       "ok": true
+      },
+      {
+       "step": "match",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 12.986,
+       "cost_usd": 0.00711525,
+       "ok": true
+      },
+      {
+       "step": "tailor_cv",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 20.458,
+       "cost_usd": 0.01161825,
+       "ok": true
+      },
+      {
+       "step": "cover_letter",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 10.899,
+       "cost_usd": 0.00600375,
+       "ok": true
+      },
+      {
+       "step": "verify",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 36.037,
+       "cost_usd": 0.019393499999999998,
+       "ok": true
+      },
+      {
+       "step": "cover_letter",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 14.994,
+       "cost_usd": 0.0078375,
+       "ok": true
+      },
+      {
+       "step": "verify",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 7.208,
+       "cost_usd": 0.00472875,
+       "ok": true
+      }
+     ],
+     "total_cost_usd": 0.059473,
+     "total_latency_s": 108.629
+    }
+   },
+   "answer": null
+  }
+ ]
+}

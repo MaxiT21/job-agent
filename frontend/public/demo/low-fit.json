@@ -1,0 +1,1148 @@
+{
+ "id": "low-fit",
+ "title": "Low fit",
+ "description": "A senior SRE role: the agent flags the gaps and asks before tailoring anything.",
+ "posting_text": "Senior Site Reliability Engineer - CloudScale\nRequirements:\n- 5+ years of production SRE experience\n- Kubernetes in production\n- Terraform\n- AWS\n- Go\n- On-call experience for high-traffic systems\nNice to have: Prometheus, Grafana.",
+ "profile": {
+  "name": "Alex Example",
+  "email": "alex.example@example.com",
+  "phone": null,
+  "location": "Barcelona, Spain",
+  "links": {
+   "github": "github.com/alex-example",
+   "web": "alex-example.dev"
+  },
+  "summary": "Computer engineering student focused on backend and AI applications, with internship experience in QA and consulting.\n",
+  "items": [
+   {
+    "id": "exp-consulting",
+    "kind": "experience",
+    "title": "Technical Consultant Intern",
+    "org": "Example Consulting",
+    "period": "Feb 2026 - Jul 2026",
+    "location": "Barcelona",
+    "bullets": [
+     {
+      "id": "exp-consulting-b1",
+      "text": "Designed and executed functional test cases for a banking web application in an Agile team.",
+      "tags": [
+       "qa",
+       "testing",
+       "agile"
+      ]
+     },
+     {
+      "id": "exp-consulting-b2",
+      "text": "Tracked and triaged defects in Jira and validated data with SQL queries.",
+      "tags": [
+       "jira",
+       "sql"
+      ]
+     }
+    ],
+    "tags": [
+     "qa",
+     "testing",
+     "jira",
+     "sql",
+     "agile"
+    ]
+   },
+   {
+    "id": "proj-network-monitor",
+    "kind": "project",
+    "title": "Home Network Monitor",
+    "org": null,
+    "period": "2026",
+    "location": null,
+    "bullets": [
+     {
+      "id": "proj-network-monitor-b1",
+      "text": "Built a FastAPI backend that scans the local network and serves device status to an HTML dashboard.",
+      "tags": [
+       "python",
+       "fastapi"
+      ]
+     },
+     {
+      "id": "proj-network-monitor-b2",
+      "text": "Runs as a background service with automatic restart.",
+      "tags": [
+       "devops"
+      ]
+     }
+    ],
+    "tags": [
+     "python",
+     "fastapi",
+     "rest",
+     "html"
+    ]
+   },
+   {
+    "id": "proj-flight-alerts",
+    "kind": "project",
+    "title": "Flight Price Alerts",
+    "org": null,
+    "period": "2026",
+    "location": null,
+    "bullets": [
+     {
+      "id": "proj-flight-alerts-b1",
+      "text": "Python scraper that finds flights under a price threshold and emails an HTML summary.",
+      "tags": [
+       "python",
+       "scraping"
+      ]
+     },
+     {
+      "id": "proj-flight-alerts-b2",
+      "text": "Scheduled weekly with GitHub Actions.",
+      "tags": [
+       "github actions",
+       "ci"
+      ]
+     }
+    ],
+    "tags": [
+     "python",
+     "beautifulsoup",
+     "github actions",
+     "automation"
+    ]
+   },
+   {
+    "id": "edu-bsc",
+    "kind": "education",
+    "title": "BSc Computer Engineering",
+    "org": "Example University",
+    "period": "2023 - 2027",
+    "location": null,
+    "bullets": [],
+    "tags": []
+   },
+   {
+    "id": "cert-agents",
+    "kind": "certificate",
+    "title": "AI Agents Course",
+    "org": "Hugging Face",
+    "period": "2026",
+    "location": null,
+    "bullets": [],
+    "tags": [
+     "agents",
+     "llm",
+     "tool calling"
+    ]
+   },
+   {
+    "id": "skills-core",
+    "kind": "skill",
+    "title": "Core skills",
+    "org": null,
+    "period": null,
+    "location": null,
+    "bullets": [],
+    "tags": [
+     "python",
+     "fastapi",
+     "sql",
+     "git",
+     "docker",
+     "rest",
+     "jira",
+     "testing",
+     "react",
+     "next.js",
+     "supabase"
+    ]
+   },
+   {
+    "id": "lang-english",
+    "kind": "language",
+    "title": "English (C1)",
+    "org": null,
+    "period": null,
+    "location": null,
+    "bullets": [],
+    "tags": [
+     "english"
+    ]
+   }
+  ]
+ },
+ "steps": [
+  {
+   "view": {
+    "run_id": "low-fit",
+    "created_at": null,
+    "status": "waiting",
+    "step": null,
+    "waiting_for": {
+     "type": "low_fit",
+     "score": 0.0,
+     "gaps": [
+      "r1",
+      "r2",
+      "r3",
+      "r4",
+      "r5",
+      "r6",
+      "r7",
+      "r8"
+     ],
+     "summary": "The candidate is an undergraduate student with QA internship and junior development background, lacking all core SRE requirements and tooling for a senior-level position."
+    },
+    "error": null,
+    "posting": {
+     "title": "Senior Site Reliability Engineer",
+     "company": "CloudScale",
+     "location": null,
+     "seniority": "senior",
+     "language": "en",
+     "requirements": [
+      {
+       "id": "r1",
+       "text": "5+ years of production SRE experience",
+       "category": "experience",
+       "importance": "must"
+      },
+      {
+       "id": "r2",
+       "text": "Experience with Kubernetes in production",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r3",
+       "text": "Experience with Terraform",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r4",
+       "text": "Experience with AWS",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r5",
+       "text": "Proficiency in Go",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r6",
+       "text": "On-call experience for high-traffic systems",
+       "category": "experience",
+       "importance": "must"
+      },
+      {
+       "id": "r7",
+       "text": "Experience with Prometheus",
+       "category": "skill",
+       "importance": "nice"
+      },
+      {
+       "id": "r8",
+       "text": "Experience with Grafana",
+       "category": "skill",
+       "importance": "nice"
+      }
+     ],
+     "responsibilities": [],
+     "is_vague": false,
+     "clarifying_question": null
+    },
+    "fit": {
+     "matches": [
+      {
+       "requirement_id": "r1",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "Candidate is an undergraduate student with internship experience in QA, possessing no production SRE experience."
+      },
+      {
+       "requirement_id": "r2",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No mention of Kubernetes experience in production."
+      },
+      {
+       "requirement_id": "r3",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No evidence of Terraform skills or usage."
+      },
+      {
+       "requirement_id": "r4",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No AWS experience listed in the profile."
+      },
+      {
+       "requirement_id": "r5",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No Go programming experience mentioned."
+      },
+      {
+       "requirement_id": "r6",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No on-call rotation or incident management experience."
+      },
+      {
+       "requirement_id": "r7",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No experience with Prometheus monitoring."
+      },
+      {
+       "requirement_id": "r8",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No experience with Grafana dashboards."
+      }
+     ],
+     "summary": "The candidate is an undergraduate student with QA internship and junior development background, lacking all core SRE requirements and tooling for a senior-level position.",
+     "score": 0.0
+    },
+    "cv": null,
+    "cover_letter": null,
+    "verification": null,
+    "verification_history": [],
+    "files": {
+     "cv": false,
+     "cover_letter": false
+    },
+    "usage": {
+     "calls": [
+      {
+       "step": "extract",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 5.48,
+       "cost_usd": 0.0020745,
+       "ok": true
+      },
+      {
+       "step": "match",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 7.704,
+       "cost_usd": 0.00478575,
+       "ok": true
+      }
+     ],
+     "total_cost_usd": 0.00686,
+     "total_latency_s": 13.184
+    }
+   },
+   "answer": {
+    "proceed": true
+   }
+  },
+  {
+   "view": {
+    "run_id": "low-fit",
+    "created_at": null,
+    "status": "waiting",
+    "step": null,
+    "waiting_for": {
+     "type": "approve",
+     "fit": {
+      "matches": [
+       {
+        "requirement_id": "r1",
+        "status": "gap",
+        "evidence_ids": [],
+        "note": "Candidate is an undergraduate student with internship experience in QA, possessing no production SRE experience."
+       },
+       {
+        "requirement_id": "r2",
+        "status": "gap",
+        "evidence_ids": [],
+        "note": "No mention of Kubernetes experience in production."
+       },
+       {
+        "requirement_id": "r3",
+        "status": "gap",
+        "evidence_ids": [],
+        "note": "No evidence of Terraform skills or usage."
+       },
+       {
+        "requirement_id": "r4",
+        "status": "gap",
+        "evidence_ids": [],
+        "note": "No AWS experience listed in the profile."
+       },
+       {
+        "requirement_id": "r5",
+        "status": "gap",
+        "evidence_ids": [],
+        "note": "No Go programming experience mentioned."
+       },
+       {
+        "requirement_id": "r6",
+        "status": "gap",
+        "evidence_ids": [],
+        "note": "No on-call rotation or incident management experience."
+       },
+       {
+        "requirement_id": "r7",
+        "status": "gap",
+        "evidence_ids": [],
+        "note": "No experience with Prometheus monitoring."
+       },
+       {
+        "requirement_id": "r8",
+        "status": "gap",
+        "evidence_ids": [],
+        "note": "No experience with Grafana dashboards."
+       }
+      ],
+      "summary": "The candidate is an undergraduate student with QA internship and junior development background, lacking all core SRE requirements and tooling for a senior-level position.",
+      "score": 0.0
+     },
+     "cv": {
+      "summary": {
+       "text": "Computer engineering student with internship experience in quality assurance and consulting, and hands-on project work developing automated services and network monitoring tools.",
+       "evidence_ids": [
+        "edu-bsc",
+        "exp-consulting",
+        "proj-network-monitor",
+        "proj-flight-alerts"
+       ]
+      },
+      "entries": [
+       {
+        "item_id": "proj-network-monitor",
+        "bullets": [
+         {
+          "text": "Configured application to run as a background service with automatic restart.",
+          "evidence_ids": [
+           "proj-network-monitor-b2"
+          ]
+         },
+         {
+          "text": "Built a FastAPI backend that scans the local network and serves device status to an HTML dashboard.",
+          "evidence_ids": [
+           "proj-network-monitor-b1"
+          ]
+         }
+        ]
+       },
+       {
+        "item_id": "proj-flight-alerts",
+        "bullets": [
+         {
+          "text": "Scheduled weekly automation workflows utilizing GitHub Actions.",
+          "evidence_ids": [
+           "proj-flight-alerts-b2"
+          ]
+         },
+         {
+          "text": "Built a Python scraper that monitors flight prices and sends email summaries.",
+          "evidence_ids": [
+           "proj-flight-alerts-b1"
+          ]
+         }
+        ]
+       },
+       {
+        "item_id": "exp-consulting",
+        "bullets": [
+         {
+          "text": "Tracked and triaged defects in Jira and validated system data with SQL queries.",
+          "evidence_ids": [
+           "exp-consulting-b2"
+          ]
+         },
+         {
+          "text": "Designed and executed functional test cases for a banking web application in an Agile team.",
+          "evidence_ids": [
+           "exp-consulting-b1"
+          ]
+         }
+        ]
+       },
+       {
+        "item_id": "edu-bsc",
+        "bullets": []
+       },
+       {
+        "item_id": "cert-agents",
+        "bullets": []
+       }
+      ],
+      "skills": [
+       "docker",
+       "python",
+       "git",
+       "sql",
+       "fastapi",
+       "rest",
+       "testing",
+       "jira"
+      ]
+     },
+     "cover_letter": {
+      "paragraphs": [
+       {
+        "text": "CloudScale provides an exciting opportunity to support scalable infrastructure. In my Home Network Monitor project, I developed a FastAPI backend that scans the local network, displays device status, and operates as a background service configured for automatic restart.",
+        "evidence_ids": [
+         "proj-network-monitor",
+         "proj-network-monitor-b1",
+         "proj-network-monitor-b2"
+        ]
+       },
+       {
+        "text": "For automated delivery and workflows, I configured scheduled weekly runs using GitHub Actions for a Python service. In addition, as a Technical Consultant Intern at Example Consulting, I tracked and triaged defects in Jira, validated application data using SQL queries, and executed test cases in an Agile environment.",
+        "evidence_ids": [
+         "proj-flight-alerts",
+         "proj-flight-alerts-b2",
+         "exp-consulting",
+         "exp-consulting-b1",
+         "exp-consulting-b2"
+        ]
+       },
+       {
+        "text": "I do not possess production experience with Kubernetes, but I have foundational container skills using Docker and am completing my BSc in Computer Engineering at Example University.",
+        "evidence_ids": [
+         "skills-core",
+         "edu-bsc"
+        ]
+       }
+      ]
+     },
+     "verification": {
+      "passed": true,
+      "issues": []
+     }
+    },
+    "error": null,
+    "posting": {
+     "title": "Senior Site Reliability Engineer",
+     "company": "CloudScale",
+     "location": null,
+     "seniority": "senior",
+     "language": "en",
+     "requirements": [
+      {
+       "id": "r1",
+       "text": "5+ years of production SRE experience",
+       "category": "experience",
+       "importance": "must"
+      },
+      {
+       "id": "r2",
+       "text": "Experience with Kubernetes in production",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r3",
+       "text": "Experience with Terraform",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r4",
+       "text": "Experience with AWS",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r5",
+       "text": "Proficiency in Go",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r6",
+       "text": "On-call experience for high-traffic systems",
+       "category": "experience",
+       "importance": "must"
+      },
+      {
+       "id": "r7",
+       "text": "Experience with Prometheus",
+       "category": "skill",
+       "importance": "nice"
+      },
+      {
+       "id": "r8",
+       "text": "Experience with Grafana",
+       "category": "skill",
+       "importance": "nice"
+      }
+     ],
+     "responsibilities": [],
+     "is_vague": false,
+     "clarifying_question": null
+    },
+    "fit": {
+     "matches": [
+      {
+       "requirement_id": "r1",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "Candidate is an undergraduate student with internship experience in QA, possessing no production SRE experience."
+      },
+      {
+       "requirement_id": "r2",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No mention of Kubernetes experience in production."
+      },
+      {
+       "requirement_id": "r3",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No evidence of Terraform skills or usage."
+      },
+      {
+       "requirement_id": "r4",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No AWS experience listed in the profile."
+      },
+      {
+       "requirement_id": "r5",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No Go programming experience mentioned."
+      },
+      {
+       "requirement_id": "r6",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No on-call rotation or incident management experience."
+      },
+      {
+       "requirement_id": "r7",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No experience with Prometheus monitoring."
+      },
+      {
+       "requirement_id": "r8",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No experience with Grafana dashboards."
+      }
+     ],
+     "summary": "The candidate is an undergraduate student with QA internship and junior development background, lacking all core SRE requirements and tooling for a senior-level position.",
+     "score": 0.0
+    },
+    "cv": {
+     "summary": {
+      "text": "Computer engineering student with internship experience in quality assurance and consulting, and hands-on project work developing automated services and network monitoring tools.",
+      "evidence_ids": [
+       "edu-bsc",
+       "exp-consulting",
+       "proj-network-monitor",
+       "proj-flight-alerts"
+      ]
+     },
+     "entries": [
+      {
+       "item_id": "proj-network-monitor",
+       "bullets": [
+        {
+         "text": "Configured application to run as a background service with automatic restart.",
+         "evidence_ids": [
+          "proj-network-monitor-b2"
+         ]
+        },
+        {
+         "text": "Built a FastAPI backend that scans the local network and serves device status to an HTML dashboard.",
+         "evidence_ids": [
+          "proj-network-monitor-b1"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "proj-flight-alerts",
+       "bullets": [
+        {
+         "text": "Scheduled weekly automation workflows utilizing GitHub Actions.",
+         "evidence_ids": [
+          "proj-flight-alerts-b2"
+         ]
+        },
+        {
+         "text": "Built a Python scraper that monitors flight prices and sends email summaries.",
+         "evidence_ids": [
+          "proj-flight-alerts-b1"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "exp-consulting",
+       "bullets": [
+        {
+         "text": "Tracked and triaged defects in Jira and validated system data with SQL queries.",
+         "evidence_ids": [
+          "exp-consulting-b2"
+         ]
+        },
+        {
+         "text": "Designed and executed functional test cases for a banking web application in an Agile team.",
+         "evidence_ids": [
+          "exp-consulting-b1"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "edu-bsc",
+       "bullets": []
+      },
+      {
+       "item_id": "cert-agents",
+       "bullets": []
+      }
+     ],
+     "skills": [
+      "docker",
+      "python",
+      "git",
+      "sql",
+      "fastapi",
+      "rest",
+      "testing",
+      "jira"
+     ]
+    },
+    "cover_letter": {
+     "paragraphs": [
+      {
+       "text": "CloudScale provides an exciting opportunity to support scalable infrastructure. In my Home Network Monitor project, I developed a FastAPI backend that scans the local network, displays device status, and operates as a background service configured for automatic restart.",
+       "evidence_ids": [
+        "proj-network-monitor",
+        "proj-network-monitor-b1",
+        "proj-network-monitor-b2"
+       ]
+      },
+      {
+       "text": "For automated delivery and workflows, I configured scheduled weekly runs using GitHub Actions for a Python service. In addition, as a Technical Consultant Intern at Example Consulting, I tracked and triaged defects in Jira, validated application data using SQL queries, and executed test cases in an Agile environment.",
+       "evidence_ids": [
+        "proj-flight-alerts",
+        "proj-flight-alerts-b2",
+        "exp-consulting",
+        "exp-consulting-b1",
+        "exp-consulting-b2"
+       ]
+      },
+      {
+       "text": "I do not possess production experience with Kubernetes, but I have foundational container skills using Docker and am completing my BSc in Computer Engineering at Example University.",
+       "evidence_ids": [
+        "skills-core",
+        "edu-bsc"
+       ]
+      }
+     ]
+    },
+    "verification": {
+     "passed": true,
+     "issues": []
+    },
+    "verification_history": [
+     {
+      "passed": false,
+      "issues": [
+       {
+        "where": "cover_letter[2]",
+        "text": "I do not yet possess production experience with Kubernetes, but I am actively expanding my container orchestration knowledge beyond Docker through self-directed lab environments and my computer engineering coursework.",
+        "reason": "The cited evidence (skills-core, edu-bsc) does not support the claims of learning container orchestration beyond Docker, participating in self-directed lab environments, or container orchestration coursework."
+       }
+      ]
+     },
+     {
+      "passed": true,
+      "issues": []
+     }
+    ],
+    "files": {
+     "cv": false,
+     "cover_letter": false
+    },
+    "usage": {
+     "calls": [
+      {
+       "step": "extract",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 5.48,
+       "cost_usd": 0.0020745,
+       "ok": true
+      },
+      {
+       "step": "match",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 7.704,
+       "cost_usd": 0.00478575,
+       "ok": true
+      },
+      {
+       "step": "tailor_cv",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 15.031,
+       "cost_usd": 0.0094725,
+       "ok": true
+      },
+      {
+       "step": "cover_letter",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 10.396,
+       "cost_usd": 0.00598425,
+       "ok": true
+      },
+      {
+       "step": "verify",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 59.99,
+       "cost_usd": 0.0304485,
+       "ok": true
+      },
+      {
+       "step": "cover_letter",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 20.71,
+       "cost_usd": 0.01167375,
+       "ok": true
+      },
+      {
+       "step": "verify",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 7.661,
+       "cost_usd": 0.0048585,
+       "ok": true
+      }
+     ],
+     "total_cost_usd": 0.069298,
+     "total_latency_s": 126.972
+    }
+   },
+   "answer": {
+    "approved": true
+   }
+  },
+  {
+   "view": {
+    "run_id": "low-fit",
+    "created_at": null,
+    "status": "done",
+    "step": null,
+    "waiting_for": null,
+    "error": null,
+    "posting": {
+     "title": "Senior Site Reliability Engineer",
+     "company": "CloudScale",
+     "location": null,
+     "seniority": "senior",
+     "language": "en",
+     "requirements": [
+      {
+       "id": "r1",
+       "text": "5+ years of production SRE experience",
+       "category": "experience",
+       "importance": "must"
+      },
+      {
+       "id": "r2",
+       "text": "Experience with Kubernetes in production",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r3",
+       "text": "Experience with Terraform",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r4",
+       "text": "Experience with AWS",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r5",
+       "text": "Proficiency in Go",
+       "category": "skill",
+       "importance": "must"
+      },
+      {
+       "id": "r6",
+       "text": "On-call experience for high-traffic systems",
+       "category": "experience",
+       "importance": "must"
+      },
+      {
+       "id": "r7",
+       "text": "Experience with Prometheus",
+       "category": "skill",
+       "importance": "nice"
+      },
+      {
+       "id": "r8",
+       "text": "Experience with Grafana",
+       "category": "skill",
+       "importance": "nice"
+      }
+     ],
+     "responsibilities": [],
+     "is_vague": false,
+     "clarifying_question": null
+    },
+    "fit": {
+     "matches": [
+      {
+       "requirement_id": "r1",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "Candidate is an undergraduate student with internship experience in QA, possessing no production SRE experience."
+      },
+      {
+       "requirement_id": "r2",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No mention of Kubernetes experience in production."
+      },
+      {
+       "requirement_id": "r3",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No evidence of Terraform skills or usage."
+      },
+      {
+       "requirement_id": "r4",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No AWS experience listed in the profile."
+      },
+      {
+       "requirement_id": "r5",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No Go programming experience mentioned."
+      },
+      {
+       "requirement_id": "r6",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No on-call rotation or incident management experience."
+      },
+      {
+       "requirement_id": "r7",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No experience with Prometheus monitoring."
+      },
+      {
+       "requirement_id": "r8",
+       "status": "gap",
+       "evidence_ids": [],
+       "note": "No experience with Grafana dashboards."
+      }
+     ],
+     "summary": "The candidate is an undergraduate student with QA internship and junior development background, lacking all core SRE requirements and tooling for a senior-level position.",
+     "score": 0.0
+    },
+    "cv": {
+     "summary": {
+      "text": "Computer engineering student with internship experience in quality assurance and consulting, and hands-on project work developing automated services and network monitoring tools.",
+      "evidence_ids": [
+       "edu-bsc",
+       "exp-consulting",
+       "proj-network-monitor",
+       "proj-flight-alerts"
+      ]
+     },
+     "entries": [
+      {
+       "item_id": "proj-network-monitor",
+       "bullets": [
+        {
+         "text": "Configured application to run as a background service with automatic restart.",
+         "evidence_ids": [
+          "proj-network-monitor-b2"
+         ]
+        },
+        {
+         "text": "Built a FastAPI backend that scans the local network and serves device status to an HTML dashboard.",
+         "evidence_ids": [
+          "proj-network-monitor-b1"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "proj-flight-alerts",
+       "bullets": [
+        {
+         "text": "Scheduled weekly automation workflows utilizing GitHub Actions.",
+         "evidence_ids": [
+          "proj-flight-alerts-b2"
+         ]
+        },
+        {
+         "text": "Built a Python scraper that monitors flight prices and sends email summaries.",
+         "evidence_ids": [
+          "proj-flight-alerts-b1"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "exp-consulting",
+       "bullets": [
+        {
+         "text": "Tracked and triaged defects in Jira and validated system data with SQL queries.",
+         "evidence_ids": [
+          "exp-consulting-b2"
+         ]
+        },
+        {
+         "text": "Designed and executed functional test cases for a banking web application in an Agile team.",
+         "evidence_ids": [
+          "exp-consulting-b1"
+         ]
+        }
+       ]
+      },
+      {
+       "item_id": "edu-bsc",
+       "bullets": []
+      },
+      {
+       "item_id": "cert-agents",
+       "bullets": []
+      }
+     ],
+     "skills": [
+      "docker",
+      "python",
+      "git",
+      "sql",
+      "fastapi",
+      "rest",
+      "testing",
+      "jira"
+     ]
+    },
+    "cover_letter": {
+     "paragraphs": [
+      {
+       "text": "CloudScale provides an exciting opportunity to support scalable infrastructure. In my Home Network Monitor project, I developed a FastAPI backend that scans the local network, displays device status, and operates as a background service configured for automatic restart.",
+       "evidence_ids": [
+        "proj-network-monitor",
+        "proj-network-monitor-b1",
+        "proj-network-monitor-b2"
+       ]
+      },
+      {
+       "text": "For automated delivery and workflows, I configured scheduled weekly runs using GitHub Actions for a Python service. In addition, as a Technical Consultant Intern at Example Consulting, I tracked and triaged defects in Jira, validated application data using SQL queries, and executed test cases in an Agile environment.",
+       "evidence_ids": [
+        "proj-flight-alerts",
+        "proj-flight-alerts-b2",
+        "exp-consulting",
+        "exp-consulting-b1",
+        "exp-consulting-b2"
+       ]
+      },
+      {
+       "text": "I do not possess production experience with Kubernetes, but I have foundational container skills using Docker and am completing my BSc in Computer Engineering at Example University.",
+       "evidence_ids": [
+        "skills-core",
+        "edu-bsc"
+       ]
+      }
+     ]
+    },
+    "verification": {
+     "passed": true,
+     "issues": []
+    },
+    "verification_history": [
+     {
+      "passed": false,
+      "issues": [
+       {
+        "where": "cover_letter[2]",
+        "text": "I do not yet possess production experience with Kubernetes, but I am actively expanding my container orchestration knowledge beyond Docker through self-directed lab environments and my computer engineering coursework.",
+        "reason": "The cited evidence (skills-core, edu-bsc) does not support the claims of learning container orchestration beyond Docker, participating in self-directed lab environments, or container orchestration coursework."
+       }
+      ]
+     },
+     {
+      "passed": true,
+      "issues": []
+     }
+    ],
+    "files": {
+     "cv": true,
+     "cover_letter": true
+    },
+    "usage": {
+     "calls": [
+      {
+       "step": "extract",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 5.48,
+       "cost_usd": 0.0020745,
+       "ok": true
+      },
+      {
+       "step": "match",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 7.704,
+       "cost_usd": 0.00478575,
+       "ok": true
+      },
+      {
+       "step": "tailor_cv",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 15.031,
+       "cost_usd": 0.0094725,
+       "ok": true
+      },
+      {
+       "step": "cover_letter",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 10.396,
+       "cost_usd": 0.00598425,
+       "ok": true
+      },
+      {
+       "step": "verify",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 59.99,
+       "cost_usd": 0.0304485,
+       "ok": true
+      },
+      {
+       "step": "cover_letter",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 20.71,
+       "cost_usd": 0.01167375,
+       "ok": true
+      },
+      {
+       "step": "verify",
+       "model": "gemini/gemini-flash-latest",
+       "latency_s": 7.661,
+       "cost_usd": 0.0048585,
+       "ok": true
+      }
+     ],
+     "total_cost_usd": 0.069298,
+     "total_latency_s": 126.972
+    }
+   },
+   "answer": null
+  }
+ ]
+}
