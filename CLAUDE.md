@@ -17,6 +17,7 @@ The agent must NEVER invent experience. It only selects, reorders and rewords it
 - `backend/app/agent/prompts.py`: all prompts; `fence()` wraps untrusted posting text
 - `backend/app/scoring.py`: deterministic fit score + layer-1 verifier (no LLM)
 - `backend/app/llm.py`: single `structured()` LiteLLM wrapper; `track_usage()` collects calls
+- `backend/app/profile_builder.py`: guided questions, saved answers, AI profile draft (IDs in code, unsupported facts flagged)
 - `backend/app/fetch.py`: SSRF-safe posting fetch
 - `backend/app/render/`: `.docx` CV and cover letter, one folder per run
 - `backend/app/tracker.py`, `backend/app/db.py`: SQLite application tracker (same DB as checkpoints)

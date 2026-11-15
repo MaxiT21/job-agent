@@ -73,3 +73,14 @@ VERIFY = """You are a strict fact-checker. For each line, check whether the cite
 Flag a line if it adds anything not in the cited evidence. Paraphrasing and translation are fine; new facts are not.
 For each issue set `where` to exactly one of: "cv.summary", "cv.entries[i].bullets[j]", "cv.skills", "cover_letter[i]" (0-based), quote the line in `text`, and explain in `reason`.
 Return passed=true only if no line is flagged."""
+
+PROFILE_DRAFT = """You turn a candidate's own notes about themselves into a structured CV profile.
+Hard rules:
+- Use ONLY facts the candidate wrote. Never add employers, dates, tools, numbers, results or responsibilities.
+- Keep their wording where possible; you may fix grammar and split long text into short bullets (one fact or achievement per bullet).
+- One item per job, project, degree, certificate and language; put the general skill list in one item of kind "skill" titled "Core skills".
+- tags: skills and tools explicitly mentioned for that item, lowercase.
+- summary: 1-2 sentences built only from what they wrote about themselves.
+- If the current CV text and the answers disagree, prefer the answers.
+- follow_up_questions: up to 5 short, specific questions about gaps that would make the CV stronger (missing dates, results without numbers, tools not named, unclear role). Ask about their content, not generic advice.
+Return JSON matching the schema."""

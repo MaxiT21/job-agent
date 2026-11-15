@@ -30,9 +30,28 @@ from pydantic import ValidationError
 
 from app import auth, tracker
 from app.agent.graph import get_graph
-from app.api.models import Health, Resume, RunSummary, RunView, StartRun, StatusUpdate
+from app.api.models import (
+    DraftRequest,
+    Health,
+    ProfileView,
+    Resume,
+    RunSummary,
+    RunView,
+    StartRun,
+    StatusUpdate,
+)
 from app.config import settings
+from app.profile import load_profile, profile_source, save_profile
+from app.profile_builder import (
+    GUIDED_SECTIONS,
+    GuidedSection,
+    ProfileDraft,
+    draft_profile,
+    get_answers,
+    save_answers,
+)
 from app.runs import Busy, NotFailed, NotWaiting, RunNotFound, Runs
+from app.schemas import Profile
 
 logging.basicConfig(
     level=settings.log_level, format="%(asctime)s %(levelname)s %(name)s: %(message)s"
@@ -77,8 +96,7 @@ def _http_errors():
 
 @app.get("/health", response_model=Health)
 def health():
-    profile = "custom" if settings.profile_path.exists() else "sample"
-    return Health(ok=True, model=settings.model, profile=profile)
+    return Health(ok=True, model=settings.model, profile=profile_source())
 
 
 @private.get("/runs", response_model=list[RunSummary])
@@ -117,6 +135,38 @@ def download_file(run_id: str, kind: Literal["cv", "cover_letter"], runs: RunsDe
     if not path or not Path(path).exists():
         raise HTTPException(404, "File not generated yet")
     return FileResponse(path, media_type=DOCX, filename=Path(path).name)
+
+
+@private.get("/profile", response_model=ProfileView)
+def get_profile():
+    return ProfileView(source=profile_source(), profile=load_profile())
+
+
+@private.put("/profile", response_model=ProfileView)
+def put_profile(body: Profile):
+    save_profile(body)
+    return ProfileView(source=profile_source(), profile=load_profile())
+
+
+@private.get("/profile/questions", response_model=list[GuidedSection])
+def profile_questions():
+    return GUIDED_SECTIONS
+
+
+@private.get("/profile/answers", response_model=dict[str, str])
+def profile_answers():
+    return get_answers()
+
+
+@private.put("/profile/answers", status_code=204)
+def put_profile_answers(body: dict[str, str]) -> None:
+    save_answers(body)
+
+
+@private.post("/profile/draft", response_model=ProfileDraft)
+def profile_draft(body: DraftRequest):
+    """One LLM call (~10-30 s). Returns a draft to review; nothing is saved."""
+    return draft_profile(body.answers)
 
 
 @private.get("/applications", response_model=list[tracker.Application])

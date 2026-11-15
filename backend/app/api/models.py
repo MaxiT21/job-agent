@@ -15,6 +15,7 @@ from app.schemas import (
     JobPosting,
     LowFitRequest,
     PasteTextRequest,
+    Profile,
     TailoredCV,
     VerificationResult,
 )
@@ -93,6 +94,15 @@ class RunSummary(BaseModel):
 
 class StatusUpdate(BaseModel):
     status: Status
+
+
+class ProfileView(BaseModel):
+    source: Literal["custom", "sample"]
+    profile: Profile
+
+
+class DraftRequest(BaseModel):
+    answers: dict[str, str]
 
 
 class Health(BaseModel):

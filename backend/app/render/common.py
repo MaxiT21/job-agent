@@ -44,7 +44,7 @@ def contact_header(doc: Document, profile: Profile) -> None:
     r.bold = True
     r.font.size = Pt(18)
     parts = [profile.location, profile.email, *([profile.phone] if profile.phone else [])]
-    contact = doc.add_paragraph(" · ".join([*parts, *profile.links.values()]))
+    contact = doc.add_paragraph(" · ".join(p for p in [*parts, *profile.links.values()] if p))
     contact.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
 

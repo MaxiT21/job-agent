@@ -37,6 +37,7 @@ def fake_llm(monkeypatch) -> Callable[..., FakeLLM]:
     def install(script: dict, strict: bool = False) -> FakeLLM:
         fake = FakeLLM(script, strict=strict)
         monkeypatch.setattr("app.agent.nodes.structured", fake)
+        monkeypatch.setattr("app.profile_builder.structured", fake)
         return fake
 
     return install

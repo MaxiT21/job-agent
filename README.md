@@ -45,7 +45,7 @@ uv run pytest                  # no LLM calls needed
 uv run uvicorn app.main:app --reload   # http://localhost:8000/docs
 ```
 
-Use your own profile: copy `backend/data/profile.sample.yaml` to `backend/data/profile.yaml` (gitignored) and fill it in.
+Use your own profile: build it in the web app's profile page (guided questions → AI draft → review → save), or copy `backend/data/profile.sample.yaml` to `backend/data/profile.yaml` (gitignored) and edit it by hand.
 
 Or with Docker: `docker compose up --build` (reads the same root `.env`; your profile is mounted, never baked into the image).
 
@@ -69,6 +69,10 @@ Interactive docs at `http://localhost:8000/docs`. Starting, answering and retryi
 | `POST` | `/runs/{id}/resume` | Answer `waiting_for` with `{"value": {...}}` (shape depends on its `type`) → `202` |
 | `POST` | `/runs/{id}/retry` | Re-run a step that failed (`status: "error"`, e.g. provider outage) or was interrupted by a restart → `202` |
 | `GET` | `/runs/{id}/files/{cv\|cover_letter}` | Download the `.docx` |
+| `GET` / `PUT` | `/profile` | The profile the agent uses (`source`: `custom` or `sample`) |
+| `GET` | `/profile/questions` | Guided sections for the profile builder |
+| `GET` / `PUT` | `/profile/answers` | Your saved answers |
+| `POST` | `/profile/draft` | AI organises the answers into a profile draft + flags + follow-up questions (nothing saved) |
 | `GET` | `/applications` | Tracker: one row per approved run |
 | `PATCH` | `/applications/{id}` | `{"status": "applied" \| "interview" \| "offer" \| "rejected" \| "withdrawn"}` |
 

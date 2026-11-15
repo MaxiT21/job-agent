@@ -41,3 +41,9 @@ def test_cover_letter_greeting_follows_language(tmp_path):
         render_cover_letter(load_profile(), good_letter(), posting(language="es"), tmp_path)
     )
     assert "Estimado equipo de Acme" in text
+
+
+def test_contact_line_skips_missing_fields(tmp_path):
+    profile = load_profile().model_copy(update={"email": "", "location": "", "links": {}})
+    lines = _text(render_cv(profile, good_cv(), posting(), tmp_path)).splitlines()
+    assert lines[1] == ""  # nothing to show, and no stray separators
