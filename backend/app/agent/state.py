@@ -1,4 +1,5 @@
-from typing import Literal, TypedDict
+import operator
+from typing import Annotated, Literal, TypedDict
 
 from app.schemas import (
     CoverLetter,
@@ -18,10 +19,11 @@ class AgentState(TypedDict, total=False):
     fit: FitReport
     cv: TailoredCV
     cover_letter: CoverLetter
-    verification: VerificationResult
+    verification: VerificationResult | None
     verify_attempts: int
     # human-in-the-loop
-    user_notes: str  # extra context the user gave (clarifications, edit requests)
+    clarifications: Annotated[list[str], operator.add]  # answers about the posting; kept all run
+    edit_notes: str | None  # latest change request from the approval step
     status: Literal["running", "stopped", "approved", "done"]
     # final
     cv_path: str

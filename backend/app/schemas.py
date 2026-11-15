@@ -148,6 +148,28 @@ class VerificationResult(BaseModel):
     issues: list[VerificationIssue] = []
 
 
+# ---------- Human-in-the-loop answers (resume payloads) ----------
+
+
+class ClarifyAnswer(BaseModel):
+    """Answer to a `clarify` interrupt (the posting was too vague)."""
+
+    answer: str = Field(min_length=1)
+
+
+class LowFitAnswer(BaseModel):
+    """Answer to a `low_fit` interrupt: apply anyway or stop."""
+
+    proceed: bool
+
+
+class ApprovalAnswer(BaseModel):
+    """Answer to an `approve` interrupt. Rejecting with notes regenerates the documents."""
+
+    approved: bool
+    notes: str = ""
+
+
 # Types stored in the LangGraph checkpoint (allow-listed for deserialization).
 __all_state_types__ = [
     "Language",

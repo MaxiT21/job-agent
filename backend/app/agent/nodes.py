@@ -17,9 +17,12 @@ from app.cv.render import render_cv
 from app.llm import structured
 from app.profile import load_profile
 from app.schemas import (
+    ApprovalAnswer,
+    ClarifyAnswer,
     CoverLetter,
     FitReport,
     JobPosting,
+    LowFitAnswer,
     MatchResult,
     TailoredCV,
     VerificationResult,
@@ -53,16 +56,18 @@ def fetch_posting(state: AgentState) -> dict:
 
 def extract_requirements(state: AgentState) -> dict:
     user = state["posting_text"]
-    if state.get("user_notes"):
-        user += f"\n\nExtra context from the candidate: {state['user_notes']}"
+    if clarifications := state.get("clarifications"):
+        user += "\n\nExtra context from the candidate:\n" + "\n".join(
+            f"- {c}" for c in clarifications
+        )
     posting = structured(JobPosting, system=prompts.EXTRACT, user=user, step="extract")
     return {"posting": posting}
 
 
 def ask_clarification(state: AgentState) -> dict:
     """Agent decision: the posting is too vague, ask the user instead of guessing."""
-    answer = interrupt({"type": "clarify", "question": state["posting"].clarifying_question})
-    return {"user_notes": str(answer)}
+    raw = interrupt({"type": "clarify", "question": state["posting"].clarifying_question})
+    return {"clarifications": [ClarifyAnswer.model_validate(raw).answer]}
 
 
 # ---------- 2. Matching ----------
@@ -87,7 +92,8 @@ def confirm_low_fit(state: AgentState) -> dict:
     answer = interrupt(
         {"type": "low_fit", "score": fit.score, "gaps": gaps, "summary": fit.summary}
     )
-    return {"status": "running" if answer.get("continue") else "stopped"}
+    proceed = LowFitAnswer.model_validate(answer).proceed
+    return {"status": "running" if proceed else "stopped"}
 
 
 # ---------- 3. Generation ----------
@@ -98,8 +104,10 @@ def _feedback_block(state: AgentState) -> str:
     if (v := state.get("verification")) and not v.passed:
         issues = "\n".join(f"- {i.where}: {i.reason} ({i.text})" for i in v.issues)
         parts.append(f"Fix these verifier issues:\n{issues}")
-    if notes := state.get("user_notes"):
-        parts.append(f"Candidate notes: {notes}")
+    if clarifications := state.get("clarifications"):
+        parts.append("Candidate context:\n" + "\n".join(f"- {c}" for c in clarifications))
+    if notes := state.get("edit_notes"):
+        parts.append(f"Candidate change request (apply it within the hard rules): {notes}")
     return "\n\n".join(parts)
 
 
@@ -174,10 +182,11 @@ def human_approval(state: AgentState) -> dict:
             "verification": state["verification"].model_dump(),
         }
     )
-    if answer.get("approved"):
+    decision = ApprovalAnswer.model_validate(answer)
+    if decision.approved:
         return {"status": "approved"}
     # Rejected with edit notes -> regenerate with them.
-    return {"user_notes": answer.get("notes", ""), "verification": None, "verify_attempts": 0}
+    return {"edit_notes": decision.notes, "verification": None, "verify_attempts": 0}
 
 
 def render_and_log(state: AgentState) -> dict:
