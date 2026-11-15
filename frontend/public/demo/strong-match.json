@@ -190,7 +190,7 @@
          "proj-flight-alerts-b1",
          "skills-core"
         ],
-        "note": "Demonstrated Python proficiency across multiple projects including a web backend and a web scraper."
+        "note": "Demonstrated through multiple Python projects and listed in core skills."
        },
        {
         "requirement_id": "r2",
@@ -199,7 +199,7 @@
          "proj-network-monitor-b1",
          "skills-core"
         ],
-        "note": "Built a FastAPI backend to serve device status for a home network monitor project."
+        "note": "Built a FastAPI backend for a network monitoring dashboard."
        },
        {
         "requirement_id": "r3",
@@ -208,15 +208,15 @@
          "exp-consulting-b2",
          "skills-core"
         ],
-        "note": "Applied SQL in an internship to validate data and track defects."
+        "note": "Used SQL queries for data validation during an internship and listed in core skills."
        },
        {
         "requirement_id": "r4",
-        "status": "partial",
+        "status": "met",
         "evidence_ids": [
          "skills-core"
         ],
-        "note": "Listed in core skills, but no specific bullet point details practical Git workflows or version control usage."
+        "note": "Listed in core skills alongside active GitHub profile."
        },
        {
         "requirement_id": "r5",
@@ -224,7 +224,7 @@
         "evidence_ids": [
          "skills-core"
         ],
-        "note": "Docker is listed in core skills, but lacks project or work experience describing containerization."
+        "note": "Docker is listed in core skills, but lacks descriptive project or work experience bullets."
        },
        {
         "requirement_id": "r6",
@@ -232,20 +232,17 @@
         "evidence_ids": [
          "proj-flight-alerts-b2"
         ],
-        "note": "Implemented CI/automation workflows by scheduling tasks weekly using GitHub Actions."
+        "note": "Implemented weekly workflow automation using GitHub Actions."
        }
       ],
-      "summary": "Alex is a strong match for the Backend Developer Intern position, meeting all core programming and framework requirements (Python, FastAPI, SQL) through projects and internship experience, with partial evidence for Git and Docker.",
-      "score": 85.0
+      "summary": "Alex Example is a strong match for the Backend Developer Intern role, meeting all required qualifications with Python, FastAPI, SQL, and Git, alongside nice-to-have experience in GitHub Actions and Docker.",
+      "score": 95.0
      },
      "cv": {
       "summary": {
-       "text": "Computer engineering student with practical experience building Python and FastAPI backend services, managing automated CI workflows with GitHub Actions, and querying data with SQL.",
+       "text": "Computer engineering student focused on backend and AI applications, with internship experience in QA and consulting.",
        "evidence_ids": [
-        "edu-bsc",
-        "proj-network-monitor-b1",
-        "proj-flight-alerts-b2",
-        "exp-consulting-b2"
+        "summary"
        ]
       },
       "entries": [
@@ -259,7 +256,7 @@
           ]
          },
          {
-          "text": "Configured the application to run as a background service with automatic restart.",
+          "text": "Configured to run as a background service with automatic restart.",
           "evidence_ids": [
            "proj-network-monitor-b2"
           ]
@@ -270,15 +267,15 @@
         "item_id": "proj-flight-alerts",
         "bullets": [
          {
-          "text": "Scheduled weekly automation workflows using GitHub Actions.",
+          "text": "Developed a Python scraper that finds flights under a price threshold and emails an HTML summary.",
           "evidence_ids": [
-           "proj-flight-alerts-b2"
+           "proj-flight-alerts-b1"
           ]
          },
          {
-          "text": "Developed a Python scraper to find flights under a price threshold and send an HTML summary via email.",
+          "text": "Scheduled weekly runs using GitHub Actions.",
           "evidence_ids": [
-           "proj-flight-alerts-b1"
+           "proj-flight-alerts-b2"
           ]
          }
         ]
@@ -287,7 +284,7 @@
         "item_id": "exp-consulting",
         "bullets": [
          {
-          "text": "Validated data with SQL queries while tracking and triaging defects in Jira.",
+          "text": "Validated data with SQL queries and tracked and triaged defects in Jira.",
           "evidence_ids": [
            "exp-consulting-b2"
           ]
@@ -313,32 +310,34 @@
        "Docker",
        "REST",
        "GitHub Actions",
-       "Testing"
+       "Testing",
+       "Jira"
       ]
      },
      "cover_letter": {
       "paragraphs": [
        {
-        "text": "I am seeking the Backend Developer Intern position at Nimbus Labs to build and test API endpoints. As a computer engineering student, I focus on backend development using Python and REST APIs.",
+        "text": "Nimbus Labs' focus on building robust backend services makes the Backend Developer Intern role an ideal fit for my background as a computer engineering student focused on backend applications in Barcelona.",
         "evidence_ids": [
-         "edu-bsc",
-         "skills-core"
+         "summary",
+         "edu-bsc"
         ]
        },
        {
-        "text": "For my Home Network Monitor project, I built a FastAPI backend that scans the local network and serves device status to an HTML dashboard. In addition, I created a Python scraper scheduled weekly with GitHub Actions to track flight prices.",
+        "text": "I have hands-on experience developing backend solutions in Python and FastAPI. For my Home Network Monitor project, I built a FastAPI backend that scans the local network and serves device status to an HTML dashboard, configured to run as an automatic background service. In another Python project, I automated flight price tracking using scheduled workflows in GitHub Actions and managed version control with Git.",
         "evidence_ids": [
          "proj-network-monitor-b1",
+         "proj-network-monitor-b2",
          "proj-flight-alerts-b1",
-         "proj-flight-alerts-b2"
+         "proj-flight-alerts-b2",
+         "skills-core"
         ]
        },
        {
-        "text": "During my internship at Example Consulting, I validated data with SQL queries and triaged defects in Jira within an Agile team. My technical foundation also includes Git and Docker.",
+        "text": "During my internship at Example Consulting, I collaborated within an Agile team to design and execute functional test cases for a banking web application. I also tracked defects in Jira and routinely used SQL queries to perform data validation across backend datasets.",
         "evidence_ids": [
          "exp-consulting-b1",
-         "exp-consulting-b2",
-         "skills-core"
+         "exp-consulting-b2"
         ]
        }
       ]
@@ -388,7 +387,7 @@
       },
       {
        "id": "r6",
-       "text": "Experience with CI pipelines (GitHub Actions)",
+       "text": "Familiarity with CI pipelines (GitHub Actions)",
        "category": "skill",
        "importance": "nice"
       }
@@ -411,7 +410,7 @@
         "proj-flight-alerts-b1",
         "skills-core"
        ],
-       "note": "Demonstrated Python proficiency across multiple projects including a web backend and a web scraper."
+       "note": "Demonstrated through multiple Python projects and listed in core skills."
       },
       {
        "requirement_id": "r2",
@@ -420,7 +419,7 @@
         "proj-network-monitor-b1",
         "skills-core"
        ],
-       "note": "Built a FastAPI backend to serve device status for a home network monitor project."
+       "note": "Built a FastAPI backend for a network monitoring dashboard."
       },
       {
        "requirement_id": "r3",
@@ -429,15 +428,15 @@
         "exp-consulting-b2",
         "skills-core"
        ],
-       "note": "Applied SQL in an internship to validate data and track defects."
+       "note": "Used SQL queries for data validation during an internship and listed in core skills."
       },
       {
        "requirement_id": "r4",
-       "status": "partial",
+       "status": "met",
        "evidence_ids": [
         "skills-core"
        ],
-       "note": "Listed in core skills, but no specific bullet point details practical Git workflows or version control usage."
+       "note": "Listed in core skills alongside active GitHub profile."
       },
       {
        "requirement_id": "r5",
@@ -445,7 +444,7 @@
        "evidence_ids": [
         "skills-core"
        ],
-       "note": "Docker is listed in core skills, but lacks project or work experience describing containerization."
+       "note": "Docker is listed in core skills, but lacks descriptive project or work experience bullets."
       },
       {
        "requirement_id": "r6",
@@ -453,20 +452,17 @@
        "evidence_ids": [
         "proj-flight-alerts-b2"
        ],
-       "note": "Implemented CI/automation workflows by scheduling tasks weekly using GitHub Actions."
+       "note": "Implemented weekly workflow automation using GitHub Actions."
       }
      ],
-     "summary": "Alex is a strong match for the Backend Developer Intern position, meeting all core programming and framework requirements (Python, FastAPI, SQL) through projects and internship experience, with partial evidence for Git and Docker.",
-     "score": 85.0
+     "summary": "Alex Example is a strong match for the Backend Developer Intern role, meeting all required qualifications with Python, FastAPI, SQL, and Git, alongside nice-to-have experience in GitHub Actions and Docker.",
+     "score": 95.0
     },
     "cv": {
      "summary": {
-      "text": "Computer engineering student with practical experience building Python and FastAPI backend services, managing automated CI workflows with GitHub Actions, and querying data with SQL.",
+      "text": "Computer engineering student focused on backend and AI applications, with internship experience in QA and consulting.",
       "evidence_ids": [
-       "edu-bsc",
-       "proj-network-monitor-b1",
-       "proj-flight-alerts-b2",
-       "exp-consulting-b2"
+       "summary"
       ]
      },
      "entries": [
@@ -480,7 +476,7 @@
          ]
         },
         {
-         "text": "Configured the application to run as a background service with automatic restart.",
+         "text": "Configured to run as a background service with automatic restart.",
          "evidence_ids": [
           "proj-network-monitor-b2"
          ]
@@ -491,15 +487,15 @@
        "item_id": "proj-flight-alerts",
        "bullets": [
         {
-         "text": "Scheduled weekly automation workflows using GitHub Actions.",
+         "text": "Developed a Python scraper that finds flights under a price threshold and emails an HTML summary.",
          "evidence_ids": [
-          "proj-flight-alerts-b2"
+          "proj-flight-alerts-b1"
          ]
         },
         {
-         "text": "Developed a Python scraper to find flights under a price threshold and send an HTML summary via email.",
+         "text": "Scheduled weekly runs using GitHub Actions.",
          "evidence_ids": [
-          "proj-flight-alerts-b1"
+          "proj-flight-alerts-b2"
          ]
         }
        ]
@@ -508,7 +504,7 @@
        "item_id": "exp-consulting",
        "bullets": [
         {
-         "text": "Validated data with SQL queries while tracking and triaging defects in Jira.",
+         "text": "Validated data with SQL queries and tracked and triaged defects in Jira.",
          "evidence_ids": [
           "exp-consulting-b2"
          ]
@@ -534,32 +530,34 @@
       "Docker",
       "REST",
       "GitHub Actions",
-      "Testing"
+      "Testing",
+      "Jira"
      ]
     },
     "cover_letter": {
      "paragraphs": [
       {
-       "text": "I am seeking the Backend Developer Intern position at Nimbus Labs to build and test API endpoints. As a computer engineering student, I focus on backend development using Python and REST APIs.",
+       "text": "Nimbus Labs' focus on building robust backend services makes the Backend Developer Intern role an ideal fit for my background as a computer engineering student focused on backend applications in Barcelona.",
        "evidence_ids": [
-        "edu-bsc",
-        "skills-core"
+        "summary",
+        "edu-bsc"
        ]
       },
       {
-       "text": "For my Home Network Monitor project, I built a FastAPI backend that scans the local network and serves device status to an HTML dashboard. In addition, I created a Python scraper scheduled weekly with GitHub Actions to track flight prices.",
+       "text": "I have hands-on experience developing backend solutions in Python and FastAPI. For my Home Network Monitor project, I built a FastAPI backend that scans the local network and serves device status to an HTML dashboard, configured to run as an automatic background service. In another Python project, I automated flight price tracking using scheduled workflows in GitHub Actions and managed version control with Git.",
        "evidence_ids": [
         "proj-network-monitor-b1",
+        "proj-network-monitor-b2",
         "proj-flight-alerts-b1",
-        "proj-flight-alerts-b2"
+        "proj-flight-alerts-b2",
+        "skills-core"
        ]
       },
       {
-       "text": "During my internship at Example Consulting, I validated data with SQL queries and triaged defects in Jira within an Agile team. My technical foundation also includes Git and Docker.",
+       "text": "During my internship at Example Consulting, I collaborated within an Agile team to design and execute functional test cases for a banking web application. I also tracked defects in Jira and routinely used SQL queries to perform data validation across backend datasets.",
        "evidence_ids": [
         "exp-consulting-b1",
-        "exp-consulting-b2",
-        "skills-core"
+        "exp-consulting-b2"
        ]
       }
      ]
@@ -574,8 +572,8 @@
       "issues": [
        {
         "where": "cover_letter[2]",
-        "text": "I haven't used Docker in a production environment yet. With a foundation in Python, Git, and REST APIs, I am prepared to write and test endpoints for your services.",
-        "reason": "The cited evidence (skills-core) only lists Docker as a skill tag; it contains no information regarding whether Docker was or was not used in a production environment."
+        "text": "In my technical consulting internship at Example Consulting, I collaborated in an Agile team to run functional test cases on banking applications and wrote SQL queries for backend data validation, reinforcing the testing and endpoint documentation practices needed for this position.",
+        "reason": "The cited evidence (exp-consulting-b1, exp-consulting-b2) does not mention endpoint documentation or documentation practices."
        }
       ]
      },
@@ -593,55 +591,55 @@
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 6.607,
-       "cost_usd": 0.0024892499999999997,
+       "latency_s": 7.039,
+       "cost_usd": 0.00307425,
        "ok": true
       },
       {
        "step": "match",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 17.171,
-       "cost_usd": 0.0086565,
+       "latency_s": 10.497,
+       "cost_usd": 0.00560925,
        "ok": true
       },
       {
        "step": "tailor_cv",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 15.293,
-       "cost_usd": 0.0091485,
+       "latency_s": 14.873,
+       "cost_usd": 0.00967875,
        "ok": true
       },
       {
        "step": "cover_letter",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 14.419,
-       "cost_usd": 0.008667000000000001,
+       "latency_s": 9.723,
+       "cost_usd": 0.006363000000000001,
        "ok": true
       },
       {
        "step": "verify",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 14.843,
-       "cost_usd": 0.00913425,
+       "latency_s": 27.725,
+       "cost_usd": 0.015354750000000002,
        "ok": true
       },
       {
        "step": "cover_letter",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 14.553,
-       "cost_usd": 0.008697,
+       "latency_s": 9.233,
+       "cost_usd": 0.0059759999999999995,
        "ok": true
       },
       {
        "step": "verify",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 9.07,
-       "cost_usd": 0.005268,
+       "latency_s": 16.276,
+       "cost_usd": 0.010295249999999999,
        "ok": true
       }
      ],
-     "total_cost_usd": 0.052061,
-     "total_latency_s": 91.956
+     "total_cost_usd": 0.056351,
+     "total_latency_s": 95.366
     }
    },
    "answer": {
@@ -695,7 +693,7 @@
       },
       {
        "id": "r6",
-       "text": "Experience with CI pipelines (GitHub Actions)",
+       "text": "Familiarity with CI pipelines (GitHub Actions)",
        "category": "skill",
        "importance": "nice"
       }
@@ -718,7 +716,7 @@
         "proj-flight-alerts-b1",
         "skills-core"
        ],
-       "note": "Demonstrated Python proficiency across multiple projects including a web backend and a web scraper."
+       "note": "Demonstrated through multiple Python projects and listed in core skills."
       },
       {
        "requirement_id": "r2",
@@ -727,7 +725,7 @@
         "proj-network-monitor-b1",
         "skills-core"
        ],
-       "note": "Built a FastAPI backend to serve device status for a home network monitor project."
+       "note": "Built a FastAPI backend for a network monitoring dashboard."
       },
       {
        "requirement_id": "r3",
@@ -736,15 +734,15 @@
         "exp-consulting-b2",
         "skills-core"
        ],
-       "note": "Applied SQL in an internship to validate data and track defects."
+       "note": "Used SQL queries for data validation during an internship and listed in core skills."
       },
       {
        "requirement_id": "r4",
-       "status": "partial",
+       "status": "met",
        "evidence_ids": [
         "skills-core"
        ],
-       "note": "Listed in core skills, but no specific bullet point details practical Git workflows or version control usage."
+       "note": "Listed in core skills alongside active GitHub profile."
       },
       {
        "requirement_id": "r5",
@@ -752,7 +750,7 @@
        "evidence_ids": [
         "skills-core"
        ],
-       "note": "Docker is listed in core skills, but lacks project or work experience describing containerization."
+       "note": "Docker is listed in core skills, but lacks descriptive project or work experience bullets."
       },
       {
        "requirement_id": "r6",
@@ -760,20 +758,17 @@
        "evidence_ids": [
         "proj-flight-alerts-b2"
        ],
-       "note": "Implemented CI/automation workflows by scheduling tasks weekly using GitHub Actions."
+       "note": "Implemented weekly workflow automation using GitHub Actions."
       }
      ],
-     "summary": "Alex is a strong match for the Backend Developer Intern position, meeting all core programming and framework requirements (Python, FastAPI, SQL) through projects and internship experience, with partial evidence for Git and Docker.",
-     "score": 85.0
+     "summary": "Alex Example is a strong match for the Backend Developer Intern role, meeting all required qualifications with Python, FastAPI, SQL, and Git, alongside nice-to-have experience in GitHub Actions and Docker.",
+     "score": 95.0
     },
     "cv": {
      "summary": {
-      "text": "Computer engineering student with practical experience building Python and FastAPI backend services, managing automated CI workflows with GitHub Actions, and querying data with SQL.",
+      "text": "Computer engineering student focused on backend and AI applications, with internship experience in QA and consulting.",
       "evidence_ids": [
-       "edu-bsc",
-       "proj-network-monitor-b1",
-       "proj-flight-alerts-b2",
-       "exp-consulting-b2"
+       "summary"
       ]
      },
      "entries": [
@@ -787,7 +782,7 @@
          ]
         },
         {
-         "text": "Configured the application to run as a background service with automatic restart.",
+         "text": "Configured to run as a background service with automatic restart.",
          "evidence_ids": [
           "proj-network-monitor-b2"
          ]
@@ -798,15 +793,15 @@
        "item_id": "proj-flight-alerts",
        "bullets": [
         {
-         "text": "Scheduled weekly automation workflows using GitHub Actions.",
+         "text": "Developed a Python scraper that finds flights under a price threshold and emails an HTML summary.",
          "evidence_ids": [
-          "proj-flight-alerts-b2"
+          "proj-flight-alerts-b1"
          ]
         },
         {
-         "text": "Developed a Python scraper to find flights under a price threshold and send an HTML summary via email.",
+         "text": "Scheduled weekly runs using GitHub Actions.",
          "evidence_ids": [
-          "proj-flight-alerts-b1"
+          "proj-flight-alerts-b2"
          ]
         }
        ]
@@ -815,7 +810,7 @@
        "item_id": "exp-consulting",
        "bullets": [
         {
-         "text": "Validated data with SQL queries while tracking and triaging defects in Jira.",
+         "text": "Validated data with SQL queries and tracked and triaged defects in Jira.",
          "evidence_ids": [
           "exp-consulting-b2"
          ]
@@ -841,32 +836,34 @@
       "Docker",
       "REST",
       "GitHub Actions",
-      "Testing"
+      "Testing",
+      "Jira"
      ]
     },
     "cover_letter": {
      "paragraphs": [
       {
-       "text": "I am seeking the Backend Developer Intern position at Nimbus Labs to build and test API endpoints. As a computer engineering student, I focus on backend development using Python and REST APIs.",
+       "text": "Nimbus Labs' focus on building robust backend services makes the Backend Developer Intern role an ideal fit for my background as a computer engineering student focused on backend applications in Barcelona.",
        "evidence_ids": [
-        "edu-bsc",
-        "skills-core"
+        "summary",
+        "edu-bsc"
        ]
       },
       {
-       "text": "For my Home Network Monitor project, I built a FastAPI backend that scans the local network and serves device status to an HTML dashboard. In addition, I created a Python scraper scheduled weekly with GitHub Actions to track flight prices.",
+       "text": "I have hands-on experience developing backend solutions in Python and FastAPI. For my Home Network Monitor project, I built a FastAPI backend that scans the local network and serves device status to an HTML dashboard, configured to run as an automatic background service. In another Python project, I automated flight price tracking using scheduled workflows in GitHub Actions and managed version control with Git.",
        "evidence_ids": [
         "proj-network-monitor-b1",
+        "proj-network-monitor-b2",
         "proj-flight-alerts-b1",
-        "proj-flight-alerts-b2"
+        "proj-flight-alerts-b2",
+        "skills-core"
        ]
       },
       {
-       "text": "During my internship at Example Consulting, I validated data with SQL queries and triaged defects in Jira within an Agile team. My technical foundation also includes Git and Docker.",
+       "text": "During my internship at Example Consulting, I collaborated within an Agile team to design and execute functional test cases for a banking web application. I also tracked defects in Jira and routinely used SQL queries to perform data validation across backend datasets.",
        "evidence_ids": [
         "exp-consulting-b1",
-        "exp-consulting-b2",
-        "skills-core"
+        "exp-consulting-b2"
        ]
       }
      ]
@@ -881,8 +878,8 @@
       "issues": [
        {
         "where": "cover_letter[2]",
-        "text": "I haven't used Docker in a production environment yet. With a foundation in Python, Git, and REST APIs, I am prepared to write and test endpoints for your services.",
-        "reason": "The cited evidence (skills-core) only lists Docker as a skill tag; it contains no information regarding whether Docker was or was not used in a production environment."
+        "text": "In my technical consulting internship at Example Consulting, I collaborated in an Agile team to run functional test cases on banking applications and wrote SQL queries for backend data validation, reinforcing the testing and endpoint documentation practices needed for this position.",
+        "reason": "The cited evidence (exp-consulting-b1, exp-consulting-b2) does not mention endpoint documentation or documentation practices."
        }
       ]
      },
@@ -900,55 +897,55 @@
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 6.607,
-       "cost_usd": 0.0024892499999999997,
+       "latency_s": 7.039,
+       "cost_usd": 0.00307425,
        "ok": true
       },
       {
        "step": "match",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 17.171,
-       "cost_usd": 0.0086565,
+       "latency_s": 10.497,
+       "cost_usd": 0.00560925,
        "ok": true
       },
       {
        "step": "tailor_cv",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 15.293,
-       "cost_usd": 0.0091485,
+       "latency_s": 14.873,
+       "cost_usd": 0.00967875,
        "ok": true
       },
       {
        "step": "cover_letter",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 14.419,
-       "cost_usd": 0.008667000000000001,
+       "latency_s": 9.723,
+       "cost_usd": 0.006363000000000001,
        "ok": true
       },
       {
        "step": "verify",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 14.843,
-       "cost_usd": 0.00913425,
+       "latency_s": 27.725,
+       "cost_usd": 0.015354750000000002,
        "ok": true
       },
       {
        "step": "cover_letter",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 14.553,
-       "cost_usd": 0.008697,
+       "latency_s": 9.233,
+       "cost_usd": 0.0059759999999999995,
        "ok": true
       },
       {
        "step": "verify",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 9.07,
-       "cost_usd": 0.005268,
+       "latency_s": 16.276,
+       "cost_usd": 0.010295249999999999,
        "ok": true
       }
      ],
-     "total_cost_usd": 0.052061,
-     "total_latency_s": 91.956
+     "total_cost_usd": 0.056351,
+     "total_latency_s": 95.366
     }
    },
    "answer": null

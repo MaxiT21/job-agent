@@ -186,79 +186,65 @@
         "requirement_id": "r1",
         "status": "met",
         "evidence_ids": [
-         "exp-consulting",
          "exp-consulting-b1"
         ],
-        "note": "Designed functional test cases during an internship for a banking web application."
+        "note": "Direct experience designing and executing functional test cases for a banking web app."
        },
        {
         "requirement_id": "r2",
         "status": "met",
         "evidence_ids": [
-         "exp-consulting",
-         "exp-consulting-b1"
+         "exp-consulting-b2",
+         "skills-core"
         ],
-        "note": "Executed functional test cases during an internship."
+        "note": "Tracked and triaged defects using Jira during internship."
        },
        {
         "requirement_id": "r3",
         "status": "met",
         "evidence_ids": [
-         "exp-consulting",
          "exp-consulting-b2",
          "skills-core"
         ],
-        "note": "Tracked and triaged defects using Jira in an internship setting."
+        "note": "Validated test data with SQL queries and lists SQL as a core skill."
        },
        {
         "requirement_id": "r4",
         "status": "met",
         "evidence_ids": [
-         "exp-consulting-b2",
-         "skills-core"
+         "exp-consulting-b1"
         ],
-        "note": "Validated data using SQL queries in an internship and lists SQL in core skills."
+        "note": "Worked within an Agile team during previous QA internship."
        },
        {
         "requirement_id": "r5",
-        "status": "met",
-        "evidence_ids": [
-         "exp-consulting",
-         "exp-consulting-b1"
-        ],
-        "note": "Worked within an Agile team during the technical consultant internship."
-       },
-       {
-        "requirement_id": "r6",
         "status": "partial",
         "evidence_ids": [
          "skills-core",
-         "proj-flight-alerts",
-         "proj-network-monitor"
+         "proj-flight-alerts-b1",
+         "exp-consulting-b1"
         ],
-        "note": "Has general Python programming and QA experience, but lacks direct experience in test automation frameworks."
+        "note": "Possesses solid Python and functional testing skills, but lacks direct evidence of Python test automation frameworks."
        },
        {
-        "requirement_id": "r7",
+        "requirement_id": "r6",
         "status": "met",
         "evidence_ids": [
          "lang-english"
         ],
-        "note": "Holds C1 proficiency in English, which exceeds the required B2 level."
+        "note": "Holds English C1 level, exceeding the requested B2 requirement."
        }
       ],
-      "summary": "The candidate is a strong fit for the QA internship, meeting all mandatory requirements including functional test design/execution, Jira, SQL, and Agile teamwork from prior internship experience, along with English C1 level. Test automation with Python is only partially covered through general Python skills.",
-      "score": 95.8
+      "summary": "The candidate is a strong fit for the QA Intern position, meeting all mandatory requirements including functional testing, Jira, SQL, and Agile methodology, alongside an English level above B2.",
+      "score": 95.0
      },
      "cv": {
       "summary": {
-       "text": "Estudiante de ingeniería informática con experiencia en QA dentro de equipos ágiles, especializado en diseño y ejecución de casos de prueba funcionales, seguimiento de incidencias en Jira, consultas SQL y programación en Python.",
+       "text": "Estudiante de Ingeniería Informática con experiencia en prácticas de QA y consultoría, especializado en diseño y ejecución de pruebas funcionales, gestión de defectos en Jira y validación con SQL en entornos ágiles.",
        "evidence_ids": [
-        "edu-bsc",
-        "exp-consulting",
+        "summary",
         "exp-consulting-b1",
-        "exp-consulting-b2",
-        "skills-core"
+        "exp-consulting-b2"
        ]
       },
       "entries": [
@@ -272,7 +258,7 @@
           ]
          },
          {
-          "text": "Seguimiento y triaje de incidencias en Jira y validación de datos mediante consultas SQL.",
+          "text": "Seguimiento y priorización de defectos en Jira y validación de datos mediante consultas SQL.",
           "evidence_ids": [
            "exp-consulting-b2"
           ]
@@ -283,32 +269,15 @@
         "item_id": "proj-flight-alerts",
         "bullets": [
          {
-          "text": "Desarrollo de un scraper en Python para detectar vuelos por debajo de un umbral de precio con envío de resúmenes en HTML.",
+          "text": "Desarrollo de un scraper en Python para monitorización y envío de alertas por correo electrónico.",
           "evidence_ids": [
            "proj-flight-alerts-b1"
           ]
          },
          {
-          "text": "Automatización y programación de ejecuciones semanales mediante GitHub Actions.",
+          "text": "Automatización de la ejecución periódica mediante flujos de GitHub Actions.",
           "evidence_ids": [
            "proj-flight-alerts-b2"
-          ]
-         }
-        ]
-       },
-       {
-        "item_id": "proj-network-monitor",
-        "bullets": [
-         {
-          "text": "Creación de un backend con FastAPI para el escaneo de la red local y monitorización del estado de dispositivos en un panel HTML.",
-          "evidence_ids": [
-           "proj-network-monitor-b1"
-          ]
-         },
-         {
-          "text": "Configuración como servicio en segundo plano con sistema de reinicio automático.",
-          "evidence_ids": [
-           "proj-network-monitor-b2"
           ]
          }
         ]
@@ -322,9 +291,7 @@
        "testing",
        "jira",
        "sql",
-       "agile",
        "python",
-       "automation",
        "git",
        "docker"
       ]
@@ -332,28 +299,26 @@
      "cover_letter": {
       "paragraphs": [
        {
-        "text": "El puesto de Becario/a QA en Fintech Ejemplo se alinea directamente con mi experiencia en pruebas de software para el sector financiero y mi formación en Ingeniería Informática.",
+        "text": "El puesto de Becario/a QA en Fintech Ejemplo encaja directamente con mi perfil como estudiante de Ingeniería Informática y mi experiencia práctica en control de calidad para aplicaciones bancarias.",
         "evidence_ids": [
-         "exp-consulting",
-         "exp-consulting-b1",
-         "edu-bsc"
+         "summary",
+         "edu-bsc",
+         "exp-consulting-b1"
         ]
        },
        {
-        "text": "En mi experiencia como Technical Consultant Intern en Example Consulting, diseñé y ejecuté casos de prueba funcionales para una aplicación web bancaria trabajando dentro de un equipo ágil. En ese entorno gestioné y clasifiqué incidencias con Jira y realicé validaciones de datos mediante consultas SQL.",
+        "text": "En Example Consulting diseñé y ejecuté casos de prueba funcionales para una aplicación web bancaria dentro de un equipo ágil. En este rol también gestioné y clasifiqué incidencias a través de Jira y realicé la validación de datos mediante consultas SQL.",
         "evidence_ids": [
-         "exp-consulting",
          "exp-consulting-b1",
-         "exp-consulting-b2",
-         "skills-core"
+         "exp-consulting-b2"
         ]
        },
        {
-        "text": "Cuento con un nivel C1 de inglés y desarrollo proyectos en Python. Aún no he utilizado herramientas de automatización de pruebas en producción.",
+        "text": "Cuento además con un nivel C1 de inglés y manejo habitual de Python y SQL para el desarrollo de proyectos técnicos y automatizaciones de flujos de trabajo.",
         "evidence_ids": [
          "lang-english",
          "skills-core",
-         "proj-flight-alerts"
+         "proj-flight-alerts-b1"
         ]
        }
       ]
@@ -373,42 +338,36 @@
      "requirements": [
       {
        "id": "r1",
-       "text": "Diseño de casos de prueba funcionales",
+       "text": "Diseño y ejecución de casos de prueba funcionales",
        "category": "skill",
        "importance": "must"
       },
       {
        "id": "r2",
-       "text": "Ejecución de casos de prueba funcionales",
-       "category": "skill",
-       "importance": "must"
-      },
-      {
-       "id": "r3",
        "text": "Gestión de incidencias con Jira",
        "category": "skill",
        "importance": "must"
       },
       {
-       "id": "r4",
+       "id": "r3",
        "text": "Conocimientos de SQL",
        "category": "skill",
        "importance": "must"
       },
       {
-       "id": "r5",
+       "id": "r4",
        "text": "Experiencia en equipos ágiles (Scrum)",
        "category": "experience",
        "importance": "must"
       },
       {
-       "id": "r6",
+       "id": "r5",
        "text": "Automatización de pruebas con Python",
        "category": "skill",
        "importance": "nice"
       },
       {
-       "id": "r7",
+       "id": "r6",
        "text": "Nivel de inglés B2",
        "category": "language",
        "importance": "nice"
@@ -424,79 +383,65 @@
        "requirement_id": "r1",
        "status": "met",
        "evidence_ids": [
-        "exp-consulting",
         "exp-consulting-b1"
        ],
-       "note": "Designed functional test cases during an internship for a banking web application."
+       "note": "Direct experience designing and executing functional test cases for a banking web app."
       },
       {
        "requirement_id": "r2",
        "status": "met",
        "evidence_ids": [
-        "exp-consulting",
-        "exp-consulting-b1"
+        "exp-consulting-b2",
+        "skills-core"
        ],
-       "note": "Executed functional test cases during an internship."
+       "note": "Tracked and triaged defects using Jira during internship."
       },
       {
        "requirement_id": "r3",
        "status": "met",
        "evidence_ids": [
-        "exp-consulting",
         "exp-consulting-b2",
         "skills-core"
        ],
-       "note": "Tracked and triaged defects using Jira in an internship setting."
+       "note": "Validated test data with SQL queries and lists SQL as a core skill."
       },
       {
        "requirement_id": "r4",
        "status": "met",
        "evidence_ids": [
-        "exp-consulting-b2",
-        "skills-core"
+        "exp-consulting-b1"
        ],
-       "note": "Validated data using SQL queries in an internship and lists SQL in core skills."
+       "note": "Worked within an Agile team during previous QA internship."
       },
       {
        "requirement_id": "r5",
-       "status": "met",
-       "evidence_ids": [
-        "exp-consulting",
-        "exp-consulting-b1"
-       ],
-       "note": "Worked within an Agile team during the technical consultant internship."
-      },
-      {
-       "requirement_id": "r6",
        "status": "partial",
        "evidence_ids": [
         "skills-core",
-        "proj-flight-alerts",
-        "proj-network-monitor"
+        "proj-flight-alerts-b1",
+        "exp-consulting-b1"
        ],
-       "note": "Has general Python programming and QA experience, but lacks direct experience in test automation frameworks."
+       "note": "Possesses solid Python and functional testing skills, but lacks direct evidence of Python test automation frameworks."
       },
       {
-       "requirement_id": "r7",
+       "requirement_id": "r6",
        "status": "met",
        "evidence_ids": [
         "lang-english"
        ],
-       "note": "Holds C1 proficiency in English, which exceeds the required B2 level."
+       "note": "Holds English C1 level, exceeding the requested B2 requirement."
       }
      ],
-     "summary": "The candidate is a strong fit for the QA internship, meeting all mandatory requirements including functional test design/execution, Jira, SQL, and Agile teamwork from prior internship experience, along with English C1 level. Test automation with Python is only partially covered through general Python skills.",
-     "score": 95.8
+     "summary": "The candidate is a strong fit for the QA Intern position, meeting all mandatory requirements including functional testing, Jira, SQL, and Agile methodology, alongside an English level above B2.",
+     "score": 95.0
     },
     "cv": {
      "summary": {
-      "text": "Estudiante de ingeniería informática con experiencia en QA dentro de equipos ágiles, especializado en diseño y ejecución de casos de prueba funcionales, seguimiento de incidencias en Jira, consultas SQL y programación en Python.",
+      "text": "Estudiante de Ingeniería Informática con experiencia en prácticas de QA y consultoría, especializado en diseño y ejecución de pruebas funcionales, gestión de defectos en Jira y validación con SQL en entornos ágiles.",
       "evidence_ids": [
-       "edu-bsc",
-       "exp-consulting",
+       "summary",
        "exp-consulting-b1",
-       "exp-consulting-b2",
-       "skills-core"
+       "exp-consulting-b2"
       ]
      },
      "entries": [
@@ -510,7 +455,7 @@
          ]
         },
         {
-         "text": "Seguimiento y triaje de incidencias en Jira y validación de datos mediante consultas SQL.",
+         "text": "Seguimiento y priorización de defectos en Jira y validación de datos mediante consultas SQL.",
          "evidence_ids": [
           "exp-consulting-b2"
          ]
@@ -521,32 +466,15 @@
        "item_id": "proj-flight-alerts",
        "bullets": [
         {
-         "text": "Desarrollo de un scraper en Python para detectar vuelos por debajo de un umbral de precio con envío de resúmenes en HTML.",
+         "text": "Desarrollo de un scraper en Python para monitorización y envío de alertas por correo electrónico.",
          "evidence_ids": [
           "proj-flight-alerts-b1"
          ]
         },
         {
-         "text": "Automatización y programación de ejecuciones semanales mediante GitHub Actions.",
+         "text": "Automatización de la ejecución periódica mediante flujos de GitHub Actions.",
          "evidence_ids": [
           "proj-flight-alerts-b2"
-         ]
-        }
-       ]
-      },
-      {
-       "item_id": "proj-network-monitor",
-       "bullets": [
-        {
-         "text": "Creación de un backend con FastAPI para el escaneo de la red local y monitorización del estado de dispositivos en un panel HTML.",
-         "evidence_ids": [
-          "proj-network-monitor-b1"
-         ]
-        },
-        {
-         "text": "Configuración como servicio en segundo plano con sistema de reinicio automático.",
-         "evidence_ids": [
-          "proj-network-monitor-b2"
          ]
         }
        ]
@@ -560,9 +488,7 @@
       "testing",
       "jira",
       "sql",
-      "agile",
       "python",
-      "automation",
       "git",
       "docker"
      ]
@@ -570,28 +496,26 @@
     "cover_letter": {
      "paragraphs": [
       {
-       "text": "El puesto de Becario/a QA en Fintech Ejemplo se alinea directamente con mi experiencia en pruebas de software para el sector financiero y mi formación en Ingeniería Informática.",
+       "text": "El puesto de Becario/a QA en Fintech Ejemplo encaja directamente con mi perfil como estudiante de Ingeniería Informática y mi experiencia práctica en control de calidad para aplicaciones bancarias.",
        "evidence_ids": [
-        "exp-consulting",
-        "exp-consulting-b1",
-        "edu-bsc"
+        "summary",
+        "edu-bsc",
+        "exp-consulting-b1"
        ]
       },
       {
-       "text": "En mi experiencia como Technical Consultant Intern en Example Consulting, diseñé y ejecuté casos de prueba funcionales para una aplicación web bancaria trabajando dentro de un equipo ágil. En ese entorno gestioné y clasifiqué incidencias con Jira y realicé validaciones de datos mediante consultas SQL.",
+       "text": "En Example Consulting diseñé y ejecuté casos de prueba funcionales para una aplicación web bancaria dentro de un equipo ágil. En este rol también gestioné y clasifiqué incidencias a través de Jira y realicé la validación de datos mediante consultas SQL.",
        "evidence_ids": [
-        "exp-consulting",
         "exp-consulting-b1",
-        "exp-consulting-b2",
-        "skills-core"
+        "exp-consulting-b2"
        ]
       },
       {
-       "text": "Cuento con un nivel C1 de inglés y desarrollo proyectos en Python. Aún no he utilizado herramientas de automatización de pruebas en producción.",
+       "text": "Cuento además con un nivel C1 de inglés y manejo habitual de Python y SQL para el desarrollo de proyectos técnicos y automatizaciones de flujos de trabajo.",
        "evidence_ids": [
         "lang-english",
         "skills-core",
-        "proj-flight-alerts"
+        "proj-flight-alerts-b1"
        ]
       }
      ]
@@ -615,41 +539,41 @@
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 10.359,
-       "cost_usd": 0.005031,
+       "latency_s": 7.048,
+       "cost_usd": 0.0034935,
        "ok": true
       },
       {
        "step": "match",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 12.089,
-       "cost_usd": 0.0068325,
+       "latency_s": 12.303,
+       "cost_usd": 0.006585000000000001,
        "ok": true
       },
       {
        "step": "tailor_cv",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 17.786,
-       "cost_usd": 0.011441999999999999,
+       "latency_s": 10.848,
+       "cost_usd": 0.0071505,
        "ok": true
       },
       {
        "step": "cover_letter",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 10.258,
-       "cost_usd": 0.0069705,
+       "latency_s": 11.528,
+       "cost_usd": 0.007333500000000001,
        "ok": true
       },
       {
        "step": "verify",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 11.249,
-       "cost_usd": 0.00692175,
+       "latency_s": 8.06,
+       "cost_usd": 0.00566775,
        "ok": true
       }
      ],
-     "total_cost_usd": 0.037198,
-     "total_latency_s": 61.741
+     "total_cost_usd": 0.03023,
+     "total_latency_s": 49.787
     }
    },
    "answer": {
@@ -673,42 +597,36 @@
      "requirements": [
       {
        "id": "r1",
-       "text": "Diseño de casos de prueba funcionales",
+       "text": "Diseño y ejecución de casos de prueba funcionales",
        "category": "skill",
        "importance": "must"
       },
       {
        "id": "r2",
-       "text": "Ejecución de casos de prueba funcionales",
-       "category": "skill",
-       "importance": "must"
-      },
-      {
-       "id": "r3",
        "text": "Gestión de incidencias con Jira",
        "category": "skill",
        "importance": "must"
       },
       {
-       "id": "r4",
+       "id": "r3",
        "text": "Conocimientos de SQL",
        "category": "skill",
        "importance": "must"
       },
       {
-       "id": "r5",
+       "id": "r4",
        "text": "Experiencia en equipos ágiles (Scrum)",
        "category": "experience",
        "importance": "must"
       },
       {
-       "id": "r6",
+       "id": "r5",
        "text": "Automatización de pruebas con Python",
        "category": "skill",
        "importance": "nice"
       },
       {
-       "id": "r7",
+       "id": "r6",
        "text": "Nivel de inglés B2",
        "category": "language",
        "importance": "nice"
@@ -724,79 +642,65 @@
        "requirement_id": "r1",
        "status": "met",
        "evidence_ids": [
-        "exp-consulting",
         "exp-consulting-b1"
        ],
-       "note": "Designed functional test cases during an internship for a banking web application."
+       "note": "Direct experience designing and executing functional test cases for a banking web app."
       },
       {
        "requirement_id": "r2",
        "status": "met",
        "evidence_ids": [
-        "exp-consulting",
-        "exp-consulting-b1"
+        "exp-consulting-b2",
+        "skills-core"
        ],
-       "note": "Executed functional test cases during an internship."
+       "note": "Tracked and triaged defects using Jira during internship."
       },
       {
        "requirement_id": "r3",
        "status": "met",
        "evidence_ids": [
-        "exp-consulting",
         "exp-consulting-b2",
         "skills-core"
        ],
-       "note": "Tracked and triaged defects using Jira in an internship setting."
+       "note": "Validated test data with SQL queries and lists SQL as a core skill."
       },
       {
        "requirement_id": "r4",
        "status": "met",
        "evidence_ids": [
-        "exp-consulting-b2",
-        "skills-core"
+        "exp-consulting-b1"
        ],
-       "note": "Validated data using SQL queries in an internship and lists SQL in core skills."
+       "note": "Worked within an Agile team during previous QA internship."
       },
       {
        "requirement_id": "r5",
-       "status": "met",
-       "evidence_ids": [
-        "exp-consulting",
-        "exp-consulting-b1"
-       ],
-       "note": "Worked within an Agile team during the technical consultant internship."
-      },
-      {
-       "requirement_id": "r6",
        "status": "partial",
        "evidence_ids": [
         "skills-core",
-        "proj-flight-alerts",
-        "proj-network-monitor"
+        "proj-flight-alerts-b1",
+        "exp-consulting-b1"
        ],
-       "note": "Has general Python programming and QA experience, but lacks direct experience in test automation frameworks."
+       "note": "Possesses solid Python and functional testing skills, but lacks direct evidence of Python test automation frameworks."
       },
       {
-       "requirement_id": "r7",
+       "requirement_id": "r6",
        "status": "met",
        "evidence_ids": [
         "lang-english"
        ],
-       "note": "Holds C1 proficiency in English, which exceeds the required B2 level."
+       "note": "Holds English C1 level, exceeding the requested B2 requirement."
       }
      ],
-     "summary": "The candidate is a strong fit for the QA internship, meeting all mandatory requirements including functional test design/execution, Jira, SQL, and Agile teamwork from prior internship experience, along with English C1 level. Test automation with Python is only partially covered through general Python skills.",
-     "score": 95.8
+     "summary": "The candidate is a strong fit for the QA Intern position, meeting all mandatory requirements including functional testing, Jira, SQL, and Agile methodology, alongside an English level above B2.",
+     "score": 95.0
     },
     "cv": {
      "summary": {
-      "text": "Estudiante de ingeniería informática con experiencia en QA dentro de equipos ágiles, especializado en diseño y ejecución de casos de prueba funcionales, seguimiento de incidencias en Jira, consultas SQL y programación en Python.",
+      "text": "Estudiante de Ingeniería Informática con experiencia en prácticas de QA y consultoría, especializado en diseño y ejecución de pruebas funcionales, gestión de defectos en Jira y validación con SQL en entornos ágiles.",
       "evidence_ids": [
-       "edu-bsc",
-       "exp-consulting",
+       "summary",
        "exp-consulting-b1",
-       "exp-consulting-b2",
-       "skills-core"
+       "exp-consulting-b2"
       ]
      },
      "entries": [
@@ -810,7 +714,7 @@
          ]
         },
         {
-         "text": "Seguimiento y triaje de incidencias en Jira y validación de datos mediante consultas SQL.",
+         "text": "Seguimiento y priorización de defectos en Jira y validación de datos mediante consultas SQL.",
          "evidence_ids": [
           "exp-consulting-b2"
          ]
@@ -821,32 +725,15 @@
        "item_id": "proj-flight-alerts",
        "bullets": [
         {
-         "text": "Desarrollo de un scraper en Python para detectar vuelos por debajo de un umbral de precio con envío de resúmenes en HTML.",
+         "text": "Desarrollo de un scraper en Python para monitorización y envío de alertas por correo electrónico.",
          "evidence_ids": [
           "proj-flight-alerts-b1"
          ]
         },
         {
-         "text": "Automatización y programación de ejecuciones semanales mediante GitHub Actions.",
+         "text": "Automatización de la ejecución periódica mediante flujos de GitHub Actions.",
          "evidence_ids": [
           "proj-flight-alerts-b2"
-         ]
-        }
-       ]
-      },
-      {
-       "item_id": "proj-network-monitor",
-       "bullets": [
-        {
-         "text": "Creación de un backend con FastAPI para el escaneo de la red local y monitorización del estado de dispositivos en un panel HTML.",
-         "evidence_ids": [
-          "proj-network-monitor-b1"
-         ]
-        },
-        {
-         "text": "Configuración como servicio en segundo plano con sistema de reinicio automático.",
-         "evidence_ids": [
-          "proj-network-monitor-b2"
          ]
         }
        ]
@@ -860,9 +747,7 @@
       "testing",
       "jira",
       "sql",
-      "agile",
       "python",
-      "automation",
       "git",
       "docker"
      ]
@@ -870,28 +755,26 @@
     "cover_letter": {
      "paragraphs": [
       {
-       "text": "El puesto de Becario/a QA en Fintech Ejemplo se alinea directamente con mi experiencia en pruebas de software para el sector financiero y mi formación en Ingeniería Informática.",
+       "text": "El puesto de Becario/a QA en Fintech Ejemplo encaja directamente con mi perfil como estudiante de Ingeniería Informática y mi experiencia práctica en control de calidad para aplicaciones bancarias.",
        "evidence_ids": [
-        "exp-consulting",
-        "exp-consulting-b1",
-        "edu-bsc"
+        "summary",
+        "edu-bsc",
+        "exp-consulting-b1"
        ]
       },
       {
-       "text": "En mi experiencia como Technical Consultant Intern en Example Consulting, diseñé y ejecuté casos de prueba funcionales para una aplicación web bancaria trabajando dentro de un equipo ágil. En ese entorno gestioné y clasifiqué incidencias con Jira y realicé validaciones de datos mediante consultas SQL.",
+       "text": "En Example Consulting diseñé y ejecuté casos de prueba funcionales para una aplicación web bancaria dentro de un equipo ágil. En este rol también gestioné y clasifiqué incidencias a través de Jira y realicé la validación de datos mediante consultas SQL.",
        "evidence_ids": [
-        "exp-consulting",
         "exp-consulting-b1",
-        "exp-consulting-b2",
-        "skills-core"
+        "exp-consulting-b2"
        ]
       },
       {
-       "text": "Cuento con un nivel C1 de inglés y desarrollo proyectos en Python. Aún no he utilizado herramientas de automatización de pruebas en producción.",
+       "text": "Cuento además con un nivel C1 de inglés y manejo habitual de Python y SQL para el desarrollo de proyectos técnicos y automatizaciones de flujos de trabajo.",
        "evidence_ids": [
         "lang-english",
         "skills-core",
-        "proj-flight-alerts"
+        "proj-flight-alerts-b1"
        ]
       }
      ]
@@ -915,41 +798,41 @@
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 10.359,
-       "cost_usd": 0.005031,
+       "latency_s": 7.048,
+       "cost_usd": 0.0034935,
        "ok": true
       },
       {
        "step": "match",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 12.089,
-       "cost_usd": 0.0068325,
+       "latency_s": 12.303,
+       "cost_usd": 0.006585000000000001,
        "ok": true
       },
       {
        "step": "tailor_cv",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 17.786,
-       "cost_usd": 0.011441999999999999,
+       "latency_s": 10.848,
+       "cost_usd": 0.0071505,
        "ok": true
       },
       {
        "step": "cover_letter",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 10.258,
-       "cost_usd": 0.0069705,
+       "latency_s": 11.528,
+       "cost_usd": 0.007333500000000001,
        "ok": true
       },
       {
        "step": "verify",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 11.249,
-       "cost_usd": 0.00692175,
+       "latency_s": 8.06,
+       "cost_usd": 0.00566775,
        "ok": true
       }
      ],
-     "total_cost_usd": 0.037198,
-     "total_latency_s": 61.741
+     "total_cost_usd": 0.03023,
+     "total_latency_s": 49.787
     }
    },
    "answer": null

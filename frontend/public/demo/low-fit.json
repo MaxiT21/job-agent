@@ -191,7 +191,7 @@
       "r7",
       "r8"
      ],
-     "summary": "The candidate is an undergraduate student with QA internship experience and small Python projects, presenting a complete gap across all senior SRE requirements, cloud technologies, and tooling."
+     "summary": "The candidate is a computer engineering student with QA internship experience and basic Python project work, lacking the required senior-level SRE experience, cloud infrastructure skills (Kubernetes, Terraform, AWS), Go proficiency, and observability tooling."
     },
     "error": null,
     "posting": {
@@ -209,25 +209,25 @@
       },
       {
        "id": "r2",
-       "text": "Experience with Kubernetes in production",
+       "text": "Kubernetes in production experience",
        "category": "skill",
        "importance": "must"
       },
       {
        "id": "r3",
-       "text": "Experience with Terraform",
+       "text": "Terraform experience",
        "category": "skill",
        "importance": "must"
       },
       {
        "id": "r4",
-       "text": "Experience with AWS",
+       "text": "AWS experience",
        "category": "skill",
        "importance": "must"
       },
       {
        "id": "r5",
-       "text": "Proficiency in Go",
+       "text": "Go programming language proficiency",
        "category": "skill",
        "importance": "must"
       },
@@ -239,13 +239,13 @@
       },
       {
        "id": "r7",
-       "text": "Experience with Prometheus",
+       "text": "Prometheus experience",
        "category": "skill",
        "importance": "nice"
       },
       {
        "id": "r8",
-       "text": "Experience with Grafana",
+       "text": "Grafana experience",
        "category": "skill",
        "importance": "nice"
       }
@@ -260,52 +260,52 @@
        "requirement_id": "r1",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Candidate is an undergraduate student with internship experience in QA, possessing no production SRE experience."
+       "note": "Candidate is a student with internship experience in QA testing and has no production SRE experience."
       },
       {
        "requirement_id": "r2",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No experience with Kubernetes is mentioned in the profile."
+       "note": "No mention of Kubernetes experience in the profile."
       },
       {
        "requirement_id": "r3",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No Terraform experience listed."
+       "note": "No mention of Terraform in the profile."
       },
       {
        "requirement_id": "r4",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No AWS experience mentioned."
+       "note": "No mention of AWS or cloud infrastructure experience in the profile."
       },
       {
        "requirement_id": "r5",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Profile lists Python and JavaScript/TypeScript tools, with no mention of Go."
+       "note": "No Go programming experience listed; background focuses primarily on Python."
       },
       {
        "requirement_id": "r6",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No on-call or high-traffic system support experience."
+       "note": "No on-call or incident response experience for production systems."
       },
       {
        "requirement_id": "r7",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Prometheus is not mentioned in the profile."
+       "note": "No mention of Prometheus monitoring experience."
       },
       {
        "requirement_id": "r8",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Grafana is not mentioned in the profile."
+       "note": "No mention of Grafana experience in the profile."
       }
      ],
-     "summary": "The candidate is an undergraduate student with QA internship experience and small Python projects, presenting a complete gap across all senior SRE requirements, cloud technologies, and tooling.",
+     "summary": "The candidate is a computer engineering student with QA internship experience and basic Python project work, lacking the required senior-level SRE experience, cloud infrastructure skills (Kubernetes, Terraform, AWS), Go proficiency, and observability tooling.",
      "score": 0.0
     },
     "cv": null,
@@ -321,20 +321,20 @@
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 5.48,
-       "cost_usd": 0.0022057500000000002,
+       "latency_s": 5.437,
+       "cost_usd": 0.00153075,
        "ok": true
       },
       {
        "step": "match",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 7.266,
-       "cost_usd": 0.00451575,
+       "latency_s": 8.408,
+       "cost_usd": 0.0052492500000000004,
        "ok": true
       }
      ],
-     "total_cost_usd": 0.006722,
-     "total_latency_s": 12.746
+     "total_cost_usd": 0.00678,
+     "total_latency_s": 13.845
     }
    },
    "answer": {
@@ -355,61 +355,61 @@
         "requirement_id": "r1",
         "status": "gap",
         "evidence_ids": [],
-        "note": "Candidate is an undergraduate student with internship experience in QA, possessing no production SRE experience."
+        "note": "Candidate is a student with internship experience in QA testing and has no production SRE experience."
        },
        {
         "requirement_id": "r2",
         "status": "gap",
         "evidence_ids": [],
-        "note": "No experience with Kubernetes is mentioned in the profile."
+        "note": "No mention of Kubernetes experience in the profile."
        },
        {
         "requirement_id": "r3",
         "status": "gap",
         "evidence_ids": [],
-        "note": "No Terraform experience listed."
+        "note": "No mention of Terraform in the profile."
        },
        {
         "requirement_id": "r4",
         "status": "gap",
         "evidence_ids": [],
-        "note": "No AWS experience mentioned."
+        "note": "No mention of AWS or cloud infrastructure experience in the profile."
        },
        {
         "requirement_id": "r5",
         "status": "gap",
         "evidence_ids": [],
-        "note": "Profile lists Python and JavaScript/TypeScript tools, with no mention of Go."
+        "note": "No Go programming experience listed; background focuses primarily on Python."
        },
        {
         "requirement_id": "r6",
         "status": "gap",
         "evidence_ids": [],
-        "note": "No on-call or high-traffic system support experience."
+        "note": "No on-call or incident response experience for production systems."
        },
        {
         "requirement_id": "r7",
         "status": "gap",
         "evidence_ids": [],
-        "note": "Prometheus is not mentioned in the profile."
+        "note": "No mention of Prometheus monitoring experience."
        },
        {
         "requirement_id": "r8",
         "status": "gap",
         "evidence_ids": [],
-        "note": "Grafana is not mentioned in the profile."
+        "note": "No mention of Grafana experience in the profile."
        }
       ],
-      "summary": "The candidate is an undergraduate student with QA internship experience and small Python projects, presenting a complete gap across all senior SRE requirements, cloud technologies, and tooling.",
+      "summary": "The candidate is a computer engineering student with QA internship experience and basic Python project work, lacking the required senior-level SRE experience, cloud infrastructure skills (Kubernetes, Terraform, AWS), Go proficiency, and observability tooling.",
       "score": 0.0
      },
      "cv": {
       "summary": {
-       "text": "Computer engineering student experienced in backend services, process automation, and software testing.",
+       "text": "Computer engineering student with a background in backend services, network monitoring, and workflow automation.",
        "evidence_ids": [
-        "edu-bsc",
+        "summary",
         "proj-network-monitor",
-        "exp-consulting"
+        "proj-flight-alerts"
        ]
       },
       "entries": [
@@ -417,13 +417,13 @@
         "item_id": "proj-network-monitor",
         "bullets": [
          {
-          "text": "Configured application to run continuously as a background service with automatic restart capabilities.",
+          "text": "Configured application to run as a continuous background service with automatic restart capabilities.",
           "evidence_ids": [
            "proj-network-monitor-b2"
           ]
          },
          {
-          "text": "Developed a FastAPI backend that scans local network devices and serves status updates to a dashboard.",
+          "text": "Built a FastAPI backend that scans the local network and reports device status to a dashboard.",
           "evidence_ids": [
            "proj-network-monitor-b1"
           ]
@@ -434,13 +434,13 @@
         "item_id": "proj-flight-alerts",
         "bullets": [
          {
-          "text": "Automated workflow schedules weekly using GitHub Actions CI.",
+          "text": "Scheduled and automated weekly execution using GitHub Actions pipelines.",
           "evidence_ids": [
            "proj-flight-alerts-b2"
           ]
          },
          {
-          "text": "Implemented a Python scraping service that monitors price thresholds and sends HTML email summaries.",
+          "text": "Engineered a Python tool to monitor price thresholds and generate automated notifications.",
           "evidence_ids": [
            "proj-flight-alerts-b1"
           ]
@@ -451,13 +451,13 @@
         "item_id": "exp-consulting",
         "bullets": [
          {
-          "text": "Tracked and triaged defects in Jira and performed data validation using SQL queries.",
+          "text": "Tracked and triaged defects in Jira and validated application data using SQL queries.",
           "evidence_ids": [
            "exp-consulting-b2"
           ]
          },
          {
-          "text": "Designed and executed functional test cases for a banking web application within an Agile team.",
+          "text": "Designed and executed functional test cases for a banking web application in an Agile environment.",
           "evidence_ids": [
            "exp-consulting-b1"
           ]
@@ -471,35 +471,38 @@
       ],
       "skills": [
        "docker",
-       "git",
        "python",
-       "fastapi",
+       "git",
+       "github actions",
        "sql",
-       "testing",
-       "jira"
+       "fastapi",
+       "rest",
+       "testing"
       ]
      },
      "cover_letter": {
       "paragraphs": [
        {
-        "text": "I am drawn to CloudScale and the Senior Site Reliability Engineer role to bring my experience in building persistent backend services and automated pipelines.",
+        "text": "CloudScale's work on infrastructure reliability aligns with my focus on backend engineering and systems. Through my computer engineering studies, I have focused on backend application development and automation.",
         "evidence_ids": [
-         "proj-network-monitor-b2",
-         "proj-flight-alerts-b2"
+         "summary",
+         "edu-bsc"
         ]
        },
        {
-        "text": "I developed a network monitoring tool using FastAPI that surveys local devices and runs continuously as a background service with automatic restart. Additionally, I implemented an automated Python workflow scheduled weekly via GitHub Actions to monitor data thresholds.",
+        "text": "My practical projects include building a network monitoring system with a FastAPI backend that scans local devices and displays status on a dashboard, running continuously as a background service with automatic restart. I have also built automation pipelines using GitHub Actions to schedule tasks and deliver automated alerts.",
         "evidence_ids": [
+         "proj-network-monitor",
          "proj-network-monitor-b1",
          "proj-network-monitor-b2",
-         "proj-flight-alerts-b1",
+         "proj-flight-alerts",
          "proj-flight-alerts-b2"
         ]
        },
        {
-        "text": "At Example Consulting, I designed and executed functional test cases for a banking web application within an Agile team. I also triaged defects in Jira and validated underlying database records with SQL.",
+        "text": "At Example Consulting, I worked within an Agile team testing a banking web application, where I triaged defects in Jira and validated application data using SQL queries.",
         "evidence_ids": [
+         "exp-consulting",
          "exp-consulting-b1",
          "exp-consulting-b2"
         ]
@@ -527,25 +530,25 @@
       },
       {
        "id": "r2",
-       "text": "Experience with Kubernetes in production",
+       "text": "Kubernetes in production experience",
        "category": "skill",
        "importance": "must"
       },
       {
        "id": "r3",
-       "text": "Experience with Terraform",
+       "text": "Terraform experience",
        "category": "skill",
        "importance": "must"
       },
       {
        "id": "r4",
-       "text": "Experience with AWS",
+       "text": "AWS experience",
        "category": "skill",
        "importance": "must"
       },
       {
        "id": "r5",
-       "text": "Proficiency in Go",
+       "text": "Go programming language proficiency",
        "category": "skill",
        "importance": "must"
       },
@@ -557,13 +560,13 @@
       },
       {
        "id": "r7",
-       "text": "Experience with Prometheus",
+       "text": "Prometheus experience",
        "category": "skill",
        "importance": "nice"
       },
       {
        "id": "r8",
-       "text": "Experience with Grafana",
+       "text": "Grafana experience",
        "category": "skill",
        "importance": "nice"
       }
@@ -578,61 +581,61 @@
        "requirement_id": "r1",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Candidate is an undergraduate student with internship experience in QA, possessing no production SRE experience."
+       "note": "Candidate is a student with internship experience in QA testing and has no production SRE experience."
       },
       {
        "requirement_id": "r2",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No experience with Kubernetes is mentioned in the profile."
+       "note": "No mention of Kubernetes experience in the profile."
       },
       {
        "requirement_id": "r3",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No Terraform experience listed."
+       "note": "No mention of Terraform in the profile."
       },
       {
        "requirement_id": "r4",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No AWS experience mentioned."
+       "note": "No mention of AWS or cloud infrastructure experience in the profile."
       },
       {
        "requirement_id": "r5",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Profile lists Python and JavaScript/TypeScript tools, with no mention of Go."
+       "note": "No Go programming experience listed; background focuses primarily on Python."
       },
       {
        "requirement_id": "r6",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No on-call or high-traffic system support experience."
+       "note": "No on-call or incident response experience for production systems."
       },
       {
        "requirement_id": "r7",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Prometheus is not mentioned in the profile."
+       "note": "No mention of Prometheus monitoring experience."
       },
       {
        "requirement_id": "r8",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Grafana is not mentioned in the profile."
+       "note": "No mention of Grafana experience in the profile."
       }
      ],
-     "summary": "The candidate is an undergraduate student with QA internship experience and small Python projects, presenting a complete gap across all senior SRE requirements, cloud technologies, and tooling.",
+     "summary": "The candidate is a computer engineering student with QA internship experience and basic Python project work, lacking the required senior-level SRE experience, cloud infrastructure skills (Kubernetes, Terraform, AWS), Go proficiency, and observability tooling.",
      "score": 0.0
     },
     "cv": {
      "summary": {
-      "text": "Computer engineering student experienced in backend services, process automation, and software testing.",
+      "text": "Computer engineering student with a background in backend services, network monitoring, and workflow automation.",
       "evidence_ids": [
-       "edu-bsc",
+       "summary",
        "proj-network-monitor",
-       "exp-consulting"
+       "proj-flight-alerts"
       ]
      },
      "entries": [
@@ -640,13 +643,13 @@
        "item_id": "proj-network-monitor",
        "bullets": [
         {
-         "text": "Configured application to run continuously as a background service with automatic restart capabilities.",
+         "text": "Configured application to run as a continuous background service with automatic restart capabilities.",
          "evidence_ids": [
           "proj-network-monitor-b2"
          ]
         },
         {
-         "text": "Developed a FastAPI backend that scans local network devices and serves status updates to a dashboard.",
+         "text": "Built a FastAPI backend that scans the local network and reports device status to a dashboard.",
          "evidence_ids": [
           "proj-network-monitor-b1"
          ]
@@ -657,13 +660,13 @@
        "item_id": "proj-flight-alerts",
        "bullets": [
         {
-         "text": "Automated workflow schedules weekly using GitHub Actions CI.",
+         "text": "Scheduled and automated weekly execution using GitHub Actions pipelines.",
          "evidence_ids": [
           "proj-flight-alerts-b2"
          ]
         },
         {
-         "text": "Implemented a Python scraping service that monitors price thresholds and sends HTML email summaries.",
+         "text": "Engineered a Python tool to monitor price thresholds and generate automated notifications.",
          "evidence_ids": [
           "proj-flight-alerts-b1"
          ]
@@ -674,13 +677,13 @@
        "item_id": "exp-consulting",
        "bullets": [
         {
-         "text": "Tracked and triaged defects in Jira and performed data validation using SQL queries.",
+         "text": "Tracked and triaged defects in Jira and validated application data using SQL queries.",
          "evidence_ids": [
           "exp-consulting-b2"
          ]
         },
         {
-         "text": "Designed and executed functional test cases for a banking web application within an Agile team.",
+         "text": "Designed and executed functional test cases for a banking web application in an Agile environment.",
          "evidence_ids": [
           "exp-consulting-b1"
          ]
@@ -694,35 +697,38 @@
      ],
      "skills": [
       "docker",
-      "git",
       "python",
-      "fastapi",
+      "git",
+      "github actions",
       "sql",
-      "testing",
-      "jira"
+      "fastapi",
+      "rest",
+      "testing"
      ]
     },
     "cover_letter": {
      "paragraphs": [
       {
-       "text": "I am drawn to CloudScale and the Senior Site Reliability Engineer role to bring my experience in building persistent backend services and automated pipelines.",
+       "text": "CloudScale's work on infrastructure reliability aligns with my focus on backend engineering and systems. Through my computer engineering studies, I have focused on backend application development and automation.",
        "evidence_ids": [
-        "proj-network-monitor-b2",
-        "proj-flight-alerts-b2"
+        "summary",
+        "edu-bsc"
        ]
       },
       {
-       "text": "I developed a network monitoring tool using FastAPI that surveys local devices and runs continuously as a background service with automatic restart. Additionally, I implemented an automated Python workflow scheduled weekly via GitHub Actions to monitor data thresholds.",
+       "text": "My practical projects include building a network monitoring system with a FastAPI backend that scans local devices and displays status on a dashboard, running continuously as a background service with automatic restart. I have also built automation pipelines using GitHub Actions to schedule tasks and deliver automated alerts.",
        "evidence_ids": [
+        "proj-network-monitor",
         "proj-network-monitor-b1",
         "proj-network-monitor-b2",
-        "proj-flight-alerts-b1",
+        "proj-flight-alerts",
         "proj-flight-alerts-b2"
        ]
       },
       {
-       "text": "At Example Consulting, I designed and executed functional test cases for a banking web application within an Agile team. I also triaged defects in Jira and validated underlying database records with SQL.",
+       "text": "At Example Consulting, I worked within an Agile team testing a banking web application, where I triaged defects in Jira and validated application data using SQL queries.",
        "evidence_ids": [
+        "exp-consulting",
         "exp-consulting-b1",
         "exp-consulting-b2"
        ]
@@ -734,16 +740,6 @@
      "issues": []
     },
     "verification_history": [
-     {
-      "passed": false,
-      "issues": [
-       {
-        "where": "cover_letter[2]",
-        "text": "During my internship at Example Consulting, I designed and executed functional test cases in an Agile environment, tracked defects in Jira, and validated database records using SQL. I have not worked with Kubernetes in production yet.",
-        "reason": "The mention of Kubernetes (and not having worked with it in production) is not supported by the cited evidence (exp-consulting-b1, exp-consulting-b2) or anywhere in the profile."
-       }
-      ]
-     },
      {
       "passed": true,
       "issues": []
@@ -758,55 +754,41 @@
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 5.48,
-       "cost_usd": 0.0022057500000000002,
+       "latency_s": 5.437,
+       "cost_usd": 0.00153075,
        "ok": true
       },
       {
        "step": "match",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 7.266,
-       "cost_usd": 0.00451575,
+       "latency_s": 8.408,
+       "cost_usd": 0.0052492500000000004,
        "ok": true
       },
       {
        "step": "tailor_cv",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 11.98,
-       "cost_usd": 0.0075450000000000005,
+       "latency_s": 9.794,
+       "cost_usd": 0.00651975,
        "ok": true
       },
       {
        "step": "cover_letter",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 13.596,
-       "cost_usd": 0.007843500000000002,
+       "latency_s": 13.006,
+       "cost_usd": 0.007719,
        "ok": true
       },
       {
        "step": "verify",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 12.9,
-       "cost_usd": 0.00782925,
-       "ok": true
-      },
-      {
-       "step": "cover_letter",
-       "model": "gemini/gemini-flash-latest",
-       "latency_s": 13.788,
-       "cost_usd": 0.00791925,
-       "ok": true
-      },
-      {
-       "step": "verify",
-       "model": "gemini/gemini-flash-latest",
-       "latency_s": 14.361,
-       "cost_usd": 0.0084255,
+       "latency_s": 8.288,
+       "cost_usd": 0.005126250000000001,
        "ok": true
       }
      ],
-     "total_cost_usd": 0.046284,
-     "total_latency_s": 79.371
+     "total_cost_usd": 0.026145,
+     "total_latency_s": 44.933
     }
    },
    "answer": {
@@ -836,25 +818,25 @@
       },
       {
        "id": "r2",
-       "text": "Experience with Kubernetes in production",
+       "text": "Kubernetes in production experience",
        "category": "skill",
        "importance": "must"
       },
       {
        "id": "r3",
-       "text": "Experience with Terraform",
+       "text": "Terraform experience",
        "category": "skill",
        "importance": "must"
       },
       {
        "id": "r4",
-       "text": "Experience with AWS",
+       "text": "AWS experience",
        "category": "skill",
        "importance": "must"
       },
       {
        "id": "r5",
-       "text": "Proficiency in Go",
+       "text": "Go programming language proficiency",
        "category": "skill",
        "importance": "must"
       },
@@ -866,13 +848,13 @@
       },
       {
        "id": "r7",
-       "text": "Experience with Prometheus",
+       "text": "Prometheus experience",
        "category": "skill",
        "importance": "nice"
       },
       {
        "id": "r8",
-       "text": "Experience with Grafana",
+       "text": "Grafana experience",
        "category": "skill",
        "importance": "nice"
       }
@@ -887,61 +869,61 @@
        "requirement_id": "r1",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Candidate is an undergraduate student with internship experience in QA, possessing no production SRE experience."
+       "note": "Candidate is a student with internship experience in QA testing and has no production SRE experience."
       },
       {
        "requirement_id": "r2",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No experience with Kubernetes is mentioned in the profile."
+       "note": "No mention of Kubernetes experience in the profile."
       },
       {
        "requirement_id": "r3",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No Terraform experience listed."
+       "note": "No mention of Terraform in the profile."
       },
       {
        "requirement_id": "r4",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No AWS experience mentioned."
+       "note": "No mention of AWS or cloud infrastructure experience in the profile."
       },
       {
        "requirement_id": "r5",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Profile lists Python and JavaScript/TypeScript tools, with no mention of Go."
+       "note": "No Go programming experience listed; background focuses primarily on Python."
       },
       {
        "requirement_id": "r6",
        "status": "gap",
        "evidence_ids": [],
-       "note": "No on-call or high-traffic system support experience."
+       "note": "No on-call or incident response experience for production systems."
       },
       {
        "requirement_id": "r7",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Prometheus is not mentioned in the profile."
+       "note": "No mention of Prometheus monitoring experience."
       },
       {
        "requirement_id": "r8",
        "status": "gap",
        "evidence_ids": [],
-       "note": "Grafana is not mentioned in the profile."
+       "note": "No mention of Grafana experience in the profile."
       }
      ],
-     "summary": "The candidate is an undergraduate student with QA internship experience and small Python projects, presenting a complete gap across all senior SRE requirements, cloud technologies, and tooling.",
+     "summary": "The candidate is a computer engineering student with QA internship experience and basic Python project work, lacking the required senior-level SRE experience, cloud infrastructure skills (Kubernetes, Terraform, AWS), Go proficiency, and observability tooling.",
      "score": 0.0
     },
     "cv": {
      "summary": {
-      "text": "Computer engineering student experienced in backend services, process automation, and software testing.",
+      "text": "Computer engineering student with a background in backend services, network monitoring, and workflow automation.",
       "evidence_ids": [
-       "edu-bsc",
+       "summary",
        "proj-network-monitor",
-       "exp-consulting"
+       "proj-flight-alerts"
       ]
      },
      "entries": [
@@ -949,13 +931,13 @@
        "item_id": "proj-network-monitor",
        "bullets": [
         {
-         "text": "Configured application to run continuously as a background service with automatic restart capabilities.",
+         "text": "Configured application to run as a continuous background service with automatic restart capabilities.",
          "evidence_ids": [
           "proj-network-monitor-b2"
          ]
         },
         {
-         "text": "Developed a FastAPI backend that scans local network devices and serves status updates to a dashboard.",
+         "text": "Built a FastAPI backend that scans the local network and reports device status to a dashboard.",
          "evidence_ids": [
           "proj-network-monitor-b1"
          ]
@@ -966,13 +948,13 @@
        "item_id": "proj-flight-alerts",
        "bullets": [
         {
-         "text": "Automated workflow schedules weekly using GitHub Actions CI.",
+         "text": "Scheduled and automated weekly execution using GitHub Actions pipelines.",
          "evidence_ids": [
           "proj-flight-alerts-b2"
          ]
         },
         {
-         "text": "Implemented a Python scraping service that monitors price thresholds and sends HTML email summaries.",
+         "text": "Engineered a Python tool to monitor price thresholds and generate automated notifications.",
          "evidence_ids": [
           "proj-flight-alerts-b1"
          ]
@@ -983,13 +965,13 @@
        "item_id": "exp-consulting",
        "bullets": [
         {
-         "text": "Tracked and triaged defects in Jira and performed data validation using SQL queries.",
+         "text": "Tracked and triaged defects in Jira and validated application data using SQL queries.",
          "evidence_ids": [
           "exp-consulting-b2"
          ]
         },
         {
-         "text": "Designed and executed functional test cases for a banking web application within an Agile team.",
+         "text": "Designed and executed functional test cases for a banking web application in an Agile environment.",
          "evidence_ids": [
           "exp-consulting-b1"
          ]
@@ -1003,35 +985,38 @@
      ],
      "skills": [
       "docker",
-      "git",
       "python",
-      "fastapi",
+      "git",
+      "github actions",
       "sql",
-      "testing",
-      "jira"
+      "fastapi",
+      "rest",
+      "testing"
      ]
     },
     "cover_letter": {
      "paragraphs": [
       {
-       "text": "I am drawn to CloudScale and the Senior Site Reliability Engineer role to bring my experience in building persistent backend services and automated pipelines.",
+       "text": "CloudScale's work on infrastructure reliability aligns with my focus on backend engineering and systems. Through my computer engineering studies, I have focused on backend application development and automation.",
        "evidence_ids": [
-        "proj-network-monitor-b2",
-        "proj-flight-alerts-b2"
+        "summary",
+        "edu-bsc"
        ]
       },
       {
-       "text": "I developed a network monitoring tool using FastAPI that surveys local devices and runs continuously as a background service with automatic restart. Additionally, I implemented an automated Python workflow scheduled weekly via GitHub Actions to monitor data thresholds.",
+       "text": "My practical projects include building a network monitoring system with a FastAPI backend that scans local devices and displays status on a dashboard, running continuously as a background service with automatic restart. I have also built automation pipelines using GitHub Actions to schedule tasks and deliver automated alerts.",
        "evidence_ids": [
+        "proj-network-monitor",
         "proj-network-monitor-b1",
         "proj-network-monitor-b2",
-        "proj-flight-alerts-b1",
+        "proj-flight-alerts",
         "proj-flight-alerts-b2"
        ]
       },
       {
-       "text": "At Example Consulting, I designed and executed functional test cases for a banking web application within an Agile team. I also triaged defects in Jira and validated underlying database records with SQL.",
+       "text": "At Example Consulting, I worked within an Agile team testing a banking web application, where I triaged defects in Jira and validated application data using SQL queries.",
        "evidence_ids": [
+        "exp-consulting",
         "exp-consulting-b1",
         "exp-consulting-b2"
        ]
@@ -1043,16 +1028,6 @@
      "issues": []
     },
     "verification_history": [
-     {
-      "passed": false,
-      "issues": [
-       {
-        "where": "cover_letter[2]",
-        "text": "During my internship at Example Consulting, I designed and executed functional test cases in an Agile environment, tracked defects in Jira, and validated database records using SQL. I have not worked with Kubernetes in production yet.",
-        "reason": "The mention of Kubernetes (and not having worked with it in production) is not supported by the cited evidence (exp-consulting-b1, exp-consulting-b2) or anywhere in the profile."
-       }
-      ]
-     },
      {
       "passed": true,
       "issues": []
@@ -1067,55 +1042,41 @@
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 5.48,
-       "cost_usd": 0.0022057500000000002,
+       "latency_s": 5.437,
+       "cost_usd": 0.00153075,
        "ok": true
       },
       {
        "step": "match",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 7.266,
-       "cost_usd": 0.00451575,
+       "latency_s": 8.408,
+       "cost_usd": 0.0052492500000000004,
        "ok": true
       },
       {
        "step": "tailor_cv",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 11.98,
-       "cost_usd": 0.0075450000000000005,
+       "latency_s": 9.794,
+       "cost_usd": 0.00651975,
        "ok": true
       },
       {
        "step": "cover_letter",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 13.596,
-       "cost_usd": 0.007843500000000002,
+       "latency_s": 13.006,
+       "cost_usd": 0.007719,
        "ok": true
       },
       {
        "step": "verify",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 12.9,
-       "cost_usd": 0.00782925,
-       "ok": true
-      },
-      {
-       "step": "cover_letter",
-       "model": "gemini/gemini-flash-latest",
-       "latency_s": 13.788,
-       "cost_usd": 0.00791925,
-       "ok": true
-      },
-      {
-       "step": "verify",
-       "model": "gemini/gemini-flash-latest",
-       "latency_s": 14.361,
-       "cost_usd": 0.0084255,
+       "latency_s": 8.288,
+       "cost_usd": 0.005126250000000001,
        "ok": true
       }
      ],
-     "total_cost_usd": 0.046284,
-     "total_latency_s": 79.371
+     "total_cost_usd": 0.026145,
+     "total_latency_s": 44.933
     }
    },
    "answer": null

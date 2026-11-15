@@ -6,7 +6,7 @@ function summary(history: VerificationResult[]): string {
   if (!last) return "Not checked yet.";
   if (last.passed && caught === 0) return "Every line is supported by your profile. Passed on the first check.";
   if (last.passed)
-    return `Caught ${caught} issue${caught === 1 ? "" : "s"} in earlier drafts and had them rewritten. Final check passed.`;
+    return `Caught ${caught === 1 ? "1 issue" : `${caught} issues`} in earlier drafts and had ${caught === 1 ? "it" : "them"} rewritten. Final check passed.`;
   return `${last.issues.length} line${last.issues.length === 1 ? "" : "s"} still flagged after retries — review them before approving.`;
 }
 

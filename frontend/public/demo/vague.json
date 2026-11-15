@@ -180,7 +180,7 @@
     "step": null,
     "waiting_for": {
      "type": "clarify",
-     "question": "Could you provide the full job title or more details regarding the specific responsibilities and required qualifications for this role?"
+     "question": "Could you provide the job title or more details regarding the specific responsibilities and required qualifications for this role?"
     },
     "error": null,
     "posting": {
@@ -192,7 +192,7 @@
      "requirements": [],
      "responsibilities": [],
      "is_vague": true,
-     "clarifying_question": "Could you provide the full job title or more details regarding the specific responsibilities and required qualifications for this role?"
+     "clarifying_question": "Could you provide the job title or more details regarding the specific responsibilities and required qualifications for this role?"
     },
     "fit": null,
     "cv": null,
@@ -208,13 +208,13 @@
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 4.806,
-       "cost_usd": 0.001674,
+       "latency_s": 5.648,
+       "cost_usd": 0.001539,
        "ok": true
       }
      ],
-     "total_cost_usd": 0.001674,
-     "total_latency_s": 4.806
+     "total_cost_usd": 0.001539,
+     "total_latency_s": 5.648
     }
    },
    "answer": {
@@ -239,7 +239,7 @@
          "proj-flight-alerts-b1",
          "skills-core"
         ],
-        "note": "Demonstrated practical experience building backend applications and scrapers with Python."
+        "note": "Demonstrated through personal projects building a FastAPI backend and a web scraper, as well as core skills."
        },
        {
         "requirement_id": "r2",
@@ -248,30 +248,27 @@
          "exp-consulting-b2",
          "skills-core"
         ],
-        "note": "Used SQL queries to validate data during consulting internship and lists SQL in core skills."
+        "note": "Validated data using SQL queries during consulting internship and listed in core skills."
        },
        {
         "requirement_id": "r3",
         "status": "met",
         "evidence_ids": [
-         "proj-network-monitor-b1",
          "proj-network-monitor",
+         "proj-network-monitor-b1",
          "skills-core"
         ],
-        "note": "Built a backend using FastAPI to serve device status and has REST listed in core skills."
+        "note": "Built a FastAPI backend project serving data to an HTML dashboard, tagged with REST."
        }
       ],
-      "summary": "The candidate meets all junior backend developer requirements, with hands-on Python and FastAPI project experience and professional experience querying SQL databases.",
+      "summary": "The candidate meets all junior backend developer requirements, demonstrating practical experience with Python, SQL, and REST APIs across internship and project work.",
       "score": 100.0
      },
      "cv": {
       "summary": {
-       "text": "Computer engineering student focused on backend development, with practical experience in Python, FastAPI, and SQL.",
+       "text": "Computer engineering student focused on backend and AI applications, with internship experience in QA and consulting.",
        "evidence_ids": [
-        "edu-bsc",
-        "proj-network-monitor-b1",
-        "exp-consulting-b2",
-        "skills-core"
+        "summary"
        ]
       },
       "entries": [
@@ -285,7 +282,7 @@
           ]
          },
          {
-          "text": "Configured application to run as a background service with automatic restart.",
+          "text": "Configured project to run as a background service with automatic restart.",
           "evidence_ids": [
            "proj-network-monitor-b2"
           ]
@@ -313,13 +310,13 @@
         "item_id": "proj-flight-alerts",
         "bullets": [
          {
-          "text": "Built a Python scraper that finds flights under a price threshold and emails an HTML summary.",
+          "text": "Created a Python scraper that finds flights under a price threshold and emails an HTML summary.",
           "evidence_ids": [
            "proj-flight-alerts-b1"
           ]
          },
          {
-          "text": "Scheduled weekly execution with GitHub Actions.",
+          "text": "Scheduled weekly runs using GitHub Actions.",
           "evidence_ids": [
            "proj-flight-alerts-b2"
           ]
@@ -349,27 +346,27 @@
      "cover_letter": {
       "paragraphs": [
        {
-        "text": "As a computer engineering student based in Barcelona focusing on backend development, this Junior Backend Developer position directly matches my practical background in Python, SQL, and REST APIs.",
+        "text": "The Junior Backend Developer position in Barcelona aligns directly with my background in computer engineering and my focus on backend development.",
         "evidence_ids": [
-         "edu-bsc",
-         "skills-core",
-         "exp-consulting"
+         "summary",
+         "edu-bsc"
         ]
        },
        {
-        "text": "I have hands-on experience building backend services in Python. For my Home Network Monitor project, I developed a FastAPI backend that scans local network devices and serves status data to an HTML dashboard. I also developed a Python scraper scheduled via GitHub Actions to automate flight price monitoring.",
+        "text": "In my backend projects, I have developed applications in Python using FastAPI to build REST services. This includes building a network monitoring backend that serves device status to a dashboard, as well as an automated Python scraper that processes flight pricing data.",
         "evidence_ids": [
+         "proj-network-monitor",
          "proj-network-monitor-b1",
          "proj-flight-alerts-b1",
-         "proj-flight-alerts-b2",
          "skills-core"
         ]
        },
        {
-        "text": "In addition, during my internship as a Technical Consultant Intern in Barcelona, I regularly validated application data using SQL queries and tracked defects in Jira within an Agile banking project.",
+        "text": "Additionally, during my internship at Example Consulting, I validated data using SQL queries and triaged defects within an Agile banking project. These experiences have given me practical knowledge of backend workflows, database querying, and collaborative development.",
         "evidence_ids": [
          "exp-consulting-b1",
-         "exp-consulting-b2"
+         "exp-consulting-b2",
+         "skills-core"
         ]
        }
       ]
@@ -389,19 +386,19 @@
      "requirements": [
       {
        "id": "r1",
-       "text": "Knowledge or experience with Python",
+       "text": "Proficiency in Python",
        "category": "skill",
        "importance": "nice"
       },
       {
        "id": "r2",
-       "text": "Knowledge or experience with SQL",
+       "text": "Knowledge of SQL",
        "category": "skill",
        "importance": "nice"
       },
       {
        "id": "r3",
-       "text": "Knowledge or experience with REST APIs",
+       "text": "Experience working with REST APIs",
        "category": "skill",
        "importance": "nice"
       }
@@ -420,7 +417,7 @@
         "proj-flight-alerts-b1",
         "skills-core"
        ],
-       "note": "Demonstrated practical experience building backend applications and scrapers with Python."
+       "note": "Demonstrated through personal projects building a FastAPI backend and a web scraper, as well as core skills."
       },
       {
        "requirement_id": "r2",
@@ -429,30 +426,27 @@
         "exp-consulting-b2",
         "skills-core"
        ],
-       "note": "Used SQL queries to validate data during consulting internship and lists SQL in core skills."
+       "note": "Validated data using SQL queries during consulting internship and listed in core skills."
       },
       {
        "requirement_id": "r3",
        "status": "met",
        "evidence_ids": [
-        "proj-network-monitor-b1",
         "proj-network-monitor",
+        "proj-network-monitor-b1",
         "skills-core"
        ],
-       "note": "Built a backend using FastAPI to serve device status and has REST listed in core skills."
+       "note": "Built a FastAPI backend project serving data to an HTML dashboard, tagged with REST."
       }
      ],
-     "summary": "The candidate meets all junior backend developer requirements, with hands-on Python and FastAPI project experience and professional experience querying SQL databases.",
+     "summary": "The candidate meets all junior backend developer requirements, demonstrating practical experience with Python, SQL, and REST APIs across internship and project work.",
      "score": 100.0
     },
     "cv": {
      "summary": {
-      "text": "Computer engineering student focused on backend development, with practical experience in Python, FastAPI, and SQL.",
+      "text": "Computer engineering student focused on backend and AI applications, with internship experience in QA and consulting.",
       "evidence_ids": [
-       "edu-bsc",
-       "proj-network-monitor-b1",
-       "exp-consulting-b2",
-       "skills-core"
+       "summary"
       ]
      },
      "entries": [
@@ -466,7 +460,7 @@
          ]
         },
         {
-         "text": "Configured application to run as a background service with automatic restart.",
+         "text": "Configured project to run as a background service with automatic restart.",
          "evidence_ids": [
           "proj-network-monitor-b2"
          ]
@@ -494,13 +488,13 @@
        "item_id": "proj-flight-alerts",
        "bullets": [
         {
-         "text": "Built a Python scraper that finds flights under a price threshold and emails an HTML summary.",
+         "text": "Created a Python scraper that finds flights under a price threshold and emails an HTML summary.",
          "evidence_ids": [
           "proj-flight-alerts-b1"
          ]
         },
         {
-         "text": "Scheduled weekly execution with GitHub Actions.",
+         "text": "Scheduled weekly runs using GitHub Actions.",
          "evidence_ids": [
           "proj-flight-alerts-b2"
          ]
@@ -530,27 +524,27 @@
     "cover_letter": {
      "paragraphs": [
       {
-       "text": "As a computer engineering student based in Barcelona focusing on backend development, this Junior Backend Developer position directly matches my practical background in Python, SQL, and REST APIs.",
+       "text": "The Junior Backend Developer position in Barcelona aligns directly with my background in computer engineering and my focus on backend development.",
        "evidence_ids": [
-        "edu-bsc",
-        "skills-core",
-        "exp-consulting"
+        "summary",
+        "edu-bsc"
        ]
       },
       {
-       "text": "I have hands-on experience building backend services in Python. For my Home Network Monitor project, I developed a FastAPI backend that scans local network devices and serves status data to an HTML dashboard. I also developed a Python scraper scheduled via GitHub Actions to automate flight price monitoring.",
+       "text": "In my backend projects, I have developed applications in Python using FastAPI to build REST services. This includes building a network monitoring backend that serves device status to a dashboard, as well as an automated Python scraper that processes flight pricing data.",
        "evidence_ids": [
+        "proj-network-monitor",
         "proj-network-monitor-b1",
         "proj-flight-alerts-b1",
-        "proj-flight-alerts-b2",
         "skills-core"
        ]
       },
       {
-       "text": "In addition, during my internship as a Technical Consultant Intern in Barcelona, I regularly validated application data using SQL queries and tracked defects in Jira within an Agile banking project.",
+       "text": "Additionally, during my internship at Example Consulting, I validated data using SQL queries and triaged defects within an Agile banking project. These experiences have given me practical knowledge of backend workflows, database querying, and collaborative development.",
        "evidence_ids": [
         "exp-consulting-b1",
-        "exp-consulting-b2"
+        "exp-consulting-b2",
+        "skills-core"
        ]
       }
      ]
@@ -574,48 +568,48 @@
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 4.806,
-       "cost_usd": 0.001674,
+       "latency_s": 5.648,
+       "cost_usd": 0.001539,
        "ok": true
       },
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 7.864,
-       "cost_usd": 0.0035204999999999998,
+       "latency_s": 6.435,
+       "cost_usd": 0.00303675,
        "ok": true
       },
       {
        "step": "match",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 8.419,
-       "cost_usd": 0.0042315,
+       "latency_s": 7.161,
+       "cost_usd": 0.0042135,
        "ok": true
       },
       {
        "step": "tailor_cv",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 14.822,
-       "cost_usd": 0.00931275,
+       "latency_s": 8.497,
+       "cost_usd": 0.00592875,
        "ok": true
       },
       {
        "step": "cover_letter",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 9.341,
-       "cost_usd": 0.005317499999999999,
+       "latency_s": 9.537,
+       "cost_usd": 0.005493,
        "ok": true
       },
       {
        "step": "verify",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 18.327,
-       "cost_usd": 0.0104145,
+       "latency_s": 6.756,
+       "cost_usd": 0.00485925,
        "ok": true
       }
      ],
-     "total_cost_usd": 0.034471,
-     "total_latency_s": 63.579
+     "total_cost_usd": 0.02507,
+     "total_latency_s": 44.034
     }
    },
    "answer": {
@@ -639,19 +633,19 @@
      "requirements": [
       {
        "id": "r1",
-       "text": "Knowledge or experience with Python",
+       "text": "Proficiency in Python",
        "category": "skill",
        "importance": "nice"
       },
       {
        "id": "r2",
-       "text": "Knowledge or experience with SQL",
+       "text": "Knowledge of SQL",
        "category": "skill",
        "importance": "nice"
       },
       {
        "id": "r3",
-       "text": "Knowledge or experience with REST APIs",
+       "text": "Experience working with REST APIs",
        "category": "skill",
        "importance": "nice"
       }
@@ -670,7 +664,7 @@
         "proj-flight-alerts-b1",
         "skills-core"
        ],
-       "note": "Demonstrated practical experience building backend applications and scrapers with Python."
+       "note": "Demonstrated through personal projects building a FastAPI backend and a web scraper, as well as core skills."
       },
       {
        "requirement_id": "r2",
@@ -679,30 +673,27 @@
         "exp-consulting-b2",
         "skills-core"
        ],
-       "note": "Used SQL queries to validate data during consulting internship and lists SQL in core skills."
+       "note": "Validated data using SQL queries during consulting internship and listed in core skills."
       },
       {
        "requirement_id": "r3",
        "status": "met",
        "evidence_ids": [
-        "proj-network-monitor-b1",
         "proj-network-monitor",
+        "proj-network-monitor-b1",
         "skills-core"
        ],
-       "note": "Built a backend using FastAPI to serve device status and has REST listed in core skills."
+       "note": "Built a FastAPI backend project serving data to an HTML dashboard, tagged with REST."
       }
      ],
-     "summary": "The candidate meets all junior backend developer requirements, with hands-on Python and FastAPI project experience and professional experience querying SQL databases.",
+     "summary": "The candidate meets all junior backend developer requirements, demonstrating practical experience with Python, SQL, and REST APIs across internship and project work.",
      "score": 100.0
     },
     "cv": {
      "summary": {
-      "text": "Computer engineering student focused on backend development, with practical experience in Python, FastAPI, and SQL.",
+      "text": "Computer engineering student focused on backend and AI applications, with internship experience in QA and consulting.",
       "evidence_ids": [
-       "edu-bsc",
-       "proj-network-monitor-b1",
-       "exp-consulting-b2",
-       "skills-core"
+       "summary"
       ]
      },
      "entries": [
@@ -716,7 +707,7 @@
          ]
         },
         {
-         "text": "Configured application to run as a background service with automatic restart.",
+         "text": "Configured project to run as a background service with automatic restart.",
          "evidence_ids": [
           "proj-network-monitor-b2"
          ]
@@ -744,13 +735,13 @@
        "item_id": "proj-flight-alerts",
        "bullets": [
         {
-         "text": "Built a Python scraper that finds flights under a price threshold and emails an HTML summary.",
+         "text": "Created a Python scraper that finds flights under a price threshold and emails an HTML summary.",
          "evidence_ids": [
           "proj-flight-alerts-b1"
          ]
         },
         {
-         "text": "Scheduled weekly execution with GitHub Actions.",
+         "text": "Scheduled weekly runs using GitHub Actions.",
          "evidence_ids": [
           "proj-flight-alerts-b2"
          ]
@@ -780,27 +771,27 @@
     "cover_letter": {
      "paragraphs": [
       {
-       "text": "As a computer engineering student based in Barcelona focusing on backend development, this Junior Backend Developer position directly matches my practical background in Python, SQL, and REST APIs.",
+       "text": "The Junior Backend Developer position in Barcelona aligns directly with my background in computer engineering and my focus on backend development.",
        "evidence_ids": [
-        "edu-bsc",
-        "skills-core",
-        "exp-consulting"
+        "summary",
+        "edu-bsc"
        ]
       },
       {
-       "text": "I have hands-on experience building backend services in Python. For my Home Network Monitor project, I developed a FastAPI backend that scans local network devices and serves status data to an HTML dashboard. I also developed a Python scraper scheduled via GitHub Actions to automate flight price monitoring.",
+       "text": "In my backend projects, I have developed applications in Python using FastAPI to build REST services. This includes building a network monitoring backend that serves device status to a dashboard, as well as an automated Python scraper that processes flight pricing data.",
        "evidence_ids": [
+        "proj-network-monitor",
         "proj-network-monitor-b1",
         "proj-flight-alerts-b1",
-        "proj-flight-alerts-b2",
         "skills-core"
        ]
       },
       {
-       "text": "In addition, during my internship as a Technical Consultant Intern in Barcelona, I regularly validated application data using SQL queries and tracked defects in Jira within an Agile banking project.",
+       "text": "Additionally, during my internship at Example Consulting, I validated data using SQL queries and triaged defects within an Agile banking project. These experiences have given me practical knowledge of backend workflows, database querying, and collaborative development.",
        "evidence_ids": [
         "exp-consulting-b1",
-        "exp-consulting-b2"
+        "exp-consulting-b2",
+        "skills-core"
        ]
       }
      ]
@@ -824,48 +815,48 @@
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 4.806,
-       "cost_usd": 0.001674,
+       "latency_s": 5.648,
+       "cost_usd": 0.001539,
        "ok": true
       },
       {
        "step": "extract",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 7.864,
-       "cost_usd": 0.0035204999999999998,
+       "latency_s": 6.435,
+       "cost_usd": 0.00303675,
        "ok": true
       },
       {
        "step": "match",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 8.419,
-       "cost_usd": 0.0042315,
+       "latency_s": 7.161,
+       "cost_usd": 0.0042135,
        "ok": true
       },
       {
        "step": "tailor_cv",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 14.822,
-       "cost_usd": 0.00931275,
+       "latency_s": 8.497,
+       "cost_usd": 0.00592875,
        "ok": true
       },
       {
        "step": "cover_letter",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 9.341,
-       "cost_usd": 0.005317499999999999,
+       "latency_s": 9.537,
+       "cost_usd": 0.005493,
        "ok": true
       },
       {
        "step": "verify",
        "model": "gemini/gemini-flash-latest",
-       "latency_s": 18.327,
-       "cost_usd": 0.0104145,
+       "latency_s": 6.756,
+       "cost_usd": 0.00485925,
        "ok": true
       }
      ],
-     "total_cost_usd": 0.034471,
-     "total_latency_s": 63.579
+     "total_cost_usd": 0.02507,
+     "total_latency_s": 44.034
     }
    },
    "answer": null

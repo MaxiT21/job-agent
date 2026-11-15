@@ -61,8 +61,8 @@ Replace the URL if you chose a different Vercel name. Drop a screenshot of the r
     ],
     specs: [
       { value: "0 / 69", label: { en: "unsupported lines shipped (evals)", es: "líneas sin respaldo entregadas (evals)" } },
+      { value: "1→6 / 7", label: { en: "first drafts passing the verifier", es: "primeros borradores que pasan el verificador" } },
       { value: "7 / 7", label: { en: "fit scores matching hand labels", es: "encajes iguales a las etiquetas" } },
-      { value: "2-layer", label: { en: "anti-hallucination verifier", es: "verificador anti-alucinación" } },
     ],
     image: "/projects/job-agent.png",
     url: "https://job-agent-demo.vercel.app",

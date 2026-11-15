@@ -5,7 +5,7 @@ Every sentence is traceable to the candidate's real experience, and nothing is s
 
 **Live demo:** _link after the Vercel deploy_ — replays real runs of the agent on a fictional candidate (no sign-up, no AI calls on your side).
 
-![Run page: fit score, evidence table and fact-check](docs/screenshots/run-review.png)
+![Run page: fit score, evidence table with the profile text behind each ID, CV and letter with their evidence, and the fact-check that caught and fixed a claim](docs/screenshots/run-review.png)
 
 ## Why
 Tailoring a CV per application takes ~30 min and it's tempting to stretch the truth.
@@ -99,13 +99,19 @@ Interactive docs at `http://localhost:8000/docs`. Starting, answering and retryi
 | `approve` | documents ready for review | `{"approved": true}` or `{"approved": false, "notes": "..."}` |
 
 ## Evals
-8 hand-labelled fictional postings (English, Spanish, Catalan) against the sample profile, run with `gemini/gemini-flash-latest` on 2026-11-15. See [`evals/`](evals/).
+8 hand-labelled fictional postings (English, Spanish, Catalan) against the sample profile, run with `gemini/gemini-flash-latest` on 2026-11-15 (`--full`: extraction, matching, generation and verification). See [`evals/`](evals/) and [`evals/results/`](evals/results/).
 
-| Extraction precision / recall | Vague posting detected | Fit score matches hand label | Unsupported lines in final documents | First draft passes verification |
-|---|---|---|---|---|
-| 0.89 / 0.95 | 8 / 8 | 7 / 7 | **0 / 69** | 1 / 7 (avg 2.3 verification passes) |
+| | Before prompt fixes | After |
+|---|---|---|
+| Extraction precision / recall | 0.89 / 0.95 | 0.91 / 0.98 |
+| Vague posting detected | 8 / 8 | 8 / 8 |
+| Fit score matches hand label | 7 / 7 | 7 / 7 |
+| **Unsupported lines in final documents** | **0 / 70** | **0 / 69** |
+| First draft passes verification | 1 / 7 | **6 / 7** |
+| Verification passes per application | 2.29 | 1.14 |
+| AI calls / cost for the whole eval | 63 / $0.44 | 52 / $0.28 |
 
-The verifier catches what the generator gets wrong, so nothing unsupported ships; the cost is extra passes. Making first drafts pass more often is the next optimisation.
+How the fix was found: the verification history showed every first-pass failure came from the prompts asking for things the verifier must reject (invented "learning plans" for gaps, unverifiable "I haven't used X" sentences, and a profile summary that had no citable ID). Fixing the prompts, not loosening the verifier, made runs ~36% cheaper with the same zero unsupported lines.
 
 ## Design decisions
 - No auto-submitting and no LinkedIn scraping (ToS). The agent prepares, the human sends.
@@ -126,7 +132,7 @@ No test calls an LLM or needs the backend running. CI runs all of the above on e
 - [x] Persistent runs (SQLite), typed API, CLI, eval harness, first Gemini eval results
 - [x] Web app (password-protected) with profile builder; public demo of recorded runs
 - [ ] Demo on Vercel + portfolio entry, screenshots/video
-- [ ] Prompt tuning so first drafts pass verification more often (faster, cheaper runs)
+- [x] Prompt fixes found via verification history: first drafts pass 6/7 (was 1/7)
 - [ ] Hosted private app (Postgres/Supabase for checkpoints + tracker)
 - [ ] Job discovery (Greenhouse/Lever/Ashby/InfoJobs APIs, weekly digest)
 
