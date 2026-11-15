@@ -6,6 +6,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added (web app)
+- Every verifier pass is kept (`verification_history` in state and `RunView`), so the UI can show what was caught and fixed.
 - Background runs: `POST /runs`, `/resume`, `/retry` return `202` and the run continues in a worker thread; `RunView.step` reports the node in progress; answering a run that is still working returns `409`; runs left mid-pipeline by a server restart show as `error` and can be retried.
 - `GET /runs` lists recent runs (company, title, status, fit score).
 - Single-user auth: `APP_PASSWORD` → HMAC-signed HttpOnly session cookie (`/auth/login`, `/auth/logout`, `/auth/me`); login attempts throttled per IP after 5 failures; private endpoints return 401 without a session and 503 if no password is configured.

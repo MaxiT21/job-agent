@@ -190,8 +190,10 @@ def verify(state: AgentState) -> dict:
 
     targets = {_target_of(i) for i in issues}
     regenerate = BOTH if None in targets else [t for t in BOTH if t in targets]
+    result = VerificationResult(passed=not issues, issues=issues)
     return {
-        "verification": VerificationResult(passed=not issues, issues=issues),
+        "verification": result,
+        "verification_history": [result],
         "verify_attempts": state.get("verify_attempts", 0) + 1,
         "regenerate": regenerate,
     }

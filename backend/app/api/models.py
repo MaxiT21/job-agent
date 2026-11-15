@@ -77,6 +77,7 @@ class RunView(BaseModel):
     cv: TailoredCV | None = None
     cover_letter: CoverLetter | None = None
     verification: VerificationResult | None = None
+    verification_history: list[VerificationResult] = []
     files: Files
     usage: Usage
 

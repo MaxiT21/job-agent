@@ -22,6 +22,7 @@ class AgentState(TypedDict, total=False):
     cover_letter: CoverLetter
     verification: VerificationResult | None
     verify_attempts: int
+    verification_history: Annotated[list[VerificationResult], operator.add]  # every pass
     regenerate: list[Literal["cv", "letter"]]  # what the next generation pass must redo
     # human-in-the-loop
     clarifications: Annotated[list[str], operator.add]  # answers about the posting; kept all run

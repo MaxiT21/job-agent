@@ -70,7 +70,7 @@ graph TD;
 `AgentState` (`agent/state.py`) is checkpointed after every node. Notable fields:
 
 - `clarifications` (append-only) and `edit_notes` (latest): trusted candidate input, kept separate from the untrusted posting.
-- `verification`, `verify_attempts`, `regenerate`: drive the retry loop. Only the document with issues (`cv` / `letter`) is regenerated, and it only sees its own issues.
+- `verification`, `verify_attempts`, `regenerate`: drive the retry loop; `verification_history` (append-only) keeps every pass for the UI. Only the document with issues (`cv` / `letter`) is regenerated, and it only sees its own issues.
 - `llm_calls` (append-only): every LLM call's step, model, latency, cost. Added by the `tracked()` node wrapper, reported per run by the API.
 
 ## Never inventing experience

@@ -183,3 +183,11 @@ def test_resume_while_running_409(client, fake_llm):
     assert r.status_code == 409
     release.set()
     assert settle(client, run_id)["status"] == "waiting"
+
+
+def test_run_view_exposes_verification_history(client, fake_llm):
+    from tests.fakes import verify_fail, verify_pass
+
+    fake_llm(happy_script(verify=[verify_fail(), verify_pass()]))
+    run = start(client)
+    assert [v["passed"] for v in run["verification_history"]] == [False, True]

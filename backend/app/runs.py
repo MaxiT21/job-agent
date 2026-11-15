@@ -179,6 +179,7 @@ class Runs:
             cv=v.get("cv"),
             cover_letter=v.get("cover_letter"),
             verification=v.get("verification"),
+            verification_history=v.get("verification_history", []),
             files=Files(cv=bool(v.get("cv_path")), cover_letter=bool(v.get("letter_path"))),
             usage=Usage(
                 calls=calls,

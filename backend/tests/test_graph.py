@@ -225,3 +225,13 @@ def test_still_vague_after_two_answers_moves_on_to_low_fit(graph, thread, fake_l
     pending = waiting_for(graph, thread)
     assert pending["type"] == "low_fit"
     assert pending["score"] == 0.0
+
+
+def test_verification_history_keeps_every_pass(graph, thread, fake_llm):
+    fake_llm(happy_script(verify=[verify_fail(reason="Invents a team size"), verify_pass()]))
+
+    graph.invoke(POSTING, thread)
+
+    history = graph.get_state(thread).values["verification_history"]
+    assert [v.passed for v in history] == [False, True]
+    assert history[0].issues[0].reason == "Invents a team size"
