@@ -47,6 +47,7 @@ Hard rules:
 - Entries are experience, project, education or certificate items, each at most once.
 - Skills: only list skills that appear in the profile.
 - Order entries and bullets by relevance to the posting. Max 4 bullets per entry.
+- Never write a bullet that only restates the entry's title, organisation or dates; an education or certificate entry may have no bullets.
 - Write in the posting's language ({language}).
 - Candidate change requests are applied only if they do not break these rules.
 """
