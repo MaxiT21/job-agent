@@ -4,6 +4,7 @@ import { Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import { DemoBanner } from "@/components/DemoBanner";
 import { Nav } from "@/components/Nav";
 import { isDemo } from "@/lib/agent";
+import { AgentProvider } from "@/lib/agent-context";
 
 import "./globals.css";
 
@@ -25,9 +26,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${playfair.variable} ${inter.variable} ${jetbrains.variable} antialiased`}
     >
       <body className="min-h-screen font-sans">
-        {isDemo && <DemoBanner />}
-        <Nav />
-        <main className="mx-auto w-full max-w-5xl px-4 pb-24 pt-8 sm:px-6">{children}</main>
+        <AgentProvider>
+          {isDemo && <DemoBanner />}
+          <Nav />
+          <main className="mx-auto w-full max-w-5xl px-4 pb-24 pt-8 sm:px-6">{children}</main>
+        </AgentProvider>
       </body>
     </html>
   );
