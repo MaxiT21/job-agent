@@ -4,10 +4,14 @@ import uuid
 from collections.abc import Callable
 
 import pytest
+from pydantic import SecretStr
 
+from app import auth
 from app.config import settings
 from app.profile import load_profile
 from tests.fakes import FakeLLM
+
+TEST_PASSWORD = "test-password"
 
 
 @pytest.fixture(autouse=True)
@@ -18,6 +22,9 @@ def isolated_settings(tmp_path, monkeypatch):
     monkeypatch.setattr(settings, "database_path", tmp_path / "test.db")
     for name in ("model", "verifier_model"):  # restored after tests that switch models
         monkeypatch.setattr(settings, name, getattr(settings, name))
+    monkeypatch.setattr(settings, "app_password", SecretStr(TEST_PASSWORD))
+    monkeypatch.setattr(settings, "session_secret", SecretStr("test-secret-" * 4))
+    auth.reset_throttle()
     load_profile.cache_clear()
     yield settings
     load_profile.cache_clear()

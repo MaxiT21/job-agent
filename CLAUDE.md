@@ -20,6 +20,7 @@ The agent must NEVER invent experience. It only selects, reorders and rewords it
 - `backend/app/fetch.py`: SSRF-safe posting fetch
 - `backend/app/render/`: `.docx` CV and cover letter, one folder per run
 - `backend/app/tracker.py`, `backend/app/db.py`: SQLite application tracker (same DB as checkpoints)
+- `backend/app/auth.py`: single-user password auth (session cookie); private routes live on the `private` router in `main.py`
 - `backend/app/runs.py`: run lifecycle (start/view/answer/retry) shared by API and CLI
 - `backend/app/main.py` + `app/api/models.py`: HTTP API (see README "API")
 - `backend/app/cli.py`: interactive terminal runner

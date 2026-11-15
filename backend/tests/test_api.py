@@ -7,6 +7,7 @@ from fastapi.testclient import TestClient
 
 from app.agent.graph import build_graph, get_graph
 from app.main import app
+from tests.conftest import TEST_PASSWORD
 from tests.fakes import happy_script, match
 
 POSTING = {"posting_text": "We need a Python + SQL intern. Kubernetes is a plus."}
@@ -17,7 +18,9 @@ DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 def client():
     graph = build_graph()
     app.dependency_overrides[get_graph] = lambda: graph
-    yield TestClient(app)
+    client = TestClient(app)
+    assert client.post("/auth/login", json={"password": TEST_PASSWORD}).status_code == 204
+    yield client
     app.dependency_overrides.clear()
 
 

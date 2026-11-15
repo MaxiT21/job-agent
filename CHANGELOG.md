@@ -5,6 +5,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added (web app)
+- Single-user auth: `APP_PASSWORD` → HMAC-signed HttpOnly session cookie (`/auth/login`, `/auth/logout`, `/auth/me`); login attempts throttled per IP after 5 failures; private endpoints return 401 without a session and 503 if no password is configured.
+
 ### Added
 - Offline graph test harness (`tests/fakes.py`): a scripted LLM drives the full pipeline, including interrupts, retries and edits.
 

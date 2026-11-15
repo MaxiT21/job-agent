@@ -2,6 +2,7 @@ from collections.abc import Iterable
 from pathlib import Path
 
 from dotenv import load_dotenv
+from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BACKEND_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,13 @@ class Settings(BaseSettings):
     low_fit_threshold: float = 50.0  # below this the agent asks before continuing
     max_verify_retries: int = 2
     max_clarifications: int = 2  # questions about a vague posting before moving on
+
+    # Single-user auth for the web app. Without APP_PASSWORD every private endpoint returns 503.
+    app_password: SecretStr | None = None
+    # Signs session cookies; if unset a random one is used and sessions reset on restart.
+    session_secret: SecretStr | None = None
+    session_days: int = 30
+    cookie_secure: bool = False  # set true when the app is served over HTTPS
 
     cors_origins: list[str] = ["http://localhost:3000"]
 

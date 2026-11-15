@@ -59,7 +59,7 @@ uv run python -m app.cli applications                         # tracker
 ```
 
 ## API
-Interactive docs at `http://localhost:8000/docs`. Runs persist in SQLite (`backend/outputs/job_agent.db`), so they survive restarts.
+Interactive docs at `http://localhost:8000/docs`. Everything except `/health` and `/auth/*` requires logging in with `APP_PASSWORD` (`POST /auth/login`), which sets an HttpOnly session cookie. Runs persist in SQLite (`backend/outputs/job_agent.db`), so they survive restarts.
 
 | Method | Path | Purpose |
 |---|---|---|

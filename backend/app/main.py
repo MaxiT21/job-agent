@@ -19,12 +19,12 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Annotated, Any, Literal
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import APIRouter, Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import ValidationError
 
-from app import tracker
+from app import auth, tracker
 from app.agent.graph import get_graph
 from app.api.models import Health, Resume, RunView, StartRun, StatusUpdate
 from app.config import settings
@@ -34,7 +34,9 @@ logging.basicConfig(
     level=settings.log_level, format="%(asctime)s %(levelname)s %(name)s: %(message)s"
 )
 
-app = FastAPI(title="Job Application Agent", version="0.2.0")
+app = FastAPI(title="Job Application Agent", version="0.3.0")
+app.include_router(auth.router)
+private = APIRouter(dependencies=[Depends(auth.require_session)])
 app.add_middleware(
     CORSMiddleware, allow_origins=settings.cors_origins, allow_methods=["*"], allow_headers=["*"]
 )
@@ -69,31 +71,31 @@ def health():
     return Health(ok=True, model=settings.model, profile=profile)
 
 
-@app.post("/runs", response_model=RunView, status_code=201)
+@private.post("/runs", response_model=RunView, status_code=201)
 def start_run(body: StartRun, runs: RunsDep):
     url = str(body.posting_url) if body.posting_url else None
     return runs.start(posting_url=url, posting_text=body.posting_text)
 
 
-@app.get("/runs/{run_id}", response_model=RunView)
+@private.get("/runs/{run_id}", response_model=RunView)
 def get_run(run_id: str, runs: RunsDep):
     with _http_errors():
         return runs.view(run_id)
 
 
-@app.post("/runs/{run_id}/resume", response_model=RunView)
+@private.post("/runs/{run_id}/resume", response_model=RunView)
 def resume_run(run_id: str, body: Resume, runs: RunsDep):
     with _http_errors():
         return runs.answer(run_id, body.value)
 
 
-@app.post("/runs/{run_id}/retry", response_model=RunView)
+@private.post("/runs/{run_id}/retry", response_model=RunView)
 def retry_run(run_id: str, runs: RunsDep):
     with _http_errors():
         return runs.retry(run_id)
 
 
-@app.get("/runs/{run_id}/files/{kind}")
+@private.get("/runs/{run_id}/files/{kind}")
 def download_file(run_id: str, kind: Literal["cv", "cover_letter"], runs: RunsDep):
     with _http_errors():
         path = runs.file_path(run_id, kind)
@@ -102,14 +104,17 @@ def download_file(run_id: str, kind: Literal["cv", "cover_letter"], runs: RunsDe
     return FileResponse(path, media_type=DOCX, filename=Path(path).name)
 
 
-@app.get("/applications", response_model=list[tracker.Application])
+@private.get("/applications", response_model=list[tracker.Application])
 def list_applications():
     return tracker.list_applications()
 
 
-@app.patch("/applications/{run_id}", response_model=tracker.Application)
+@private.patch("/applications/{run_id}", response_model=tracker.Application)
 def update_application(run_id: str, body: StatusUpdate):
     try:
         return tracker.update_status(run_id, body.status)
     except KeyError as e:
         raise HTTPException(404, "Application not found") from e
+
+
+app.include_router(private)
