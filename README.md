@@ -3,7 +3,7 @@
 Paste a job posting → get a fit analysis, a tailored CV and a cover letter (both `.docx`).
 Every sentence is traceable to the candidate's real experience, and nothing is sent without human approval.
 
-> 🚧 Work in progress. Demo link, eval results and video coming in week 4.
+> 🚧 Work in progress: backend, CLI and evals work end to end; web UI, deployment and published eval results are next.
 
 ## Why
 Tailoring a CV per application takes ~30 min and it's tempting to stretch the truth.
@@ -22,13 +22,14 @@ fetch → [unreadable?] ask to paste → extract requirements → [vague?] ask u
                                                                        → render CV + letter .docx + log
 ```
 
-- **Workflow where it's predictable, agent decisions where it isn't**: LangGraph conditional edges for vague postings, low fit, failed verification and user edits.
+- **Workflow where it's predictable, agent decisions where it isn't**: LangGraph conditional edges for unreadable URLs, vague postings, low fit, failed verification and user edits. Details and the generated graph diagram: [`docs/architecture.md`](docs/architecture.md).
 - **Deterministic where possible**: the fit score and the first verification layer are plain code (tested), not LLM output.
 - **Two-layer verification**:
   1. *Deterministic* (`scoring.py`, free, unit-tested): every line cites existing profile IDs; each CV bullet cites its own job/project and never borrows another one's evidence; every number appears in the cited evidence; skills exist in the profile; entries are real and unique.
   2. *LLM fact-check*: each line is checked against the evidence it cites (paraphrase OK, new facts not).
 - **Untrusted input stays data**: the posting is fenced in tags it cannot close and prompts treat it as data; URL fetching blocks private/local addresses (SSRF) and oversized pages.
 - **Provider-agnostic**: all LLM calls go through LiteLLM; cost and latency are recorded per step and per run.
+- **Durable runs**: checkpoints in SQLite, so a run paused for your answer (or failed on a provider outage) can be resumed or retried later.
 
 ## Stack
 LangGraph · FastAPI · Pydantic · LiteLLM · python-docx · SQLite · Docker · Next.js (planned) · Supabase (planned)
@@ -86,9 +87,23 @@ Extraction precision/recall, vague-posting detection, fit-score agreement with h
 - No auto-submitting and no LinkedIn scraping (ToS). The agent prepares, the human sends.
 - Real candidate data never enters the repo; a fictional sample profile is used instead.
 
+## Development
+```bash
+cd backend
+uv run pytest                                   # 85+ tests, no network, no LLM
+uv run ruff check . ../evals && uv run ruff format . ../evals
+uv run python -m app.agent.graph                # print the graph as Mermaid (docs/architecture.md)
+```
+CI runs lint and tests on every push and PR. Changes are logged in [`CHANGELOG.md`](CHANGELOG.md).
+
 ## Roadmap
-- [ ] Week 1: profile, extraction, matching, fit score (CLI)
-- [ ] Week 2: CV + cover letter, verifier loop, approval, tracker
-- [ ] Week 3: Next.js UI, Supabase tracker + checkpointer
-- [ ] Week 4: evals, deploy (Vercel + Railway/Render), demo video
-- [ ] Week 5: job discovery (Greenhouse/Lever/Ashby/InfoJobs APIs, weekly digest)
+- [x] Profile, extraction, matching, deterministic fit score
+- [x] CV + cover letter, two-layer verifier with targeted retries, human approval, tracker
+- [x] Persistent runs (SQLite), typed API, CLI, eval harness
+- [ ] First eval results with a real model (Gemini) published here
+- [ ] Next.js UI (run view with evidence table, tracker)
+- [ ] Deploy (Vercel + Railway/Render), Postgres/Supabase for checkpoints + tracker, demo video
+- [ ] Job discovery (Greenhouse/Lever/Ashby/InfoJobs APIs, weekly digest)
+
+## License
+[MIT](LICENSE)

@@ -97,16 +97,20 @@ def build_graph(checkpointer=None):
     g.add_node("render_and_log", tracked(nodes.render_and_log))
 
     g.add_edge(START, "fetch_posting")
-    g.add_conditional_edges("fetch_posting", after_fetch)
+    g.add_conditional_edges("fetch_posting", after_fetch, ["ask_for_text", "extract_requirements"])
     g.add_edge("ask_for_text", "extract_requirements")
-    g.add_conditional_edges("extract_requirements", after_extract)
+    g.add_conditional_edges(
+        "extract_requirements", after_extract, ["ask_clarification", "match_profile"]
+    )
     g.add_edge("ask_clarification", "extract_requirements")
-    g.add_conditional_edges("match_profile", after_match)
-    g.add_conditional_edges("confirm_low_fit", after_low_fit)
-    g.add_conditional_edges("tailor_cv", after_tailor)
+    g.add_conditional_edges("match_profile", after_match, ["confirm_low_fit", "tailor_cv"])
+    g.add_conditional_edges("confirm_low_fit", after_low_fit, [END, "tailor_cv"])
+    g.add_conditional_edges("tailor_cv", after_tailor, ["write_cover_letter", "verify"])
     g.add_edge("write_cover_letter", "verify")
-    g.add_conditional_edges("verify", after_verify)
-    g.add_conditional_edges("human_approval", after_approval)
+    g.add_conditional_edges(
+        "verify", after_verify, ["tailor_cv", "write_cover_letter", "human_approval"]
+    )
+    g.add_conditional_edges("human_approval", after_approval, ["render_and_log", "tailor_cv"])
     g.add_edge("render_and_log", END)
 
     return g.compile(checkpointer=checkpointer or MemorySaver(serde=_serializer()))
@@ -127,3 +131,12 @@ def _serializer() -> JsonPlusSerializer:
     """Explicitly allow our Pydantic state types to be restored from checkpoints."""
     allowed = [("app.schemas", name) for name in schemas.__all_state_types__]
     return JsonPlusSerializer(allowed_msgpack_modules=allowed)
+
+
+def mermaid() -> str:
+    """The graph as a Mermaid diagram (embedded in docs/architecture.md)."""
+    return build_graph().get_graph().draw_mermaid()
+
+
+if __name__ == "__main__":
+    print(mermaid())

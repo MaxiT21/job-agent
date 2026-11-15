@@ -26,7 +26,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Eval harness: 8 labelled fictional postings (en/es/ca), extraction P/R, vague detection, fit agreement, and `--full` verification metrics; results saved to `evals/results/`.
 
+- `docs/architecture.md` with the graph diagram generated from code; a test fails if it goes stale.
+
 ### Changed
+- Conditional edges declare their targets, so the graph can be drawn and inspected (e.g. LangGraph Studio).
+- `.env.example` defaults to Gemini and documents every setting.
 - A posting that is still vague after 2 clarifying answers (`MAX_CLARIFICATIONS`) moves on to the low-fit check instead of asking forever.
 - A failing step no longer returns HTTP 500: the run is kept with `status: "error"` and can be retried.
 - Resume answers are validated against the pending question (422 on the wrong shape, 409 if nothing is pending).

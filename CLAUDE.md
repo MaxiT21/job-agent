@@ -25,6 +25,7 @@ The agent must NEVER invent experience. It only selects, reorders and rewords it
 - `backend/app/cli.py`: interactive terminal runner
 - `backend/tests/fakes.py`: `FakeLLM` + canned outputs valid against the sample profile
 - `evals/`: eval dataset + runner
+- `docs/architecture.md`: pipeline, state, verification layers, persistence
 - `docs/plans/`: implementation plans
 
 ## Conventions
@@ -34,7 +35,9 @@ The agent must NEVER invent experience. It only selects, reorders and rewords it
 - Every interrupt has a `*Request` model (what the agent asks) and a `*Answer` model (registered in `ANSWER_MODELS`).
 - Lint/format before committing: `uv run ruff check . ../evals && uv run ruff format . ../evals`.
 - Dependencies live in `backend/pyproject.toml` + `uv.lock` (`uv add <pkg>`); never edit the lockfile by hand.
-- Keep docs current in the same commit as the change: README, CLAUDE.md, CHANGELOG (`Unreleased`), sub-READMEs.
+- Keep docs current in the same commit as the change: README, CLAUDE.md, CHANGELOG (`Unreleased`), `docs/architecture.md`, sub-READMEs.
+- After changing the graph, regenerate its diagram into `docs/architecture.md` (`uv run python -m app.agent.graph`); `tests/test_docs.py` fails if it is stale.
+- Conditional edges must declare their targets (path map) so the graph stays inspectable.
 - Never commit `backend/data/profile.yaml`, `.env` or `backend/outputs/` (real personal data).
 - No auto-submitting applications and no LinkedIn scraping.
 
