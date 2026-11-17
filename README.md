@@ -111,7 +111,7 @@ Interactive docs at `http://localhost:8000/docs`. Starting, answering and retryi
 | Verification passes per application | 2.29 | 1.14 |
 | AI calls / cost for the whole eval | 63 / $0.44 | 52 / $0.28 |
 
-How the fix was found: the verification history showed every first-pass failure came from the prompts asking for things the verifier must reject (invented "learning plans" for gaps, unverifiable "I haven't used X" sentences, and a profile summary that had no citable ID). Fixing the prompts, not loosening the verifier, made runs ~36% cheaper with the same zero unsupported lines.
+Single runs on 7 full cases, so treat the first-draft rows as noisy (see the comparison below: the same prompts later passed 2/7). How the fix was found: the verification history showed every first-pass failure came from the prompts asking for things the verifier must reject (invented "learning plans" for gaps, unverifiable "I haven't used X" sentences, and a profile summary that had no citable ID). Fixing the prompts, not loosening the verifier, made runs ~36% cheaper with the same zero unsupported lines.
 
 ### Model comparison (2026-11-17)
 Same 8 postings, same prompts, `--full`, one run per model:
@@ -150,7 +150,7 @@ No test calls an LLM or needs the backend running. CI runs all of the above on e
 - [x] Web app (password-protected) with profile builder; public demo of recorded runs
 - [x] Demo on Vercel + portfolio entry
 - [x] Demo GIF
-- [x] Prompt fixes found via verification history: first drafts pass 6/7 (was 1/7)
+- [x] Prompt fixes found via verification history (prompts stopped asking for what the verifier must reject)
 - [x] Model comparison across Gemini tiers; eval regression gate in CI
 - [ ] Hosted private app (Postgres/Supabase for checkpoints + tracker)
 - [ ] Job discovery (Greenhouse/Lever/Ashby/InfoJobs APIs, weekly digest)

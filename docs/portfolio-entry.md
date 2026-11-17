@@ -60,8 +60,8 @@ The screenshot lives at `public/projects/job-agent.png` in the portfolio. The re
       },
     ],
     specs: [
-      { value: "0 / 69", label: { en: "unsupported lines shipped (evals)", es: "líneas sin respaldo entregadas (evals)" } },
-      { value: "1→6 / 7", label: { en: "first drafts passing the verifier", es: "primeros borradores que pasan el verificador" } },
+      { value: "0 / 67", label: { en: "unsupported lines shipped (Flash models)", es: "líneas sin respaldo entregadas (modelos Flash)" } },
+      { value: "4", label: { en: "models compared on quality, cost, latency", es: "modelos comparados en calidad, coste, latencia" } },
       { value: "7 / 7", label: { en: "fit scores matching hand labels", es: "encajes iguales a las etiquetas" } },
     ],
     image: "/projects/job-agent.png",
