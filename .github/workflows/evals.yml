@@ -1,0 +1,66 @@
+name: evals
+
+# Runs a small slice of the eval set against the real model whenever the
+# prompts, the agent or the verifier change, and fails the check if quality
+# drops: extraction recall below 0.85, or any unsupported line reaching the
+# final documents. ~4 postings with --full, roughly $0.15 per run.
+on:
+  pull_request:
+    paths:
+      - backend/app/agent/**
+      - backend/app/scoring.py
+      - backend/app/llm.py
+      - evals/**
+  push:
+    branches: [main]
+    paths:
+      - backend/app/agent/**
+      - backend/app/scoring.py
+      - backend/app/llm.py
+      - evals/**
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Postings to run (1-8)"
+        default: "4"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: evals-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # Forks and repos without the secret skip the run instead of failing.
+      HAS_KEY: ${{ secrets.GEMINI_API_KEY != '' }}
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: No GEMINI_API_KEY secret — skipping
+        if: env.HAS_KEY != 'true'
+        working-directory: .
+        run: echo "Set the GEMINI_API_KEY repository secret to enable model evals." >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/checkout@v4
+        if: env.HAS_KEY == 'true'
+      - uses: astral-sh/setup-uv@v6
+        if: env.HAS_KEY == 'true'
+        with:
+          version: "0.13.7"
+          enable-cache: true
+      - run: uv sync --locked
+        if: env.HAS_KEY == 'true'
+      - name: Eval gate
+        if: env.HAS_KEY == 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: >
+          uv run python ../evals/run_evals.py
+          --model gemini/gemini-flash-latest --full
+          --limit ${{ inputs.limit || '4' }}
+          --min-recall 0.85 --max-residual 0

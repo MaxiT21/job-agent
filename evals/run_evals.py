@@ -12,8 +12,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
+import tempfile
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
@@ -156,13 +158,43 @@ def to_markdown(reports: list[ModelReport], cases: list[dict], full: bool) -> st
     return "\n".join(out) + "\n"
 
 
+def check_thresholds(
+    reports: list[ModelReport], min_recall: float | None, max_residual: int | None
+) -> list[str]:
+    """Regression gate for CI: what fell below the bar (empty list = pass)."""
+    failures = []
+    for r in reports:
+        _, rec = precision_recall(r.tp, r.fp, r.fn)
+        if min_recall is not None and rec < min_recall:
+            failures.append(f"{r.model}: extraction recall {rec:.2f} < {min_recall:.2f}")
+        if max_residual is not None and r.residual_flagged > max_residual:
+            failures.append(
+                f"{r.model}: {r.residual_flagged} unsupported lines in final documents (max {max_residual})"
+            )
+        if r.errors:
+            failures.append(f"{r.model}: {len(r.errors)} case(s) errored")
+    return failures
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--model", action="append", required=True, help="LiteLLM model (repeatable)")
     ap.add_argument("--limit", type=int, help="only the first N cases")
     ap.add_argument("--full", action="store_true", help="also run generation + verification")
+    ap.add_argument(
+        "--db",
+        type=Path,
+        help="SQLite file for the eval runs (default: a fresh temp file, so evals never touch the app's database)",
+    )
+    ap.add_argument("--min-recall", type=float, help="exit 1 if extraction recall is below this")
+    ap.add_argument(
+        "--max-residual", type=int, help="exit 1 if more unsupported lines than this (--full)"
+    )
     args = ap.parse_args()
 
+    settings.database_path = (
+        args.db or Path(tempfile.mkdtemp(prefix="job-agent-evals-")) / "evals.db"
+    )
     settings.profile_path = settings.sample_profile_path
     load_profile.cache_clear()
     cases = load_cases(args.limit)
@@ -173,6 +205,15 @@ def main() -> None:
     RESULTS.mkdir(exist_ok=True)
     slug = re.sub(r"[^a-z0-9]+", "-", "_".join(args.model).lower()).strip("-")
     (RESULTS / f"{date.today()}_{slug}.md").write_text(md)
+
+    failures = check_thresholds(reports, args.min_recall, args.max_residual)
+    if summary := os.environ.get("GITHUB_STEP_SUMMARY"):
+        verdict = "\n".join(f"- ❌ {f}" for f in failures) or "- ✅ all thresholds met"
+        with open(summary, "a") as f:
+            f.write(md + "\n## Gate\n" + verdict + "\n")
+    if failures:
+        print("\n".join(failures), file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

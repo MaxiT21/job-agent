@@ -5,6 +5,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added (evals)
+- Model comparison on the full eval set across Gemini tiers (3.1 Flash-Lite, Flash-latest, 3.5 Flash; 3.1 Pro partial, credits ran out): quality, cost and latency side by side in the README, with the run-to-run variance of the first-pass rate called out.
+- Regression gate: `run_evals.py --min-recall --max-residual` exits 1 on a quality drop (and on errored cases) and writes the table to the GitHub job summary; `.github/workflows/evals.yml` runs it on 4 postings whenever prompts, the agent, the verifier or the evals change (skips without a `GEMINI_API_KEY` secret).
+- Demo GIF in the README.
+
+### Changed (evals)
+- Eval runs use a fresh temporary SQLite file by default (`--db` to choose), so evals never write into the app's database.
+
 ### Added (web app)
 - Public demo deployed at https://job-agent-demo-ten.vercel.app (Vercel project `job-agent-demo`, root `frontend/`, `NEXT_PUBLIC_DEMO=1`) and embedded in the portfolio.
 - Public demo: `backend/scripts/record_demo.py` records real runs on the sample profile (5 scenarios) into `frontend/public/demo/`; the demo build (`NEXT_PUBLIC_DEMO=1`) replays them with no backend, no keys and no AI calls; Playwright smoke test; a test ensures recordings only contain the sample candidate.

@@ -30,4 +30,13 @@ uv run python ../evals/run_evals.py --model gemini/gemini-flash-latest
 uv run python ../evals/run_evals.py --model gemini/gemini-flash-latest --model gpt-4o-mini --full
 ```
 Needs the provider keys in `.env`. Output: a markdown table, also saved to `results/<date>_<models>.md`, ready to paste into the main README.
-The metric functions and the runner itself are tested offline (`backend/tests/test_eval_metrics.py`).
+Runs go to a fresh temporary SQLite file, so evals never touch the app's database (`--db <file>` to keep them).
+The metric functions, the threshold gate and the runner itself are tested offline (`backend/tests/test_eval_metrics.py`).
+
+## Regression gate (CI)
+```bash
+uv run python ../evals/run_evals.py --model gemini/gemini-flash-latest --full --limit 4 \
+  --min-recall 0.85 --max-residual 0
+```
+exits 1 if extraction recall drops below 0.85, if any unsupported line survives into the final documents, or if a case errors.
+[`.github/workflows/evals.yml`](../.github/workflows/evals.yml) runs exactly this on every push or PR that touches the prompts, the agent, the verifier or the evals (and on demand), and writes the table to the job summary. It needs a `GEMINI_API_KEY` repository secret; without it the job skips itself. One run costs about $0.15.

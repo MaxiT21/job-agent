@@ -5,7 +5,7 @@ Every sentence is traceable to the candidate's real experience, and nothing is s
 
 **Live demo: [job-agent-demo-ten.vercel.app](https://job-agent-demo-ten.vercel.app)** — replays real runs of the agent on a fictional candidate (no sign-up, no AI calls). Also on [my portfolio](https://maximotorassa.vercel.app).
 
-![Run page: fit score, evidence table with the profile text behind each ID, CV and letter with their evidence, and the fact-check that caught and fixed a claim](docs/screenshots/run-review.png)
+![Demo walkthrough: pick a recorded run, watch the agent work, hover an evidence ID to see the profile text behind it, see the fact-check that caught and fixed a claim, approve and download](docs/screenshots/demo.gif)
 
 ## Why
 Tailoring a CV per application takes ~30 min and it's tempting to stretch the truth.
@@ -113,6 +113,23 @@ Interactive docs at `http://localhost:8000/docs`. Starting, answering and retryi
 
 How the fix was found: the verification history showed every first-pass failure came from the prompts asking for things the verifier must reject (invented "learning plans" for gaps, unverifiable "I haven't used X" sentences, and a profile summary that had no citable ID). Fixing the prompts, not loosening the verifier, made runs ~36% cheaper with the same zero unsupported lines.
 
+### Model comparison (2026-11-17)
+Same 8 postings, same prompts, `--full`, one run per model:
+
+| Model | Extraction P / R | Fit matches label | First draft passes | **Unsupported lines left for review** | Cost | Avg latency / call |
+|---|---|---|---|---|---|---|
+| `gemini-3.1-flash-lite` | 1.00 / 1.00 | 6 / 7 | 0 / 7 | **7 / 59** | $0.06 | 1.5 s |
+| `gemini-flash-latest` (default) | 0.91 / 0.98 | 7 / 7 | 2 / 7 | **0 / 67** | $0.38 | 11.6 s |
+| `gemini-3.5-flash` | 0.89 / 0.95 | 7 / 7 | 6 / 7 | **0 / 67** | $0.32 | 7.7 s |
+| `gemini-3.1-pro-preview` ¹ | 0.90 / 1.00 | 6 / 6 | 2 / 5 | **3 / 47** | $1.45 | 14.1 s |
+
+¹ Partial: 5 of 8 postings (the API credits ran out mid-run).
+
+What it shows:
+- **The verifier is what makes cheap models usable, but not cheap enough.** Flash-Lite extracts requirements perfectly at a sixth of the cost, but none of its first drafts passed and 7 lines were still unsupported after the retries; they reach the approval screen flagged, never silently. Flash-class models leave none.
+- **Bigger isn't better here.** Pro cost ~4× more, was the slowest, and still left 3 flagged lines in 5 postings: following "cite only what the evidence says" matters more than raw capability.
+- **First-draft pass rate is noisy on 7 cases.** The default model passed 6/7 on 2026-11-15 and 2/7 on this run with identical prompts; the number to trust is the one that held in every Flash run, zero unsupported lines in the final documents. Next step: repeated runs per model to report a spread instead of a single number.
+
 ## Design decisions
 - No auto-submitting and no LinkedIn scraping (ToS). The agent prepares, the human sends.
 - Real candidate data never enters the repo; a fictional sample profile is used instead.
@@ -124,7 +141,7 @@ cd frontend && npm run lint && npm run typecheck && npm test
 cd frontend && npm run build:demo && npm run e2e      # demo smoke test (Playwright)
 cd backend && uv run python -m app.agent.graph        # graph as Mermaid (docs/architecture.md)
 ```
-No test calls an LLM or needs the backend running. CI runs all of the above on every push and PR. Changes are logged in [`CHANGELOG.md`](CHANGELOG.md).
+No test calls an LLM or needs the backend running. CI runs all of the above on every push and PR; a separate [eval gate](evals/README.md#regression-gate-ci) runs real model calls when prompts or the agent change. Changes are logged in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Roadmap
 - [x] Profile, extraction, matching, deterministic fit score
@@ -132,8 +149,9 @@ No test calls an LLM or needs the backend running. CI runs all of the above on e
 - [x] Persistent runs (SQLite), typed API, CLI, eval harness, first Gemini eval results
 - [x] Web app (password-protected) with profile builder; public demo of recorded runs
 - [x] Demo on Vercel + portfolio entry
-- [ ] Short demo video / GIF
+- [x] Demo GIF
 - [x] Prompt fixes found via verification history: first drafts pass 6/7 (was 1/7)
+- [x] Model comparison across Gemini tiers; eval regression gate in CI
 - [ ] Hosted private app (Postgres/Supabase for checkpoints + tracker)
 - [ ] Job discovery (Greenhouse/Lever/Ashby/InfoJobs APIs, weekly digest)
 

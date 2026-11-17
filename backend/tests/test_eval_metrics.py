@@ -51,3 +51,17 @@ def test_runner_end_to_end_with_scripted_llm(fake_llm):
     assert report.vague_correct == 1  # p01 correct, p08 (scripted not vague) wrong
     assert report.first_pass_ok == 1
     assert "| fake-model |" in md
+
+
+def test_check_thresholds_flags_regressions():
+    from evals.run_evals import ModelReport, check_thresholds
+
+    good = ModelReport("m", tp=9, fp=1, fn=1)
+    assert check_thresholds([good], min_recall=0.85, max_residual=0) == []
+
+    bad = ModelReport("m", tp=5, fp=0, fn=5, residual_flagged=2, errors=["p01: boom"])
+    failures = check_thresholds([bad], min_recall=0.85, max_residual=0)
+    assert len(failures) == 3
+    assert "recall 0.50" in failures[0]
+    assert "2 unsupported lines" in failures[1]
+    assert check_thresholds([bad], min_recall=None, max_residual=None) == ["m: 1 case(s) errored"]
